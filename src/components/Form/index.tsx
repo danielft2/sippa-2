@@ -1,9 +1,9 @@
-import { Field } from "./Field";
-import { Label } from "./Label";
-import { Input } from "./Input";
-import { Select } from "./Select";
-import { Checkbox } from "./Checkbox";
-import { ErrorMessage } from "./ErrorMessage";
+import { Field } from './Field';
+import { Label } from './Label';
+import { Input } from './Input';
+import { Select } from './Select';
+import { Checkbox } from './Checkbox';
+import { ErrorMessage } from './ErrorMessage';
 
 export const Form = {
    Field,
@@ -12,4 +12,4 @@ export const Form = {
    Select,
    Checkbox,
    ErrorMessage
-}
+};

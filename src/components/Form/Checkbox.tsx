@@ -1,15 +1,15 @@
-import { InputHTMLAttributes } from "react";
-import { useFormContext } from "react-hook-form";
+import { InputHTMLAttributes } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-   name: string
+   name: string;
 }
 
 export function Checkbox({ name, ...rest }: CheckboxProps) {
    const { register } = useFormContext();
 
    return (
-      <input 
+      <input
          className="border-[1.5px] border-green-500 appearance-none rounded-sm w-[15px] h-[15px]
          checked:bg-green-400 before:content-[''] before:block checked:before:w-[3px] checked:before:h-2 
          checked:before:mx-1 checked:before:mt-[1.5px] checked:before:ml-[5px] checked:before:border-b-[2px]
@@ -18,7 +18,7 @@ export function Checkbox({ name, ...rest }: CheckboxProps) {
          id={name}
          type="checkbox"
          {...register(name)}
-         {...rest} 
+         {...rest}
       />
-   )
+   );
 }
