@@ -1,11 +1,10 @@
 'use client';
 
-type AppProviderProps = {
-   children: React.ReactNode;
-};
+import { Context } from '@/@types/context';
+import { AuthProvider } from './Auth';
 
-const AppProvider = ({ children }: AppProviderProps) => {
-   return <>{children}</>;
+const AppProvider = ({ children }: Context) => {
+   return <AuthProvider>{children}</AuthProvider>;
 };
 
 export default AppProvider;

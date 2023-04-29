@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { singInScheme } from '../validations/scheme';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
+import { useAuth } from '@/hooks/useAuth';
 
 type SinInFormData = z.infer<typeof singInScheme>;
 
@@ -10,6 +11,9 @@ type useSingInProps = {
 };
 
 export function useSingIn({ setValue }: useSingInProps) {
+   const [loading, setLoading] = useState(false);
+   const { handleSingIn } = useAuth();
+
    const verifyIsRememberInformations = useCallback(() => {
       const credencials = localStorage.getItem('credencials-singIn');
       if (credencials) {
@@ -25,7 +29,16 @@ export function useSingIn({ setValue }: useSingInProps) {
    }, [verifyIsRememberInformations]);
 
    function handleSubmitData(data: SinInFormData) {
+      setLoading(true);
       checkIsRememberInformations(data);
+
+      try {
+         handleSingIn(data);
+      } catch (error) {
+         console.log(error);
+      } finally {
+         setLoading(false);
+      }
    }
 
    function checkIsRememberInformations(data: SinInFormData) {
@@ -44,6 +57,7 @@ export function useSingIn({ setValue }: useSingInProps) {
    }
 
    return {
-      handleSubmitData
+      handleSubmitData,
+      loading
    };
 }
