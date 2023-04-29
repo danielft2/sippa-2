@@ -14,7 +14,7 @@ export const Select = forwardRef(
       return (
          <SelectRadix.Root value={value} onValueChange={onValueChange}>
             <SelectRadix.Trigger
-               className="bg-gray-200 h-10 rounded justify-between flex items-center px-4 text-[13px] text-gray-600
+               className="bg-gray-200 h-10 rounded justify-between flex items-center px-4 text-sm text-gray-600
             focus:outline-green-400 focus:bg-green-100"
                ref={forwardedRef}
             >
