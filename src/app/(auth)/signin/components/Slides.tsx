@@ -21,6 +21,8 @@ const Slides = () => {
                src="/slides/slide-1.png"
                alt="Imagem do campus"
                fill
+               priority
+               sizes="(max-width: 768px) 100vw, (min-width: 1200px) 70vw, 33vw"
             />
          </SwiperSlide>
          <SwiperSlide>
@@ -29,6 +31,8 @@ const Slides = () => {
                src="/slides/slide-2.jpg"
                alt="Imagem do campus"
                fill
+               priority
+               sizes="(max-width: 768px) 100vw, (min-width: 1200px) 70vw, 33vw"
             />
          </SwiperSlide>
          <SwiperSlide>
@@ -37,6 +41,8 @@ const Slides = () => {
                src="/slides/slide-3.jpg"
                alt="Imagem do campus"
                fill
+               priority
+               sizes="(max-width: 768px) 100vw, (min-width: 1200px) 70vw, 33vw"
             />
          </SwiperSlide>
       </Swiper>
