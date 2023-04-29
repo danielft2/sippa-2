@@ -14,8 +14,8 @@ const FormLogin = () => {
    const singInForm = useForm<SinInFormData>({
       resolver: zodResolver(singInScheme)
    });
-   const { handleSubmitData } = useSingIn();
-   const { handleSubmit, control } = singInForm;
+   const { handleSubmit, setValue, control } = singInForm;
+   const { handleSubmitData } = useSingIn({ setValue });
 
    return (
       <div>
@@ -55,7 +55,7 @@ const FormLogin = () => {
 
                   <Form.Field className="flex justify-between items-center mt-2">
                      <Form.Field className="flex items-center gap-2">
-                        <Form.Checkbox name="remember" />
+                        <Form.Checkbox name="remember_informations" />
                         <label
                            htmlFor="remember"
                            className="text-xs text-gray-500"
