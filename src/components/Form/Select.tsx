@@ -4,13 +4,18 @@ import React, { forwardRef } from 'react';
 
 import { SelectItem } from './SelectItem';
 
+type SelectOption = {
+   name: string;
+};
+
 interface SelectProps {
    value: string;
+   options: SelectOption[];
    onValueChange: (...event: any[]) => void;
 }
 
 export const Select = forwardRef(
-   ({ value, onValueChange }: SelectProps, forwardedRef: any) => {
+   ({ value, options, onValueChange }: SelectProps, forwardedRef: any) => {
       return (
          <SelectRadix.Root value={value} onValueChange={onValueChange}>
             <SelectRadix.Trigger
@@ -33,8 +38,11 @@ export const Select = forwardRef(
                   sideOffset={-6}
                >
                   <SelectRadix.Viewport className="px-2 py-3 flex flex-col gap-y-2">
-                     <SelectItem value="item1">Item1</SelectItem>
-                     <SelectItem value="item2">Item2</SelectItem>
+                     {options.map((option) => (
+                        <SelectItem key={option.name} value={option.name}>
+                           {option.name}
+                        </SelectItem>
+                     ))}
                   </SelectRadix.Viewport>
                </SelectRadix.Content>
             </SelectRadix.Portal>

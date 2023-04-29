@@ -9,6 +9,14 @@ import { z } from 'zod';
 import { useSingIn } from '../hooks/useSingIn';
 
 type SinInFormData = z.infer<typeof singInScheme>;
+const options = [
+   {
+      name: 'Estudante'
+   },
+   {
+      name: 'Professor'
+   }
+];
 
 const FormLogin = () => {
    const singInForm = useForm<SinInFormData>({
@@ -35,6 +43,7 @@ const FormLogin = () => {
                               ref={ref}
                               value={value}
                               onValueChange={onChange}
+                              options={options}
                            />
                         );
                      }}
