@@ -10,7 +10,7 @@ interface UserSummaryProps {
 
 const UserSummary = ({ name, course, avatarImageUrl }: UserSummaryProps) => {
    return (
-      <div className="bg-white flex flex-col md:w-auto lg:min-w-[500px] h-[150px] rounded-md overflow-hidden shadow-sm">
+      <div className="bg-white flex flex-col md:w-auto lg:min-w-[500px] h-[160px] rounded-md overflow-hidden shadow-sm">
          <div className="bg-green-300 h-7"></div>
          <div className="flex items-center flex-1 px-8">
             <div className="flex items-center gap-4">
@@ -18,6 +18,7 @@ const UserSummary = ({ name, course, avatarImageUrl }: UserSummaryProps) => {
                   avatarImageUrl={avatarImageUrl}
                   name={name}
                   width="90"
+                  textSizeFalback="text-lg"
                   isBorder
                />
                <div>

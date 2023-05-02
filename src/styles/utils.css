@@ -1,3 +1,7 @@
 .container-content {
-   @apply w-full max-w-[1500px] px-5 mx-auto; 
+   @apply w-full max-w-[1600px] px-5 mx-auto; 
+}
+
+.swiper-slide-custom {
+   @apply w-auto flex-none !important;
 }

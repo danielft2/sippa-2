@@ -8,24 +8,24 @@ export function Participants() {
                <Avatar
                   avatarImageUrl={'https://github.com/danielft2.png'}
                   name="Daniel"
-                  width="30"
-                  textSizeFalback="text-[10px]"
+                  width="26"
+                  textSizeFalback="text-[8px]"
                />
             </div>
             <div className="z-10 absolute right-9">
                <Avatar
-                  avatarImageUrl={'https://github.com/danielft2.png'}
+                  avatarImageUrl={'https://github.com/VictorM-Coder.png'}
                   name="Daniel"
-                  width="30"
-                  textSizeFalback="text-[10px]"
+                  width="26"
+                  textSizeFalback="text-[8px]"
                />
             </div>
             <div className="z-20 absolute right-14">
                <Avatar
-                  avatarImageUrl={'https://github.com/danielft2.png'}
+                  avatarImageUrl={'https://github.com/alexsonalmeida.png'}
                   name="Daniel"
-                  width="30"
-                  textSizeFalback="text-[10px]"
+                  width="26"
+                  textSizeFalback="text-[8px]"
                />
             </div>
             <span className="absolute -right-1 text-sm text-gray-600 top-1">

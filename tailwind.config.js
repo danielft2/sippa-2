@@ -13,10 +13,17 @@ module.exports = {
                200: '#D9F1ED',
                300: '#A1D4CB',
                400: '#00AF8F'
+            },
+            zync: {
+               100: '#F3F3F9'
             }
          },
          gridTemplateColumns: {
             dashboard: '1fr 2fr'
+         },
+         screens: {
+            lg_p: { max: '1400px' },
+            md_p: { max: '820px' }
          }
       }
    },
