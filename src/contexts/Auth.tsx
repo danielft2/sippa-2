@@ -23,7 +23,7 @@ export function AuthProvider({ children }: Context) {
                resolver();
                Cookies.set('token', 'token_teste', { path: '/' });
             } else {
-               reject();
+               reject(new Error('Usuário e/ou senha incorretos'));
             }
          }, 1000);
       });
