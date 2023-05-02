@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 type SinInFormData = z.infer<typeof singInScheme>;
 
@@ -38,7 +39,10 @@ export function useSingIn({ setValue }: useSingInProps) {
          await handleSingIn(data);
          router.push('/dashboard');
       } catch (error) {
-         console.log(error);
+         toast('usuário e/ou senha incorretos', {
+            autoClose: 2000,
+            type: 'error'
+         });
       } finally {
          setLoading(false);
       }
