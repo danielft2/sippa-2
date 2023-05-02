@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/Buttons';
+import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { singInScheme } from '../validations/scheme';
@@ -16,7 +16,7 @@ const FormLogin = () => {
       resolver: zodResolver(singInScheme)
    });
    const { handleSubmit, setValue, control } = singInForm;
-   const { handleSubmitData } = useSingIn({ setValue });
+   const { handleSubmitData, loading } = useSingIn({ setValue });
 
    return (
       <div>
@@ -70,7 +70,9 @@ const FormLogin = () => {
                      </button>
                   </Form.Field>
                </Form.Field>
-               <Button.Default type="submit">Entrar</Button.Default>
+               <Button.Root type="submit" isLoading={loading}>
+                  <Button.Text>Entrar</Button.Text>
+               </Button.Root>
             </form>
          </FormProvider>
       </div>
