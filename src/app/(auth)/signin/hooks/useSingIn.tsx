@@ -13,7 +13,7 @@ type useSingInProps = {
 
 export function useSingIn({ setValue }: useSingInProps) {
    const [loading, setLoading] = useState(false);
-   const { push } = useRouter();
+   const router = useRouter();
    const { handleSingIn } = useAuth();
 
    const verifyIsRememberInformations = useCallback(() => {
@@ -36,7 +36,7 @@ export function useSingIn({ setValue }: useSingInProps) {
 
       try {
          await handleSingIn(data);
-         push('/dashboard');
+         router.push('/dashboard');
       } catch (error) {
          console.log(error);
       } finally {
