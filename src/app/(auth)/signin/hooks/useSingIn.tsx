@@ -3,6 +3,7 @@ import { singInScheme } from '../validations/scheme';
 import { useCallback, useEffect, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 type SinInFormData = z.infer<typeof singInScheme>;
 
@@ -12,6 +13,7 @@ type useSingInProps = {
 
 export function useSingIn({ setValue }: useSingInProps) {
    const [loading, setLoading] = useState(false);
+   const { push } = useRouter();
    const { handleSingIn } = useAuth();
 
    const verifyIsRememberInformations = useCallback(() => {
@@ -28,12 +30,13 @@ export function useSingIn({ setValue }: useSingInProps) {
       verifyIsRememberInformations();
    }, [verifyIsRememberInformations]);
 
-   function handleSubmitData(data: SinInFormData) {
+   async function handleSubmitData(data: SinInFormData) {
       setLoading(true);
       checkIsRememberInformations(data);
 
       try {
-         handleSingIn(data);
+         await handleSingIn(data);
+         push('/dashboard');
       } catch (error) {
          console.log(error);
       } finally {
