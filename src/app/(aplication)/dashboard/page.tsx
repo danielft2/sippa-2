@@ -9,11 +9,7 @@ export default function Dashboard() {
       <main className="space-y-6">
          <section className="grid grid-cols-dashboard gap-3 lg_p:grid-cols-1">
             <div>
-               <UserSummary
-                  name="Daniel Almeida"
-                  course="Engenharia de Software"
-                  avatarImageUrl="https://github.com/danielft2.png"
-               />
+               <UserSummary />
             </div>
             <div className="grid grid-cols-3 md_p:grid-cols-1 gap-3">
                <DisciplineSummary

@@ -1,11 +1,17 @@
-import '../../styles/utils.css';
+'use client';
+
+import { LogOut } from 'lucide-react';
+import { ReactNode } from 'react';
 
 import Sidebar from '@/layouts/Sidebar/index.';
 import Image from 'next/image';
-import { Settings } from 'lucide-react';
-import { ReactNode } from 'react';
 
-export default function Layout({ children }: { children: ReactNode }) {
+import '../../styles/utils.css';
+import { useAuth } from '@/hooks/useAuth';
+
+const Layout = ({ children }: { children: ReactNode }) => {
+   const { signOut } = useAuth();
+
    return (
       <main className="flex flex-col h-screen">
          <div className="w-full">
@@ -17,8 +23,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                      width={100}
                      height={100}
                   />
-                  <button>
-                     <Settings size={20} color="white" />
+                  <button onClick={signOut}>
+                     <LogOut size={20} color="white" />
                   </button>
                </div>
             </div>
@@ -29,4 +35,6 @@ export default function Layout({ children }: { children: ReactNode }) {
          </div>
       </main>
    );
-}
+};
+
+export default Layout;

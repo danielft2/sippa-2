@@ -1,5 +1,4 @@
-export type SingInDTO = {
-   user_type: string;
-   login: string;
+export type SinginDTO = {
+   enrollment: number;
    password: string;
 };

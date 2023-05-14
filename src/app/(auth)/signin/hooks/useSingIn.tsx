@@ -5,6 +5,7 @@ import { UseFormSetValue } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { AppError } from '@/utils/AppError';
 
 type SinInFormData = z.infer<typeof singInScheme>;
 
@@ -14,15 +15,16 @@ type useSingInProps = {
 
 export function useSingIn({ setValue }: useSingInProps) {
    const [loading, setLoading] = useState(false);
+   const { signin } = useAuth();
+
    const router = useRouter();
-   const { handleSingIn } = useAuth();
 
    const verifyIsRememberInformations = useCallback(() => {
       const credencials = localStorage.getItem('credencials-singIn');
       if (credencials) {
          const credencialsJSON = JSON.parse(credencials);
          setValue('user_type', credencialsJSON.user_type);
-         setValue('login', credencialsJSON.login);
+         setValue('enrollment', credencialsJSON.enrollment.toString());
          setValue('remember_informations', credencialsJSON.remember);
       }
    }, [setValue]);
@@ -36,13 +38,20 @@ export function useSingIn({ setValue }: useSingInProps) {
       checkIsRememberInformations(data);
 
       try {
-         await handleSingIn(data);
+         await signin({
+            enrollment: data.enrollment,
+            password: data.password
+         });
          router.push('/dashboard');
       } catch (error) {
-         toast('usuário e/ou senha incorretos', {
-            autoClose: 2000,
-            type: 'error'
-         });
+         if (error instanceof AppError) {
+            toast(error.message(), {
+               autoClose: 2000,
+               type: 'error'
+            });
+         } else {
+            console.log(error);
+         }
       } finally {
          setLoading(false);
       }
@@ -54,7 +63,7 @@ export function useSingIn({ setValue }: useSingInProps) {
             'credencials-singIn',
             JSON.stringify({
                user_type: data.user_type,
-               login: data.login,
+               enrollment: data.enrollment,
                remember: data.remember_informations
             })
          );

@@ -46,8 +46,8 @@ const FormLogin = () => {
 
                <Form.Field>
                   <Form.Label htmlFor="login">Login</Form.Label>
-                  <Form.Input type="number" name="login" maxLength={6} />
-                  <Form.ErrorMessage field="login" />
+                  <Form.Input type="number" name="enrollment" maxLength={6} />
+                  <Form.ErrorMessage field="enrollment" />
                </Form.Field>
 
                <Form.Field className="flex flex-col mb-4">
