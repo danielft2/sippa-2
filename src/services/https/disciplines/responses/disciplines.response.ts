@@ -1,5 +1,5 @@
-import { DisciplineModel } from "@/domain/models/discipline-model";
+import { DisciplineModel } from '@/domain/models/discipline-model';
 
 export interface DisciplineResponse {
-    returnData: DisciplineModel
+   returnData: DisciplineModel;
 }
