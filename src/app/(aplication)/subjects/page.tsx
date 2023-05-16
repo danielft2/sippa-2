@@ -1,13 +1,13 @@
 'use client';
 import { DisciplineSummary } from '@/components/DisciplineSummary';
 import UserSummary from '@/components/UserSummary';
-import { DisciplineService } from '@/services/https/disciplines';
+import { ClassroomService } from '@/services/https/disciplines/classrooms';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Subjects() {
    const { data } = useQuery({
-      queryKey: ['discipline'],
-      queryFn: DisciplineService.getAll
+      queryKey: ['classroom'],
+      queryFn: ClassroomService.getAll
    });
 
    return (
@@ -17,15 +17,15 @@ export default function Subjects() {
                <UserSummary />
             </div>
             <div className="grid grid-cols-3 md_p:grid-cols-1 gap-3">
-               {data?.map((discipline) => (
+               {data?.map((classroom) => (
                   <DisciplineSummary
-                     key={discipline.code}
+                     key={classroom.classroom.classroom_id}
                      isDashboard={false}
-                     code={discipline.code}
-                     name={discipline.name}
-                     teachName={'Professor'}
+                     code={classroom.discipline.code}
+                     name={classroom.discipline.name}
+                     teachName={classroom.teacherName}
                      frequency={90}
-                     participants={discipline.participants}
+                     participants={[]}
                   />
                ))}
             </div>
