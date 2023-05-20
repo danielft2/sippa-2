@@ -12,10 +12,14 @@ import {
 export function useSidebar() {
    const config = {
       main: [
-         { name: 'ínicio', pathName: '/dashboard', icone: <Home size={16} /> },
+         {
+            name: 'ínicio',
+            pathName: 'aplication/dashboard',
+            icone: <Home size={16} />
+         },
          {
             name: 'Disciplinas',
-            pathName: '/subjects',
+            pathName: 'aplication/subjects',
             icone: <BookMarked size={16} />
          },
          { name: 'Histórico Escolar', icone: <FileText size={16} /> }

@@ -1,14 +1,15 @@
 'use client';
+
 import { DisciplineSummary } from '@/components/DisciplineSummary';
 import UserSummary from '@/components/UserSummary';
 import { ClassroomService } from '@/services/https/disciplines/classrooms';
 import { useQuery } from '@tanstack/react-query';
 
-export default function Subjects() {
-   const { data } = useQuery({
-      queryKey: ['classroom'],
-      queryFn: ClassroomService.getAll
-   });
+const Subjects = () => {
+   // const { data } = useQuery({
+   //    queryKey: ['classroom'],
+   //    queryFn: ClassroomService.getAll
+   // });
 
    return (
       <main>
@@ -17,7 +18,7 @@ export default function Subjects() {
                <UserSummary />
             </div>
             <div className="grid grid-cols-3 md_p:grid-cols-1 gap-3">
-               {data?.map((classroom) => (
+               {/* {data?.map((classroom) => (
                   <DisciplineSummary
                      key={classroom.classroom.classroom_id}
                      isDashboard={false}
@@ -27,9 +28,11 @@ export default function Subjects() {
                      frequency={90}
                      participants={[]}
                   />
-               ))}
+               ))} */}
             </div>
          </section>
       </main>
    );
-}
+};
+
+export default Subjects;
