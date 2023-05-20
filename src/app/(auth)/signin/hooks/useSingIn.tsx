@@ -42,7 +42,6 @@ export function useSingIn({ setValue }: useSingInProps) {
             enrollment: data.enrollment,
             password: data.password
          });
-         router.push('/dashboard');
       } catch (error) {
          if (error instanceof AppError) {
             toast(error.message(), {

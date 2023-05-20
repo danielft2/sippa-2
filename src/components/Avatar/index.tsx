@@ -1,4 +1,5 @@
 'use client';
+
 import * as AvatarRadix from '@radix-ui/react-avatar';
 import { Poppins } from 'next/font/google';
 const poppins = Poppins({ weight: '600', subsets: ['latin'] });
