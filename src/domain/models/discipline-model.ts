@@ -4,4 +4,5 @@ export interface DisciplineModel {
    teachName: string;
    frequency: number;
    participants: [];
+   credit: number;
 }

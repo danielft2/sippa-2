@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { AxiosError } from 'axios';
 
 import { AuthService } from '@/services/https/auth';
-import { ERRORS_MESSAGES } from '@/services/https/errors-messages';
+import { ERRORS_MESSAGES } from '@/services/https/errors';
 
 import { AppError } from '@/utils/AppError';
 import { StorageAuth } from '@/storage/StorageAuth';
