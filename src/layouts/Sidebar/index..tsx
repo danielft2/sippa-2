@@ -43,6 +43,7 @@ const SidebarItem = ({ name, pathName = '#', icon }: SidebarItemProps) => {
             className={`group flex items-center gap-1 ${
                path.includes(pathName) ? 'text-green-400' : 'text-gray-500'
             }`}
+            prefetch={false}
          >
             <span className="item">{icon}</span>
             <span className="item text-[13px]">{name}</span>

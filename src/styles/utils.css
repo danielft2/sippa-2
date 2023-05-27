@@ -1,5 +1,5 @@
 .container-content {
-   @apply w-full max-w-[1600px] px-5 mx-auto; 
+   @apply w-full max-w-[1600px] px-8 mx-auto; 
 }
 
 .swiper-slide-custom {

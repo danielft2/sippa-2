@@ -55,12 +55,6 @@ export function AuthProvider({ children }: Context) {
 
    useEffect(() => {
       const user = StorageAuth.retrieveUserLogged();
-      const token = StorageAuth.retrieveToken();
-
-      if (token)
-         api.private.defaults.headers.common[
-            'Authorization'
-         ] = `Bearer ${token}`;
       if (user) setUserLogged(user);
    }, []);
 
