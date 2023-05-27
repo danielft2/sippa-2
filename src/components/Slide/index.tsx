@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import { ReactNode } from 'react';
 
 interface SlideProps extends SwiperProps {
-   children: ReactNode[];
+   children: ReactNode;
 }
 
 export function Slide({ children, ...rest }: SlideProps) {

@@ -11,8 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AppProvider = ({ children }: Context) => {
    return (
-      <QueryClientProvider client={queryClient}>
-         <AuthProvider>
+      <AuthProvider>
+         <QueryClientProvider client={queryClient}>
             {children}
             <ToastContainer
                position="top-right"
@@ -26,8 +26,8 @@ const AppProvider = ({ children }: Context) => {
                pauseOnHover
                theme="light"
             />
-         </AuthProvider>
-      </QueryClientProvider>
+         </QueryClientProvider>
+      </AuthProvider>
    );
 };
 

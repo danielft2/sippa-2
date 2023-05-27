@@ -1,31 +1,30 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import { SwiperSlide } from 'swiper/react';
+
 import AnimationLottie from '@/components/AnimationLottie';
 import animationNotification from '@/assets/animations/notification.json';
-
-import { Poppins } from 'next/font/google';
-import { NEWS } from '@/mocks/news.mock';
 import { Slide } from '@/components/Slide';
-import { SwiperSlide } from 'swiper/react';
-import { BellRing } from 'lucide-react';
-import { NewsClass } from './NewsClass';
+import { DashboardService } from '@/services/https/dashboard';
+
+import { NewsClass } from '../NewsClass';
+import { SkeletonNewsClass } from './SkeletonNewsClass';
 
 import '@/styles/utils.css';
 
-const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
+const LastNewsClass = () => {
+   const { data, isLoading } = useQuery({
+      queryKey: ['news'],
+      queryFn: DashboardService.getAllNewsClass,
+      staleTime: 1000 * 60 * 60 * 30 // As informações permancem válidas por 30min.
+   });
 
-const LastNewsClasses = () => {
    return (
-      <section className="w-full bg-white rounded-md px-8 py-7">
-         <div className="flex items-center gap-2 text-sm mb-5">
-            <span className="text-green-400">
-               <BellRing size={18} />
-            </span>
-            <span className={`${poppins_md.className} text-gray-600`}>
-               Ultimas notícias das suas turmas
-            </span>
-         </div>
-         {!NEWS.length ? (
+      <>
+         {isLoading ? (
+            <SkeletonNewsClass />
+         ) : !data ? (
             <div className="flex flex-col justify-center items-center mb-2">
                <AnimationLottie
                   animationData={animationNotification}
@@ -38,20 +37,22 @@ const LastNewsClasses = () => {
             </div>
          ) : (
             <Slide slidesPerView={'auto'} resizeObserver spaceBetween={16}>
-               {NEWS.map((news) => (
+               {data?.map((news) => (
                   <SwiperSlide key={news.id} className="swiper-slide-custom">
                      <NewsClass
-                        code={news.code}
-                        name={news.name}
+                        code={'QXD3893X'}
+                        name={news.title}
                         title={news.title}
-                        date={news.date}
+                        date={new Intl.DateTimeFormat('pt-BR').format(
+                           new Date(news.date_of_post)
+                        )}
                      />
                   </SwiperSlide>
                ))}
             </Slide>
          )}
-      </section>
+      </>
    );
 };
 
-export default LastNewsClasses;
+export default LastNewsClass;
