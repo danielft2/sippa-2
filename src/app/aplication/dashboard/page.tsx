@@ -1,9 +1,9 @@
-import UserSummary from '@/components/UserSummary';
-import LastNewsClasses from './components/LastNewsClass';
-import { DisciplineSummary } from '@/components/DisciplineSummary';
-import { NewsCampus } from './components/NewsCampus';
-import { NEWS_CAMPUS } from '@/mocks/news-campus.mock';
 import { BellRing } from 'lucide-react';
+import { NEWS_CAMPUS } from '@/mocks/news-campus.mock';
+import { NewsCampus } from './components/NewsCampus';
+import DisciplinesRecents from './components/DisciplinesRecents';
+import LastNewsClasses from './components/LastNewsClass';
+import UserSummary from '@/components/UserSummary';
 
 export default async function Dashboard() {
    return (
@@ -13,30 +13,7 @@ export default async function Dashboard() {
                <UserSummary />
             </div>
             <div className="grid grid-cols-3 md_p:grid-cols-1 gap-3">
-               <DisciplineSummary
-                  isDashboard
-                  code="QX2772719"
-                  name="Desenvolvimento de Softwares para Aplicativos Móveis"
-                  teachName="Marcio Espíndola"
-                  frequency={90}
-                  participants={[]}
-               />
-               <DisciplineSummary
-                  isDashboard
-                  code="QX2772719"
-                  name="SO - Sistemas Operacionais"
-                  teachName="Thiago Werley"
-                  frequency={97}
-                  participants={[]}
-               />
-               <DisciplineSummary
-                  isDashboard
-                  code="QX2772719"
-                  name="Projeto Integrado em Enegenharia de Software II"
-                  teachName="Thiago Werley"
-                  frequency={56}
-                  participants={[]}
-               />
+               <DisciplinesRecents />
             </div>
          </section>
          <section className="w-full bg-white rounded-md px-8 py-7">

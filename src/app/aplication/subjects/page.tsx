@@ -1,6 +1,6 @@
 import { SubjectService } from '@/services/https/subjects';
 import { DisciplineModel } from '@/domain/models/discipline-model';
-import { DisciplineSummary } from '@/components/DisciplineSummary';
+import DisciplineSummary from '@/components/DisciplineSummary';
 import UserSummary from '@/components/UserSummary';
 
 export default async function Subjects() {

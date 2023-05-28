@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,6 +9,7 @@ import { clsx } from 'clsx';
 
 import { Participants } from './Participants';
 import { generateRandomColor } from '@/utils/generate-random-colors';
+import { useDisciplineRecents } from '@/hooks/useDisciplinesRecents';
 
 const poppins_semi = Poppins({ weight: ['600'], subsets: ['latin'] });
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
@@ -20,15 +23,30 @@ interface SubjectCardProps {
    isDashboard: boolean;
 }
 
-export function DisciplineSummary({
+const DisciplineSummary = ({
    code,
    name,
    frequency,
    teachName,
    isDashboard
-}: SubjectCardProps) {
+}: SubjectCardProps) => {
+   const { handleSavedDiscipline } = useDisciplineRecents();
+
    return (
-      <Link href={'/'} className="hover:shadow-md transition-all">
+      <Link
+         href={'/'}
+         className="hover:shadow-md transition-all"
+         onClick={() =>
+            handleSavedDiscipline({
+               code,
+               name,
+               frequency,
+               teachName,
+               participants: [],
+               credit: 0
+            })
+         }
+      >
          <div
             className={`bg-white min-w-[200px] max-w-[580px] md_p:max-w-full overflow-hidden rounded-md 
             shadow-sm flex flex-col ${isDashboard ? 'h-[160px]' : ''}`}
@@ -80,4 +98,6 @@ export function DisciplineSummary({
          </div>
       </Link>
    );
-}
+};
+
+export default DisciplineSummary;
