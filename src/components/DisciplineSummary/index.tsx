@@ -34,7 +34,7 @@ const DisciplineSummary = ({
 
    return (
       <Link
-         href={'/'}
+         href={`aplication/subjects/${code}`}
          className="hover:shadow-md transition-all"
          onClick={() =>
             handleSavedDiscipline({
