@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname, useParams } from 'next/navigation';
 import { useSidebar } from '@/hooks/useSidebar';
-import { usePathname } from 'next/navigation';
 
-import '../../styles/utils.css';
+import '@/styles/utils.css';
 import './style.css';
 
 interface SidebarItemProps {
@@ -14,19 +14,31 @@ interface SidebarItemProps {
 }
 
 const Sidebar = () => {
-   const { main } = useSidebar();
+   const { main, subject_details } = useSidebar();
+   const path = usePathname();
+   const params = useParams();
+
    return (
       <div className="bg-white h-14 shadow flex items-center">
          <div className="container-content">
             <div className="flex w-full gap-8">
-               {main.map((menu) => (
-                  <SidebarItem
-                     key={menu.name}
-                     name={menu.name}
-                     pathName={menu.pathName}
-                     icon={menu.icone}
-                  />
-               ))}
+               {path.includes('/subjects/')
+                  ? subject_details.map((menu) => (
+                       <SidebarItem
+                          key={menu.name}
+                          name={menu.name}
+                          pathName={menu.redirect(params.id)}
+                          icon={menu.icone}
+                       />
+                    ))
+                  : main.map((menu) => (
+                       <SidebarItem
+                          key={menu.name}
+                          name={menu.name}
+                          pathName={menu.pathName}
+                          icon={menu.icone}
+                       />
+                    ))}
             </div>
          </div>
       </div>
