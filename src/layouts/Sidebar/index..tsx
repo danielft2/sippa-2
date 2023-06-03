@@ -16,18 +16,18 @@ interface SidebarItemProps {
 const Sidebar = () => {
    const { main, subject_details } = useSidebar();
    const path = usePathname();
-   const params = useParams();
+   const { subject } = useParams();
 
    return (
       <div className="bg-white h-14 shadow flex items-center">
          <div className="container-content">
             <div className="flex w-full gap-8">
-               {path.includes('/subjects/')
+               {path.includes('/subject-details/')
                   ? subject_details.map((menu) => (
                        <SidebarItem
                           key={menu.name}
                           name={menu.name}
-                          pathName={menu.redirect(params.id)}
+                          pathName={menu.redirect(subject)}
                           icon={menu.icone}
                        />
                     ))
@@ -45,7 +45,7 @@ const Sidebar = () => {
    );
 };
 
-const SidebarItem = ({ name, pathName = '#', icon }: SidebarItemProps) => {
+const SidebarItem = ({ name, pathName = '', icon }: SidebarItemProps) => {
    const path = usePathname();
 
    return (
@@ -53,7 +53,7 @@ const SidebarItem = ({ name, pathName = '#', icon }: SidebarItemProps) => {
          <Link
             href={pathName}
             className={`group flex items-center gap-1 ${
-               path.includes(pathName) ? 'text-green-400' : 'text-gray-500'
+               path == pathName ? 'text-green-400' : 'text-gray-500'
             }`}
             prefetch={false}
          >

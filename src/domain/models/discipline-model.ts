@@ -1,4 +1,5 @@
 export interface DisciplineModel {
+   id: string;
    code: string;
    name: string;
    teachName: string;

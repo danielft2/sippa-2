@@ -3,14 +3,13 @@ import {
    Calculator,
    CalendarRange,
    CheckCheck,
-   FileText,
    Home,
    ListChecks,
    MessageSquare
 } from 'lucide-react';
 
 export function useSidebar() {
-   const subjectInitURL = '/aplication/subjects';
+   const subjectInitURL = '/aplication/subject-details';
 
    const config = {
       main: [
@@ -21,45 +20,44 @@ export function useSidebar() {
          },
          {
             name: 'Disciplinas',
-            pathName: 'aplication/subjects',
+            pathName: 'aplication/subject',
             icone: <BookMarked size={16} />
-         },
-         { name: 'Histórico Escolar', icone: <FileText size={16} /> }
+         }
       ],
       subject_details: [
          {
             name: 'ínicio',
-            pathName: '/',
+            pathName: 'subject-details',
             icone: <Home size={16} />,
             redirect: (id: string) => `${subjectInitURL}/${id}`
          },
          {
             name: 'Atividades',
-            pathName: '/atividades',
+            pathName: 'activities',
             icone: <ListChecks size={16} />,
-            redirect: (id: string) => `${subjectInitURL}/${id}/atividades`
+            redirect: (id: string) => `${subjectInitURL}/${id}/activities`
          },
          {
             name: 'Notas',
-            pathName: '/notas',
+            pathName: 'notas',
             icone: <Calculator size={16} />,
             redirect: (id: string) => `${subjectInitURL}/${id}/notas`
          },
          {
             name: 'Frequência',
-            pathName: '/frequencia',
+            pathName: 'frequencia',
             icone: <CheckCheck size={16} />,
             redirect: (id: string) => `${subjectInitURL}/${id}/frequencia`
          },
          {
             name: 'Plano de Aula',
-            pathName: '/plano-de-aula',
+            pathName: 'plano-de-aula',
             icone: <CalendarRange size={16} />,
             redirect: (id: string) => `${subjectInitURL}/${id}/plano-de-aula`
          },
          {
             name: 'Solicitar Segunda Chamada',
-            pathName: '/segunda-chamada',
+            pathName: 'segunda-chamada',
             icone: <MessageSquare size={16} />,
             redirect: (id: string) => `${subjectInitURL}/${id}/segunda-chamada`
          }

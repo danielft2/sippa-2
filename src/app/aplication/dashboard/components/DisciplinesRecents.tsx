@@ -12,6 +12,7 @@ const DisciplinesRecents = () => {
                <DisciplineSummary
                   key={discipline.code}
                   isDashboard
+                  id={discipline.id}
                   code={discipline.code}
                   name={discipline.name}
                   teachName={discipline.teachName ?? 'Nome do professor'}
