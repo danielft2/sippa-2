@@ -47,6 +47,7 @@ const Sidebar = () => {
 
 const SidebarItem = ({ name, pathName = '', icon }: SidebarItemProps) => {
    const path = usePathname();
+   console.log(pathName, path);
 
    return (
       <div className="">

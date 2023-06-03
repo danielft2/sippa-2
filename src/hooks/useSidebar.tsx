@@ -15,12 +15,12 @@ export function useSidebar() {
       main: [
          {
             name: 'ínicio',
-            pathName: 'aplication/dashboard',
+            pathName: '/aplication/dashboard',
             icone: <Home size={16} />
          },
          {
             name: 'Disciplinas',
-            pathName: 'aplication/subject',
+            pathName: '/aplication/subjects',
             icone: <BookMarked size={16} />
          }
       ],
