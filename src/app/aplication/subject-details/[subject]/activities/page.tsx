@@ -1,32 +1,25 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import { CheckCheck, List } from 'lucide-react';
-
-import { SubjectClientService } from '@/services/https/subjects-client';
 import { ACTIVITIES_THEMES } from '@/mocks/activities';
 
 import {
    ActivityCard,
    Header
 } from '@/app/aplication/subject-details/components';
+import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 const DisciplineActivities = () => {
-   const { subject } = useParams();
-
-   const { data } = useQuery({
-      queryKey: ['discipline-data', subject],
-      queryFn: () => SubjectClientService.getDiscipline(subject)
-   });
+   const { classrooms } = useClassRoomRecents();
+   const { discipline, teacherName } = classrooms[0];
 
    return (
       <div className="space-y-4">
          <Header
-            key={data?.id}
-            subtitle={data?.code || ''}
-            title={data?.name || ''}
-            description="Nome do professor"
+            key={discipline.id}
+            subtitle={discipline.code}
+            title={discipline.name}
+            description={teacherName}
          >
             <div className="flex items-center gap-3">
                <div className="text-green-400 flex items-center gap-1">
