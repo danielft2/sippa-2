@@ -41,7 +41,7 @@ export function useSidebar() {
             name: 'Notas',
             pathName: 'notas',
             icone: <Calculator size={16} />,
-            redirect: (id: string) => `${subjectInitURL}/${id}/notas`
+            redirect: (id: string) => `${subjectInitURL}/${id}/notes`
          },
          {
             name: 'Frequência',
