@@ -1,22 +1,13 @@
-import { Poppins } from 'next/font/google';
 import { TextSelection } from 'lucide-react';
 import { Attachament } from './Attachament';
-
-const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
+import { TitleCard } from '../TitleCard';
 
 export function InformationsActivity() {
    return (
       <section className="bg-white rounded-md pb-5">
-         <div className="border-b border-gray-200">
-            <div className="flex items-center gap-1 px-7 py-5 pb-4">
-               <span className="text-green-400">
-                  <TextSelection size={18} />
-               </span>
-               <h1 className={`${poppins_md.className} text-sm text-gray-600`}>
-                  Detalhes da atividade
-               </h1>
-            </div>
-         </div>
+         <TitleCard type="simple" title="Detalhes da Atividade">
+            <TextSelection size={18} />
+         </TitleCard>
          <div className="px-7 py-5 space-y-4">
             <div className="border-b border-gray-100 pb-4">
                <p className="text-sm text-gray-600">
