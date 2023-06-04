@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { CheckCheck } from 'lucide-react';
 import { Poppins } from 'next/font/google';
+import { CheckCheck } from 'lucide-react';
 import { clsx } from 'clsx';
 
 import { Participants } from './Participants';
@@ -15,29 +15,32 @@ const poppins_semi = Poppins({ weight: ['600'], subsets: ['latin'] });
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface SubjectCardProps {
+   id: string;
    code: string;
    name: string;
    teachName: string;
    frequency: number;
    participants: [];
-   isDashboard: boolean;
+   isDashboard?: boolean;
 }
 
 const DisciplineSummary = ({
+   id,
    code,
    name,
    frequency,
    teachName,
-   isDashboard
+   isDashboard = false
 }: SubjectCardProps) => {
    const { handleSavedDiscipline } = useDisciplineRecents();
 
    return (
       <Link
-         href={`aplication/subjects/${code}`}
+         href={`aplication/subject-details/${id}`}
          className="hover:shadow-md transition-all"
          onClick={() =>
             handleSavedDiscipline({
+               id,
                code,
                name,
                frequency,

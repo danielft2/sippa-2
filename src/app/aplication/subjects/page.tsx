@@ -18,6 +18,7 @@ export default async function Subjects() {
                   <DisciplineSummary
                      key={classroom.code}
                      isDashboard={false}
+                     id={classroom.id}
                      code={classroom.code}
                      name={classroom.name}
                      teachName={
