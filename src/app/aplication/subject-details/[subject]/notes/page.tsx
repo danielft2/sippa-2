@@ -1,3 +1,5 @@
+'use client';
+
 import { CheckCheck } from 'lucide-react';
 import {
    Header,
@@ -5,14 +7,18 @@ import {
 } from '@/app/aplication/subject-details/components';
 import { ACTIVITIES_NOTES_MOCKUP } from '@/mocks/activities-notes.mock';
 import { AVALIATIONS_NOTES_MOCKUP } from '@/mocks/avaliation-notes.mock';
+import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
-export default function Notes() {
+const Notes = () => {
+   const { classrooms } = useClassRoomRecents();
+   const { discipline, teacherName } = classrooms[0];
+
    return (
       <main className="space-y-4">
          <Header
-            subtitle="QX2772719"
-            title="Desenvolvimento de Software para Dispositivos Movéis | 2023.1 - 01A - SI"
-            description="Prof(a). Marcio Espíndola Freire Maia - marcioefmaia@gmail.com"
+            subtitle={discipline.code}
+            title={discipline.name}
+            description={teacherName}
             color="#00AF8F"
          >
             <div className="text-green-400 flex items-center gap-1">
@@ -26,4 +32,6 @@ export default function Notes() {
          </section>
       </main>
    );
-}
+};
+
+export default Notes;
