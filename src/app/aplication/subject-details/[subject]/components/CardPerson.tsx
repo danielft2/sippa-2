@@ -1,6 +1,8 @@
+import { ParticipantModel } from '@/domain/models/participant-model';
 import { UserIcon } from 'lucide-react';
 
 interface Props {
+   participant: ParticipantModel;
    backgroundDark: boolean;
 }
 

@@ -1,15 +1,24 @@
+import { NewClassModel } from '@/domain/models/new-class-model';
 import { Search } from 'lucide-react';
 
-export default function CardNews() {
+interface Props {
+   news: NewClassModel;
+}
+
+export default function CardNews(props: Props) {
    return (
-      <div className="flex w-full flex-shrink-0 justify-between py-4 px-8 bg-gray-200 rounded-md">
+      <div
+         className={`flex w-full  bg-gray-200 rounded-md flex-shrink-0 justify-between py-4 px-8`}
+      >
          <div className="flex gap-3">
             <Search className="text-green-400"></Search>
-            <p className="text-gray-600">Texto texto</p>
+            <p className="text-gray-600">{props.news.title}</p>
          </div>
          <div>
             <p className="text-gray-600">
-               Terça feira, 09 de abril 2023, 20:34h
+               {new Intl.DateTimeFormat('pt-BR').format(
+                  new Date(props.news.date_of_post)
+               )}
             </p>
          </div>
       </div>

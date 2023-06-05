@@ -1,11 +1,24 @@
 'use client';
+
 import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
 import { Controller, useForm } from 'react-hook-form';
 import TitleBar from '../components/TitleBar';
+import { RetakeExamService } from '@/services/https/retake-exam';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
 
 export default function RetakeExam() {
    const { control } = useForm();
+   const { subject } = useParams();
+
+   const { data: retakeExamList } = useQuery({
+      queryKey: ['retakeExam', subject],
+      queryFn: () =>
+         RetakeExamService.getAllRetakeExams(
+            '"b64c8c1c-ce0e-4e84-89cd-e6dc381a1004"'
+         )
+   });
    return (
       <div className="grid grid-cols-5 gap-10">
          <div className="col-span-2 bg-gray-50 px-9 py-6 rounded-t-md">
@@ -68,36 +81,26 @@ export default function RetakeExam() {
                   </tr>
                </thead>
                <tbody className="text-gray-600">
-                  <tr>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        16/03/2022
-                     </td>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        AP1
-                     </td>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry...
-                     </td>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        Aceita
-                     </td>
-                  </tr>
-                  <tr>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        17/03/2023
-                     </td>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        AP2
-                     </td>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry...
-                     </td>
-                     <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                        Pendente
-                     </td>
-                  </tr>
+                  {retakeExamList ? (
+                     retakeExamList.map((retakeExam, index) => (
+                        <tr key={index}>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.date.toDateString()}
+                           </td>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.exam}
+                           </td>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.justify}
+                           </td>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.status}
+                           </td>
+                        </tr>
+                     ))
+                  ) : (
+                     <></>
+                  )}
                </tbody>
             </table>
          </div>
