@@ -4,7 +4,7 @@ import { StudentModel } from '@/domain/models/student-model';
 
 export const StorageAuth = {
    savedToken(token: string) {
-      Cookies.set(TOKEN_KEY, token, { path: '/', expires: 1 });
+      Cookies.set(TOKEN_KEY, token, { path: '/', expires: 1 / 24 }); // token expires in one hour
    },
 
    retrieveToken(): string {
