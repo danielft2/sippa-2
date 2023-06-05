@@ -70,9 +70,9 @@ export default function DisciplineDetails() {
             </article>
 
             <article className="col-span-12 lg:col-span-5 bg-gray-50 px-9 py-6 rounded-t-md">
-               <div className="flex items-center gap-2 py-3">
+               <div className="flex items-center gap-2 py-3 mb-3">
                   <UsersIcon className="text-green-400"></UsersIcon>
-                  <h1 className="text-lg font-bold text-gray-800 mb-3">
+                  <h1 className="text-lg font-bold text-gray-800">
                      Participantes
                   </h1>
                </div>
