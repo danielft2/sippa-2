@@ -15,7 +15,7 @@ export const StorageAuth = {
       localStorage.setItem(USERLOGGED_KEY, JSON.stringify(user));
    },
 
-   retrieveUserLogged() {
+   retrieveUserLogged(): StudentModel | null {
       const userLogged = localStorage.getItem(USERLOGGED_KEY);
       if (userLogged) return JSON.parse(userLogged);
       else return null;

@@ -5,3 +5,19 @@
 .swiper-slide-custom {
    @apply w-auto flex-none !important;
 }
+
+.table-custom thead {
+  @apply text-left border-b-2 border-gray-100;
+}
+
+.table-custom th, td {
+  @apply px-4 py-3 text-[13px];
+}
+
+.table-custom tr {
+  @apply odd:bg-white even:bg-slate-100;
+}
+
+.table-custom td {
+  @apply text-gray-600
+}

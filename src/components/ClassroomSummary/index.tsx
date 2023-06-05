@@ -7,46 +7,44 @@ import { Poppins } from 'next/font/google';
 import { CheckCheck } from 'lucide-react';
 import { clsx } from 'clsx';
 
-import { Participants } from './Participants';
 import { generateRandomColor } from '@/utils/generate-random-colors';
-import { useDisciplineRecents } from '@/hooks/useDisciplinesRecents';
+import { ClassroomModel } from '@/domain/models/classroom-student-model';
+
+import { Participants } from './Participants';
+import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 const poppins_semi = Poppins({ weight: ['600'], subsets: ['latin'] });
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
-interface SubjectCardProps {
-   id: string;
-   code: string;
-   name: string;
-   teachName: string;
+interface ClassroomSummaryProps {
+   discipline: ClassroomModel;
    frequency: number;
    participants: [];
    isDashboard?: boolean;
 }
 
-const DisciplineSummary = ({
-   id,
-   code,
-   name,
+const ClassroomSummary = ({
+   discipline: { classroom, discipline, teacherName },
    frequency,
-   teachName,
    isDashboard = false
-}: SubjectCardProps) => {
-   const { handleSavedDiscipline } = useDisciplineRecents();
+}: ClassroomSummaryProps) => {
+   const { handleSavedDiscipline } = useClassRoomRecents();
 
    return (
       <Link
-         href={`aplication/subject-details/${id}`}
+         href={`aplication/subject-details/${classroom.classroom_id}`}
          className="hover:shadow-md transition-all"
          onClick={() =>
             handleSavedDiscipline({
-               id,
-               code,
-               name,
-               frequency,
-               teachName,
-               participants: [],
-               credit: 0
+               classroom,
+               discipline: {
+                  id: classroom.classroom_id,
+                  code: discipline.code,
+                  credit: discipline.credit,
+                  ement: discipline.ement,
+                  name: discipline.name
+               },
+               teacherName: teacherName
             })
          }
       >
@@ -72,15 +70,15 @@ const DisciplineSummary = ({
                      className={`${poppins_semi.className} text-sm block -mb-1`}
                      style={{ color: generateRandomColor() }}
                   >
-                     {code}
+                     {discipline.code}
                   </span>
                   <h1
                      className={`${poppins_md.className} text-[15px] text-gray-800 -mb-1 truncate`}
                   >
-                     {name}
+                     {discipline.name}
                   </h1>
                   <span className="text-sm text-gray-500 truncate">
-                     {teachName}
+                     {teacherName}
                   </span>
                </div>
                <div className="flex items-center justify-between">
@@ -103,4 +101,4 @@ const DisciplineSummary = ({
    );
 };
 
-export default DisciplineSummary;
+export default ClassroomSummary;

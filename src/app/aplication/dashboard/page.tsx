@@ -1,7 +1,7 @@
 import { BellRing } from 'lucide-react';
 import { NEWS_CAMPUS } from '@/mocks/news-campus.mock';
 import { NewsCampus } from './components/NewsCampus';
-import DisciplinesRecents from './components/DisciplinesRecents';
+import DisciplinesRecents from './components/ClassroomRecents';
 import LastNewsClasses from './components/LastNewsClass';
 import UserSummary from '@/components/UserSummary';
 
