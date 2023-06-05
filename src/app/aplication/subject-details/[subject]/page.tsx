@@ -8,6 +8,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { Header } from '../components/Header';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
+import { useState } from 'react';
+import { NewClassModel } from '@/domain/models/new-class-model';
+import ModalNews from './components/ModalNews';
 
 export default function DisciplineDetails() {
    const { subject } = useParams();
@@ -29,6 +32,18 @@ export default function DisciplineDetails() {
             '8cda8f98-39f7-48fb-8138-fc0738982319'
          )
    });
+
+   const [isOpen, setIsOpen] = useState(false);
+   const [selectedNews, setSelectedNews] = useState<NewClassModel | null>(null);
+   const openModal = (news: NewClassModel) => {
+      setSelectedNews(news);
+      setIsOpen(true);
+      console.log('aaaaa');
+   };
+
+   const closeModal = () => {
+      setIsOpen(false);
+   };
 
    return (
       <>
@@ -58,7 +73,11 @@ export default function DisciplineDetails() {
                   <div className="flex flex-wrap mt-3">
                      {newsList ? (
                         newsList.map((news) => (
-                           <div className="flex w-full mb-4" key={news.id}>
+                           <div
+                              className="flex w-full mb-4 cursor-pointer"
+                              key={news.id}
+                              onClick={() => openModal(news)}
+                           >
                               <CardNews news={news}></CardNews>
                            </div>
                         ))
@@ -90,6 +109,11 @@ export default function DisciplineDetails() {
                )}
             </article>
          </section>
+         <ModalNews
+            isOpen={isOpen}
+            onClose={closeModal}
+            news={selectedNews}
+         ></ModalNews>
       </>
    );
 }

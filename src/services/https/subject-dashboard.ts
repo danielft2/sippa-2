@@ -20,21 +20,21 @@ export const SubjectDashboard = {
             description: 'descrição',
             date_of_post: new Date().toDateString(),
             classroom_id: 'a',
-            id: '1'
+            id: '2'
          },
          {
             title: 'noticia',
             description: 'descrição',
             date_of_post: new Date().toDateString(),
             classroom_id: 'a',
-            id: '1'
+            id: '3'
          },
          {
             title: 'noticia',
             description: 'descrição',
             date_of_post: new Date().toDateString(),
             classroom_id: 'a',
-            id: '1'
+            id: '4'
          }
       ];
    },
@@ -46,7 +46,7 @@ export const SubjectDashboard = {
          {
             name: 'Daniel',
             course: 'Engenharia de Software',
-            enrollment: '508077'
+            enrollment: '508076'
          },
          {
             name: 'Daniel',
@@ -56,7 +56,7 @@ export const SubjectDashboard = {
          {
             name: 'Daniel',
             course: 'Engenharia de Software',
-            enrollment: '508077'
+            enrollment: '508078'
          }
       ];
    }
