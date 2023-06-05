@@ -9,7 +9,7 @@ interface Props {
 export default function CardPerson(props: Props) {
    return (
       <div
-         className={`flex gap-2 rounded-md py-3 px-5 ${
+         className={`flex w-full gap-2 rounded-md py-3 px-5 ${
             props.backgroundDark ? 'bg-gray-200' : ''
          }`}
       >
@@ -18,16 +18,14 @@ export default function CardPerson(props: Props) {
          </div>
          <div className="flex flex-wrap">
             <span className="flex justify-start items-end w-full flex-shrink-0 text-sm font-semibold text-green-400">
-               Engenharia de software
+               {props.participant.course}
             </span>
             <span className="flex justify-start items-end w-full flex-shrink-0 font-semibold text-gray-700">
-               Daniel Almeida de Freitas
+               {props.participant.name}
             </span>
          </div>
-         <div className="flex justify-self-end">
-            <span className="flex items-end text-sm font-bold text-gray-600">
-               508077
-            </span>
+         <div className="flex ml-auto items-end text-sm font-bold text-gray-600">
+            {props.participant.enrollment}
          </div>
       </div>
    );
