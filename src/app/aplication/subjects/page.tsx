@@ -22,10 +22,9 @@ const Subjects = () => {
                {data?.map((classroom) => (
                   <DisciplineSummary
                      key={classroom.discipline.id}
-                     discipline={classroom}
+                     data={classroom}
                      isDashboard={false}
                      frequency={90}
-                     participants={[]}
                   />
                ))}
             </div>

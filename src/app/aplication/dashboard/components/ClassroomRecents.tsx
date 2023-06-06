@@ -7,14 +7,13 @@ const ClassroomRecents = () => {
    const { classrooms } = useClassRoomRecents();
    return (
       <>
-         {classrooms.map((discipline) => {
+         {classrooms.map((item) => {
             return (
                <ClassroomSummary
-                  key={discipline.classroom.classroom_id}
+                  key={item.classroom.classroom_id}
                   isDashboard
-                  discipline={discipline}
+                  data={item}
                   frequency={90}
-                  participants={[]}
                />
             );
          })}

@@ -17,14 +17,13 @@ const poppins_semi = Poppins({ weight: ['600'], subsets: ['latin'] });
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface ClassroomSummaryProps {
-   discipline: ClassroomModel;
+   data: ClassroomModel;
    frequency: number;
-   participants: [];
    isDashboard?: boolean;
 }
 
 const ClassroomSummary = ({
-   discipline: { classroom, discipline, teacherName },
+   data,
    frequency,
    isDashboard = false
 }: ClassroomSummaryProps) => {
@@ -32,21 +31,9 @@ const ClassroomSummary = ({
 
    return (
       <Link
-         href={`aplication/subject-details/${classroom.classroom_id}`}
+         href={`aplication/subject-details/${data?.classroom.classroom_id}`}
          className="hover:shadow-md transition-all"
-         onClick={() =>
-            handleSavedDiscipline({
-               classroom,
-               discipline: {
-                  id: classroom.classroom_id,
-                  code: discipline.code,
-                  credit: discipline.credit,
-                  ement: discipline.ement,
-                  name: discipline.name
-               },
-               teacherName: teacherName
-            })
-         }
+         onClick={() => handleSavedDiscipline({ ...data })}
       >
          <div
             className={`bg-white min-w-[200px] max-w-[580px] md_p:max-w-full overflow-hidden rounded-md 
@@ -70,15 +57,15 @@ const ClassroomSummary = ({
                      className={`${poppins_semi.className} text-sm block -mb-1`}
                      style={{ color: generateRandomColor() }}
                   >
-                     {discipline.code}
+                     {data?.discipline.code}
                   </span>
                   <h1
                      className={`${poppins_md.className} text-[15px] text-gray-800 -mb-1 truncate`}
                   >
-                     {discipline.name}
+                     {data?.discipline.name}
                   </h1>
                   <span className="text-sm text-gray-500 truncate">
-                     {teacherName}
+                     {data?.teacherName}
                   </span>
                </div>
                <div className="flex items-center justify-between">
@@ -93,7 +80,12 @@ const ClassroomSummary = ({
                         {frequency}%
                      </span>
                   </div>
-                  <Participants />
+                  <Participants
+                     participant1={data.threeFirstStudents?.student1}
+                     participant2={data.threeFirstStudents?.student2}
+                     participant3={data.threeFirstStudents?.student3}
+                     totalParticipantsLeft={data?.totalStudentsLeft}
+                  />
                </div>
             </div>
          </div>

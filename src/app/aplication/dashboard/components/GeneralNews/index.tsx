@@ -15,7 +15,7 @@ const GeneralNews = () => {
       <section className="grid grid-cols-3 gap-4">
          {data?.map((generalNew) => (
             <GeneralNewCard
-               key={generalNew.generalNewsFind.id}
+               key={`${generalNew.generalNewsFind.id} ${generalNew.URL}`}
                title={generalNew.generalNewsFind.title}
                description={generalNew.generalNewsFind.description}
                linkUrlImage={generalNew.URL}
