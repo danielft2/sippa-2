@@ -1,35 +1,64 @@
+import { Poppins } from 'next/font/google';
+import { ClassroomParticipant } from '@/domain/models/classroom-participant';
+
+const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
+
 import Avatar from '../Avatar';
 
-export function Participants() {
+interface ParticipantsProps {
+   participant1: ClassroomParticipant;
+   participant2: ClassroomParticipant;
+   participant3: ClassroomParticipant;
+   totalParticipantsLeft: number;
+}
+
+export function Participants({
+   participant1,
+   participant2,
+   participant3,
+   totalParticipantsLeft
+}: ParticipantsProps) {
    return (
-      <div className="w-[100px] h-[30px]">
-         <div className="flex relative">
-            <div className="absolute right-5">
-               <Avatar
-                  avatarImageUrl={'https://github.com/danielft2.png'}
-                  name="Daniel"
-                  width="26"
-                  textSizeFalback="text-[8px]"
-               />
-            </div>
-            <div className="z-10 absolute right-9">
-               <Avatar
-                  avatarImageUrl={'https://github.com/VictorM-Coder.png'}
-                  name="Daniel"
-                  width="26"
-                  textSizeFalback="text-[8px]"
-               />
-            </div>
-            <div className="z-20 absolute right-14">
-               <Avatar
-                  avatarImageUrl={'https://github.com/alexsonalmeida.png'}
-                  name="Daniel"
-                  width="26"
-                  textSizeFalback="text-[8px]"
-               />
-            </div>
-            <span className="absolute -right-1 text-sm text-gray-600 top-1">
-               +12
+      <div className="">
+         <div className="flex items-center">
+            {participant1 && (
+               <div className="-ml-2">
+                  <Avatar
+                     avatarImageUrl={participant1?.url ?? 'https://'}
+                     name={participant1?.name}
+                     width="26"
+                     textSizeFalback="text-[8px]"
+                  />
+               </div>
+            )}
+
+            {participant2 && (
+               <div className="-ml-2">
+                  <Avatar
+                     avatarImageUrl={participant2?.url ?? 'https://'}
+                     name={participant2?.name}
+                     width="26"
+                     textSizeFalback="text-[8px]"
+                  />
+               </div>
+            )}
+
+            {participant3 && (
+               <div className="-ml-2">
+                  <Avatar
+                     avatarImageUrl={participant3?.url ?? 'https://'}
+                     name={participant3?.name}
+                     width="26"
+                     textSizeFalback="text-[8px]"
+                  />
+               </div>
+            )}
+
+            <span
+               className={`${poppins_md.className} w-[28px] h-[28px] shadow flex items-center justify-center rounded-full 
+               bg-slate-100 text-[11px] text-gray-600 -ml-2`}
+            >
+               +{totalParticipantsLeft}
             </span>
          </div>
       </div>
