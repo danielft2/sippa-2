@@ -17,7 +17,7 @@ export default function ClassroomPlan() {
       queryKey: ['plans', subject],
       queryFn: () =>
          ClassroomPlanService.getAllClassroomPlans(
-            '"b64c8c1c-ce0e-4e84-89cd-e6dc381a1004"'
+            classrooms[0].classroom.classroom_id
          )
    });
 
@@ -58,13 +58,15 @@ export default function ClassroomPlan() {
                            className={`${index % 2 != 0 ? 'bg-gray-200' : ''}`}
                         >
                            <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {plan.date.toDateString()}
+                              {new Date(plan.class_date).toLocaleDateString(
+                                 'pt-BR'
+                              )}
                            </td>
                            <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {plan.plan}
+                              {plan.class_plan}
                            </td>
                            <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {plan.diary}
+                              {plan.class_diary}
                            </td>
                         </tr>
                      ))

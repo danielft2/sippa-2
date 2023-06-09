@@ -25,7 +25,9 @@ export default function ModalNews(modalProps: ModalProps) {
                <div className="mb-2 flex-grow w-full">
                   <p>
                      <strong>Postado em: </strong>
-                     {modalProps.news.date_of_post}
+                     {new Date(modalProps.news.date_of_post).toLocaleDateString(
+                        'pt-BR'
+                     )}
                   </p>
                </div>
                <div className="flex-grow">

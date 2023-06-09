@@ -20,25 +20,24 @@ export default function DisciplineDetails() {
    const { data: newsList } = useQuery({
       queryKey: ['news', subject],
       queryFn: () =>
-         SubjectDashboard.getAllNewsClass(
-            '"b64c8c1c-ce0e-4e84-89cd-e6dc381a1004"'
-         )
+         SubjectDashboard.getAllNewsClass(classrooms[0].classroom.classroom_id)
    });
 
    const { data: participantsList } = useQuery({
       queryKey: ['participants', subject],
       queryFn: () =>
          SubjectDashboard.getAllParticipants(
-            '8cda8f98-39f7-48fb-8138-fc0738982319'
+            classrooms[0].classroom.classroom_id
          )
    });
+
+   console.log(participantsList);
 
    const [isOpen, setIsOpen] = useState(false);
    const [selectedNews, setSelectedNews] = useState<NewClassModel | null>(null);
    const openModal = (news: NewClassModel) => {
       setSelectedNews(news);
       setIsOpen(true);
-      console.log('aaaaa');
    };
 
    const closeModal = () => {
