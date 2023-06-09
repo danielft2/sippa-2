@@ -5,20 +5,27 @@ import {
    Header,
    ResumeNotes
 } from '@/app/aplication/subject-details/components';
-import { ACTIVITIES_NOTES_MOCKUP } from '@/mocks/activities-notes.mock';
-import { AVALIATIONS_NOTES_MOCKUP } from '@/mocks/avaliation-notes.mock';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { SubjectService } from '@/services/https/subjects';
 
 const Notes = () => {
+   const { subject } = useParams();
+
+   const { data } = useQuery({
+      queryKey: ['notes', subject],
+      queryFn: () => SubjectService.getAllNotesByClassroom(subject)
+   });
+
    const { classrooms } = useClassRoomRecents();
-   const { discipline, teacherName } = classrooms[0];
 
    return (
       <main className="space-y-4">
          <Header
-            subtitle={discipline.code}
-            title={discipline.name}
-            description={teacherName}
+            subtitle={classrooms[0]?.discipline.code}
+            title={classrooms[0]?.discipline.name}
+            description={classrooms[0]?.teacherName}
             color="#00AF8F"
          >
             <div className="text-green-400 flex items-center gap-1">
@@ -27,8 +34,8 @@ const Notes = () => {
             </div>
          </Header>
          <section className="grid grid-cols-2 lg_p:grid-cols-1 gap-4">
-            <ResumeNotes body={ACTIVITIES_NOTES_MOCKUP} />
-            <ResumeNotes body={AVALIATIONS_NOTES_MOCKUP} />
+            <ResumeNotes body={data?.exams ? data.exams : []} />
+            <ResumeNotes body={data?.activities ? data.activities : []} />
          </section>
       </main>
    );
