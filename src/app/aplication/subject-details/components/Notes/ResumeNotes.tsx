@@ -11,7 +11,8 @@ interface ResumeNotesProps {
 
 export function ResumeNotes({ body }: ResumeNotesProps) {
    function calculateAvg(total: number, value: number) {
-      return (value / total).toFixed(1);
+      if (total > 0 && value > 0) return (value / total).toFixed(1);
+      return 0.0;
    }
 
    return (
@@ -20,19 +21,19 @@ export function ResumeNotes({ body }: ResumeNotesProps) {
             <TextSelection size={18} />
          </TitleCard>
          <Table headers={['Nome', 'Peso', 'Nota']}>
-            {body.map((note) => (
-               <tr key={note.id}>
+            {body.map((item) => (
+               <tr key={item.studentActivityData?.id}>
                   <td className="flex items-center gap-1">
                      <span className="text-green-400">
                         <FileText size={16} />
                      </span>
-                     <span>{note.name}</span>
+                     <span>{item.title}</span>
                   </td>
-                  <td>{note.weight}</td>
-                  <td>{note.note}</td>
+                  <td>{item.weight}</td>
+                  <td>{item.studentActivityData?.activity_points}</td>
                </tr>
             ))}
-            <tr>
+            <tr key={'resume'}>
                <td className="flex items-center gap-1">
                   <span className="text-green-400">
                      <Calculator size={16} />
