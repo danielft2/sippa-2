@@ -1,9 +1,8 @@
 import { BellRing } from 'lucide-react';
-import { NEWS_CAMPUS } from '@/mocks/news-campus.mock';
-import { NewsCampus } from './components/NewsCampus';
 import DisciplinesRecents from './components/ClassroomRecents';
 import LastNewsClasses from './components/LastNewsClass';
 import UserSummary from '@/components/UserSummary';
+import GeneralNews from './components/GeneralNews';
 
 export default async function Dashboard() {
    return (
@@ -27,17 +26,7 @@ export default async function Dashboard() {
             </div>
             <LastNewsClasses />
          </section>
-         <div className="flex items-center gap-4 flex-wrap">
-            {NEWS_CAMPUS.map((news) => (
-               <NewsCampus
-                  key={news.id}
-                  title={news.title}
-                  description={news.descrption}
-                  linkUrlNews={news.linkUrlNews}
-                  linkUrlImage={news.linkUrlImage}
-               />
-            ))}
-         </div>
+         <GeneralNews />
       </main>
    );
 }

@@ -44,7 +44,7 @@ export function useSingIn({ setValue }: useSingInProps) {
          });
       } catch (error) {
          if (error instanceof AppError) {
-            toast(error.message(), {
+            toast(error.message, {
                autoClose: 2000,
                type: 'error'
             });
