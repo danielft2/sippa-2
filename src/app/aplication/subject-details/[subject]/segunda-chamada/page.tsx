@@ -11,7 +11,7 @@ import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 import { CheckCheck } from 'lucide-react';
 import { Header } from '../../components/Header';
 
-export default function RetakeExam() {
+const RetakeExam = () => {
    const { control } = useForm();
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
@@ -124,4 +124,6 @@ export default function RetakeExam() {
          </div>
       </>
    );
-}
+};
+
+export default RetakeExam;

@@ -8,7 +8,7 @@ import { Header } from '../../components/Header';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 import { CheckCheck } from 'lucide-react';
 
-export default function ClassroomPlan() {
+const ClassroomPlan = () => {
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
    const { discipline, teacherName } = classrooms[0];
@@ -78,4 +78,6 @@ export default function ClassroomPlan() {
          </div>
       </>
    );
-}
+};
+
+export default ClassroomPlan;

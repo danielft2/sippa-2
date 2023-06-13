@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { NewClassModel } from '@/domain/models/new-class-model';
 import ModalNews from './components/ModalNews';
 
-export default function DisciplineDetails() {
+const DisciplineDetails = () => {
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
    const { discipline, teacherName } = classrooms[0];
@@ -30,8 +30,6 @@ export default function DisciplineDetails() {
             classrooms[0].classroom.classroom_id
          )
    });
-
-   console.log(participantsList);
 
    const [isOpen, setIsOpen] = useState(false);
    const [selectedNews, setSelectedNews] = useState<NewClassModel | null>(null);
@@ -115,4 +113,6 @@ export default function DisciplineDetails() {
          ></ModalNews>
       </>
    );
-}
+};
+
+export default DisciplineDetails;
