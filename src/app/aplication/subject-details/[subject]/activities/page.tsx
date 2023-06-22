@@ -11,15 +11,14 @@ import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 const DisciplineActivities = () => {
    const { classrooms } = useClassRoomRecents();
-   const { discipline, teacherName } = classrooms[0];
 
    return (
       <div className="space-y-4">
          <Header
-            key={discipline.id}
-            subtitle={discipline.code}
-            title={discipline.name}
-            description={teacherName}
+            key={classrooms[0]?.discipline.id}
+            subtitle={classrooms[0]?.discipline.code}
+            title={classrooms[0]?.discipline.name}
+            description={classrooms[0]?.teacherName}
          >
             <div className="flex items-center gap-3">
                <div className="text-green-400 flex items-center gap-1">

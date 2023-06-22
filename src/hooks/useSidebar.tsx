@@ -51,15 +51,15 @@ export function useSidebar() {
          },
          {
             name: 'Plano de Aula',
-            pathName: 'plano-de-aula',
+            pathName: 'classroom-plan',
             icone: <CalendarRange size={16} />,
-            redirect: (id: string) => `${subjectInitURL}/${id}/plano-de-aula`
+            redirect: (id: string) => `${subjectInitURL}/${id}/classroom-plan`
          },
          {
             name: 'Solicitar Segunda Chamada',
-            pathName: 'segunda-chamada',
+            pathName: 'retake-exam',
             icone: <MessageSquare size={16} />,
-            redirect: (id: string) => `${subjectInitURL}/${id}/segunda-chamada`
+            redirect: (id: string) => `${subjectInitURL}/${id}/retake-exam`
          }
       ]
    };

@@ -1,21 +1,23 @@
 'use client';
 
+import { useParams } from 'next/navigation';
+import { Controller, useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import { CheckCheck, FileSpreadsheet } from 'lucide-react';
+
 import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
-import { Controller, useForm } from 'react-hook-form';
-import TitleBar from '../components/TitleBar';
 import { RetakeExamService } from '@/services/https/retake-exam';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
-import { CheckCheck } from 'lucide-react';
-import { Header } from '../../components/Header';
+
+import { Header } from '@/app/aplication/subject-details/components/Header';
+import TitleBar from '@/app/aplication/subject-details/components/Dashboard/TitleBar';
+import { TitleCard } from '../../components';
 
 const RetakeExam = () => {
    const { control } = useForm();
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
-   const { discipline, teacherName } = classrooms[0];
 
    const { data: retakeExamList } = useQuery({
       queryKey: ['retakeExam', subject],
@@ -27,9 +29,9 @@ const RetakeExam = () => {
    return (
       <>
          <Header
-            subtitle={discipline.code}
-            title={discipline.name}
-            description={teacherName}
+            subtitle={classrooms[0]?.discipline.code}
+            title={classrooms[0]?.discipline.name}
+            description={classrooms[0]?.teacherName}
             color="#00AF8F"
          >
             <div className="text-green-400 flex items-center gap-1">
@@ -38,9 +40,11 @@ const RetakeExam = () => {
             </div>
          </Header>
          <div className="grid grid-cols-5 gap-10 mt-4">
-            <div className="col-span-5 lg:col-span-2 bg-gray-50 px-9 py-6 rounded-t-md">
-               <TitleBar titleValue={'Solicitar segunda chamada'}></TitleBar>
-               <form className="space-y-4">
+            <div className="col-span-5 lg:col-span-2 bg-gray-50 px-6 py-6 rounded-t-md">
+               <TitleCard title="Solicitar Segunda Chamada" type="background">
+                  <FileSpreadsheet size={18} />
+               </TitleCard>
+               <form className="space-y-4 mt-4">
                   <Form.Field>
                      <Form.Label htmlFor="exam">Avaliação:</Form.Label>
                      <Controller
@@ -79,45 +83,43 @@ const RetakeExam = () => {
                </form>
             </div>
             <div className="col-span-5 lg:col-span-3 bg-gray-50 px-9 py-6 rounded-t-md">
-               <TitleBar titleValue={'Solicitações de chamadas'}></TitleBar>
+               <TitleCard title="Solicitações de Chamados" type="background">
+                  <FileSpreadsheet size={18} />
+               </TitleCard>
                <table className="min-w-full divide-y divide-gray-200">
                   <thead>
                      <tr>
-                        <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
                            Data
                         </th>
-                        <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
                            Avaliação
                         </th>
-                        <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
                            Justificativa
                         </th>
-                        <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
                            Status
                         </th>
                      </tr>
                   </thead>
                   <tbody className="text-gray-600">
-                     {retakeExamList ? (
-                        retakeExamList.map((retakeExam, index) => (
-                           <tr key={index}>
-                              <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                                 {retakeExam.date.toDateString()}
-                              </td>
-                              <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                                 {retakeExam.exam}
-                              </td>
-                              <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                                 {retakeExam.justify}
-                              </td>
-                              <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                                 {retakeExam.status}
-                              </td>
-                           </tr>
-                        ))
-                     ) : (
-                        <></>
-                     )}
+                     {retakeExamList?.map((retakeExam, index) => (
+                        <tr key={index}>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.date.toDateString()}
+                           </td>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.exam}
+                           </td>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.justify}
+                           </td>
+                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
+                              {retakeExam.status}
+                           </td>
+                        </tr>
+                     ))}
                   </tbody>
                </table>
             </div>
