@@ -1,32 +1,31 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import TitleBar from '../components/TitleBar';
 import { useQuery } from '@tanstack/react-query';
+import { CheckCheck, FileSpreadsheet } from 'lucide-react';
+
 import { ClassroomPlanService } from '@/services/https/classroom-plan';
-import { Header } from '../../components/Header';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
-import { CheckCheck } from 'lucide-react';
+
+import { Header } from '@/app/aplication/subject-details/components/Header';
+import TitleBar from '@/app/aplication/subject-details/components/Dashboard/TitleBar';
+import { TitleCard } from '../../components';
 
 const ClassroomPlan = () => {
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
-   const { discipline, teacherName } = classrooms[0];
 
    const { data: planList } = useQuery({
       queryKey: ['plans', subject],
-      queryFn: () =>
-         ClassroomPlanService.getAllClassroomPlans(
-            classrooms[0].classroom.classroom_id
-         )
+      queryFn: () => ClassroomPlanService.getAllClassroomPlans(subject)
    });
 
    return (
       <>
          <Header
-            subtitle={discipline.code}
-            title={discipline.name}
-            description={teacherName}
+            subtitle={classrooms[0]?.discipline.code}
+            title={classrooms[0]?.discipline.name}
+            description={classrooms[0]?.teacherName}
             color="#00AF8F"
          >
             <div className="text-green-400 flex items-center gap-1">
@@ -34,18 +33,20 @@ const ClassroomPlan = () => {
                <span className="text-[13px]">90% de Frequência</span>
             </div>
          </Header>
-         <div className="bg-gray-50 px-9 py-6 rounded-t-md mt-4">
-            <TitleBar titleValue={'Plano de aulas'}></TitleBar>
-            <table className="min-w-full divide-y divide-gray-200">
+         <div className="bg-gray-50 px-8 py-6 rounded-t-md mt-4">
+            <TitleCard title="Plano de Aula" type="background">
+               <FileSpreadsheet size={18} />
+            </TitleCard>
+            <table className="min-w-full divide-y divide-gray-200 mt-4">
                <thead>
                   <tr>
-                     <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                     <th className="px-6 py-3 text-center text-sm font-semibold text-gray-800">
                         Aula
                      </th>
-                     <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                     <th className="px-6 py-3 text-center text-sm font-semibold text-gray-800">
                         Plano de Aula
                      </th>
-                     <th className="px-6 py-3 text-center text-md font-semibold text-gray-800">
+                     <th className="px-6 py-3 text-center text-sm font-semibold text-gray-800">
                         Diário de Aula
                      </th>
                   </tr>
@@ -55,7 +56,7 @@ const ClassroomPlan = () => {
                      planList.map((plan, index) => (
                         <tr
                            key={plan.id}
-                           className={`${index % 2 != 0 ? 'bg-gray-200' : ''}`}
+                           className={`${index % 2 != 0 ? 'bg-slate-100' : ''}`}
                         >
                            <td className="px-6 py-4 text-center whitespace-pre-wrap">
                               {new Date(plan.class_date).toLocaleDateString(

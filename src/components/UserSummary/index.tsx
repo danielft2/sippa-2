@@ -14,7 +14,7 @@ const UserSummary = () => {
          <div className="flex items-center flex-1 px-8">
             <div className="flex items-center gap-4">
                <Avatar
-                  avatarImageUrl={userLogged.urlPhoto ?? 'https://'}
+                  avatarImageUrl={userLogged.url ?? 'https://'}
                   name={userLogged.name}
                   width="90"
                   textSizeFalback="text-lg"

@@ -5,6 +5,7 @@ import Sidebar from '@/layouts/Sidebar/index.';
 import Image from 'next/image';
 
 import '../../styles/utils.css';
+import Link from 'next/link';
 
 export function Layout({ children }: { children: ReactNode }) {
    return (
@@ -12,12 +13,14 @@ export function Layout({ children }: { children: ReactNode }) {
          <div className="w-full">
             <div className="h-[64px] bg-green-400 flex items-center">
                <div className="container-content flex items-center justify-between">
-                  <Image
-                     src="/logo.png"
-                     alt="Logo do sistema"
-                     width={100}
-                     height={100}
-                  />
+                  <Link href="aplication/dashboard">
+                     <Image
+                        src="/logo.png"
+                        alt="Logo do sistema"
+                        width={100}
+                        height={100}
+                     />
+                  </Link>
                   <a href="/api/auth/logout">
                      <LogOut size={20} color="white" />
                   </a>
