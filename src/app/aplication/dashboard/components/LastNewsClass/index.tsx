@@ -6,7 +6,7 @@ import { SwiperSlide } from 'swiper/react';
 import { Slide } from '@/components/Slide';
 import { DashboardService } from '@/services/https/dashboard';
 
-import { NewsClass } from '../NewsClass';
+import { NewsClass } from './NewsClass';
 import { SkeletonNewsClass } from './SkeletonNewsClass';
 
 import '@/styles/utils.css';

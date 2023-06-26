@@ -19,11 +19,11 @@ export function ActivityCard({
 
    return (
       <Link href={`/aplication/subject-details/${subject}/activities/${id}`}>
-         <div className="bg-zinc-100 p-6 pb-3 flex flex-col justify-between gap-4 rounded-md h-[140px]">
+         <div className="bg-zinc-100 p-6 pb-3 flex flex-col justify-between gap-4 shadow rounded-md h-[140px]">
             <div className="flex flex-col">
                <span
                   className={`text-[13px] ${poppins_md.className} ${
-                     status == 'Pendente' ? 'text-orange-500' : 'text-green-400'
+                     status == 'Pendente' ? 'text-orange-700' : 'text-green-400'
                   }`}
                >
                   {status}
@@ -33,11 +33,11 @@ export function ActivityCard({
                >
                   {title}
                </span>
-               <span className="text-[13px] text-gray-500">{date}</span>
+               <span className="text-[13px] text-gray-600">{date}</span>
             </div>
             <div className="flex-1 flex items-center gap-2">
                {isFrequency && (
-                  <div className="text-green-400 flex items-center gap-1">
+                  <div className="text-green-600 flex items-center gap-1">
                      <CheckCheck size={12} />
                      <span className="text-xs ">Freq.</span>
                   </div>

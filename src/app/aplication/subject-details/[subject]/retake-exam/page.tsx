@@ -32,19 +32,18 @@ const RetakeExam = () => {
             subtitle={classrooms[0]?.discipline.code}
             title={classrooms[0]?.discipline.name}
             description={classrooms[0]?.teacherName}
-            color="#00AF8F"
          >
-            <div className="text-green-400 flex items-center gap-1">
+            <div className="text-green-600 flex items-center gap-1">
                <CheckCheck size={16} />
                <span className="text-[13px]">90% de Frequência</span>
             </div>
          </Header>
          <section
-            className="grid grid-cols-2 gap-6 mt-6"
+            className="grid grid-cols-2 lg_p:grid-cols-1 gap-6 mt-6"
             aria-label="Solicitação e histórico de solicitações da segunda chamada."
          >
             <article
-               className="bg-white p-6 rounded-sm"
+               className="bg-white p-6 rounded shadow"
                aria-label="Solicitação de segunda chamada."
             >
                <TitleCard title="Solicitar Segunda Chamada" type="background">
@@ -88,7 +87,7 @@ const RetakeExam = () => {
                </form>
             </article>
             <article
-               className="bg-white p-6 rounded-sm space-y-3"
+               className="bg-white p-6 rounded space-y-3 shadow"
                aria-label="Histórico de solicitações."
             >
                <TitleCard title="Solicitações de Chamados" type="background">

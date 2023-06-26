@@ -15,7 +15,7 @@ function ButtonRoot({ children, isLoading, ...rest }: ButtonRootProps) {
    return (
       <button
          className={clsx(
-            'bg-green-400 w-full h-10 rounded text-sm hover:brightness-95 transition-all flex justify-center items-center px-4',
+            'bg-green-600 w-full h-10 rounded text-sm hover:brightness-90 transition-all flex justify-center items-center px-4',
             {
                'opacity-50': isLoading,
                'opacity-100': !isLoading

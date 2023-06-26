@@ -75,7 +75,7 @@ const ClassroomSummary = ({
                <div className="flex items-center justify-between">
                   <div
                      className={clsx('flex items-center gap-1', {
-                        'text-green-400': frequency > 80,
+                        'text-green-600': frequency > 80,
                         'text-orange-500': frequency < 80
                      })}
                   >

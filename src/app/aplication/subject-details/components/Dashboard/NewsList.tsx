@@ -34,11 +34,11 @@ const NewsList = () => {
    return (
       <>
          <article
-            className="flex flex-col bg-white rounded-md shadow-sm"
+            className="flex flex-col bg-white rounded-md shadow"
             aria-label="Listagem de noticias."
          >
             <TitleCard title="Noticias da turma" type="simple">
-               <BellIcon className="text-green-400" size={18} />
+               <BellIcon className="text-green-600" size={18} />
             </TitleCard>
             <div className="px-8 py-4 flex-1">
                {isLoading ? (

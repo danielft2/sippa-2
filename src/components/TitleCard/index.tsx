@@ -11,12 +11,7 @@ interface TitleCardProps {
    type: 'simple' | 'background';
 }
 
-export function TitleCard({
-   type,
-   title,
-   icon,
-   children = null
-}: TitleCardProps) {
+export function TitleCard({ type, title, children = null }: TitleCardProps) {
    return (
       <header
          className={clsx('', {
@@ -24,8 +19,8 @@ export function TitleCard({
             'border-b-2 border-gray-100': type === 'simple'
          })}
       >
-         <div className="flex items-center gap-1 px-7 py-4 pb-4">
-            <span className="text-green-400">{children}</span>
+         <div className="flex items-center gap-1 px-7 py-5 pb-4">
+            <span className="text-green-600">{children}</span>
             <h1 className={`${poppins_md.className} text-sm text-gray-600`}>
                {title}
             </h1>

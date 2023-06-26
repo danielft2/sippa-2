@@ -13,14 +13,14 @@ export default function CardPerson({
    return (
       <div
          className={`flex w-full gap-4 rounded-md py-3 px-5 ${
-            backgroundDark ? 'bg-gray-200' : ''
+            backgroundDark ? 'bg-gray-100' : ''
          }`}
       >
          <div className="flex flex-shrink-0 justify-center items-center w-12 h-12 rounded-full bg-gray-300">
             <UserIcon className="text-gray-600"></UserIcon>
          </div>
          <div className="flex flex-wrap">
-            <span className="flex justify-start items-end w-full flex-shrink-0 text-sm font-semibold text-green-400">
+            <span className="flex justify-start items-end w-full flex-shrink-0 text-sm font-semibold text-green-600">
                {participant.course}
             </span>
             <span className="flex justify-start items-end w-full flex-shrink-0 text-sm font-semibold text-gray-700">

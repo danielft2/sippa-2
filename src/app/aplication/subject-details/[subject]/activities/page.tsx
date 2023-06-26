@@ -21,11 +21,11 @@ const DisciplineActivities = () => {
             description={classrooms[0]?.teacherName}
          >
             <div className="flex items-center gap-3">
-               <div className="text-green-400 flex items-center gap-1">
+               <div className="text-green-600 flex items-center gap-1">
                   <CheckCheck size={16} />
                   <span className="text-[13px]">{90}% de Frequência.</span>
                </div>
-               <div className="text-orange-500 flex items-center gap-1">
+               <div className="text-orange-700 flex items-center gap-1">
                   <CheckCheck size={16} />
                   <span className="text-[13px]">{6} Faltas.</span>
                </div>
@@ -35,7 +35,7 @@ const DisciplineActivities = () => {
          {ACTIVITIES_THEMES.map((theme) => (
             <section
                key={theme.title}
-               className="bg-white w-full p-6 space-y-4 rounded-md"
+               className="bg-white w-full p-6 space-y-4 shadow rounded-md"
                aria-label={`Atividades do tópico ${theme.title}`}
             >
                <header className="flex items-center gap-1">

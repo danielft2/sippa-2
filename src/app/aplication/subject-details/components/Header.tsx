@@ -19,11 +19,10 @@ export function Header({
    title,
    subtitle,
    description,
-   color,
    children
 }: DisicplineHeaderProps) {
    return (
-      <header className={`bg-white overflow-hidden rounded-md `}>
+      <header className={`bg-white overflow-hidden rounded-md shadow`}>
          <div className="w-full relative h-[60px]">
             <Image
                className="relative max-h-full object-cover"
@@ -35,8 +34,7 @@ export function Header({
          <div className="flex-1 flex flex-col gap-4 justify-between px-7 py-7 pb-3 pt-4">
             <div className="">
                <span
-                  className={`${poppins_semi.className} text-sm block -mb-1`}
-                  style={{ color: color || generateRandomColor() }}
+                  className={`${poppins_semi.className} text-sm block -mb-1 text-green-600`}
                >
                   {subtitle}
                </span>

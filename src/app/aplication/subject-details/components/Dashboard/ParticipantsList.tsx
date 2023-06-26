@@ -19,17 +19,17 @@ const ParticipantsList = () => {
 
    return (
       <article
-         className="bg-white rounded-md shadow-sm"
+         className="bg-white rounded-md shadow"
          aria-label="Lista de participantes."
       >
          <div className="flex justify-between items-center gap-2 px-8 py-4 pt-6 border-b border-b-gray-200">
             <div className="flex items-center gap-2">
-               <Users className="text-green-400" size={20} />
+               <Users className="text-green-600" size={20} />
                <h1 className="font-bold text-gray-600 text-[15px]">
                   Participantes
                </h1>
             </div>
-            <div className="bg-green-400 w-7 h-7 rounded-full flex items-center justify-center">
+            <div className="bg-green-600 w-7 h-7 rounded-full flex items-center justify-center">
                <span className="text-white text-sm font-medium">
                   {participantsList?.length ? participantsList.length : 0}
                </span>

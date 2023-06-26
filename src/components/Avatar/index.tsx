@@ -23,7 +23,7 @@ const Avatar = ({
       <AvatarRadix.Root
          className={`bg-blackA3 inline-flex select-none items-center justify-center 
          overflow-hidden rounded-full align-middle shadow ${
-            isBorder ? 'border-2 border-green-400 p-1' : ''
+            isBorder ? 'border-2 border-green-600 p-1' : ''
          } `}
          style={{
             width: `${width}px` ?? '46px',

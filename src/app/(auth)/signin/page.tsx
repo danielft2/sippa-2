@@ -24,9 +24,9 @@ export default function SigIn() {
             <div className="p-10 flex-1 flex flex-col justify-center gap-8">
                <div>
                   <span className="flex items-center justify-center w-14 h-14 rounded-full bg-green-200 mb-1">
-                     <UserCheck className="text-green-400" size={28} />
+                     <UserCheck className="text-green-600" size={28} />
                   </span>
-                  <h1 className={`${poppins.className} text-green-400 text-xl`}>
+                  <h1 className={`${poppins.className} text-green-600 text-xl`}>
                      Bem vindo de volta
                   </h1>
                   <span className="text-sm text-gray-600">
@@ -40,7 +40,7 @@ export default function SigIn() {
                <span className="text-[13px] text-gray-400">
                   Universidade Federal do Ceará - Campus Quixadá
                </span>
-               <div className="text-green-400 flex items-center gap-1">
+               <div className="text-green-600 flex items-center gap-1">
                   <Headphones size={18} />
                   <span className="text-[13px]">
                      Suporte: emaildesuporte@gmail.com
