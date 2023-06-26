@@ -49,7 +49,7 @@ const SidebarItem = ({ name, pathName = '', icon }: SidebarItemProps) => {
    const path = usePathname();
 
    return (
-      <div className="">
+      <nav className="">
          <Link
             href={pathName}
             className={`group flex items-center gap-1 ${
@@ -60,7 +60,7 @@ const SidebarItem = ({ name, pathName = '', icon }: SidebarItemProps) => {
             <span className="item">{icon}</span>
             <span className="item text-[13px]">{name}</span>
          </Link>
-      </div>
+      </nav>
    );
 };
 

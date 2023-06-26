@@ -37,6 +37,7 @@ const FormLogin = () => {
                               value={value}
                               onValueChange={onChange}
                               options={options}
+                              ariaLabel="Selecionar o tipo de usário."
                            />
                         );
                      }}
@@ -45,21 +46,21 @@ const FormLogin = () => {
                </Form.Field>
 
                <Form.Field>
-                  <Form.Label htmlFor="login">Login</Form.Label>
+                  <Form.Label htmlFor="enrollment">Login</Form.Label>
                   <Form.Input type="number" name="enrollment" maxLength={6} />
                   <Form.ErrorMessage field="enrollment" />
                </Form.Field>
 
                <Form.Field className="flex flex-col mb-4">
                   <Form.Label htmlFor="password">Senha</Form.Label>
-                  <Form.Input type="text" name="password" />
+                  <Form.Input type="password" name="password" />
                   <Form.ErrorMessage field="password" />
 
                   <Form.Field className="flex justify-between items-center mt-2">
                      <Form.Field className="flex items-center gap-2">
                         <Form.Checkbox name="remember_informations" />
                         <label
-                           htmlFor="remember"
+                           htmlFor="remember_informations"
                            className="text-xs text-gray-500"
                         >
                            Lembrar informações

@@ -7,12 +7,18 @@ const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 interface TitleCardProps {
    title: string;
    children?: ReactNode;
+   icon?: ReactNode;
    type: 'simple' | 'background';
 }
 
-export function TitleCard({ type, title, children = null }: TitleCardProps) {
+export function TitleCard({
+   type,
+   title,
+   icon,
+   children = null
+}: TitleCardProps) {
    return (
-      <div
+      <header
          className={clsx('', {
             'bg-slate-100 rounded-md': type === 'background',
             'border-b-2 border-gray-100': type === 'simple'
@@ -24,6 +30,6 @@ export function TitleCard({ type, title, children = null }: TitleCardProps) {
                {title}
             </h1>
          </div>
-      </div>
+      </header>
    );
 }

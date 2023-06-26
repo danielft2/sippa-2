@@ -1,6 +1,6 @@
 import Image from 'next/image';
-
 import { Poppins } from 'next/font/google';
+
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface GeneralNewCardProps {
@@ -17,13 +17,16 @@ export function GeneralNewCard({
    linkUrlImage
 }: GeneralNewCardProps) {
    return (
-      <div className="max-w-[530px] h-[250px] bg-white rounded-md shadow-sm overflow-hidden flex flex-col">
+      <section
+         className="max-w-[530px] h-[250px] bg-white rounded-md shadow-sm overflow-hidden flex flex-col"
+         aria-label="Noticia"
+      >
          <div className="h-[100px] w-full relative">
             <Image
-               src={linkUrlImage}
-               alt="Imagem do evento"
-               fill
                className="object-cover h-full"
+               src={linkUrlImage}
+               alt={`Imagem da noticia ${title}`}
+               fill
             />
          </div>
          <div className="flex-1 p-5 flex flex-col justify-between">
@@ -41,6 +44,6 @@ export function GeneralNewCard({
                </a>
             )}
          </div>
-      </div>
+      </section>
    );
 }

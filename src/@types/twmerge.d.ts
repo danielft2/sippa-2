@@ -1,0 +1,3 @@
+interface Twmerge {
+   className?: string;
+}

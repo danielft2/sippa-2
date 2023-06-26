@@ -1,5 +1,5 @@
 import { Calculator, FileText, TextSelection } from 'lucide-react';
-import { TitleCard } from '@/app/aplication/subject-details/components/TitleCard';
+import { TitleCard } from '@/components/TitleCard';
 
 import { Table } from '@/components/Table';
 
@@ -7,16 +7,20 @@ import '@/styles/utils.css';
 
 interface ResumeNotesProps {
    body: any[];
+   type: 'Avaliações' | 'Atividades';
 }
 
-export function ResumeNotes({ body }: ResumeNotesProps) {
+export function ResumeNotes({ body, type }: ResumeNotesProps) {
    function calculateAvg(total: number, value: number) {
       if (total > 0 && value > 0) return (value / total).toFixed(1);
       return 0.0;
    }
 
    return (
-      <section className="bg-white rounded-md px-7 py-5 space-y-2">
+      <section
+         className="bg-white rounded-md px-7 py-5 space-y-2"
+         aria-label={`Notas das ${type}`}
+      >
          <TitleCard type="background" title="Notas das Atividades">
             <TextSelection size={18} />
          </TitleCard>
