@@ -1,5 +1,5 @@
 import { Header } from './Header';
-import { TitleCard } from './TitleCard';
+import { TitleCard } from '../../../../components/TitleCard';
 import { ActivityCard } from './Activities/AcitivityCard';
 import { InformationsActivity } from './Activities/InformationsActivity';
 import { Attachament } from './Activities/Attachament';

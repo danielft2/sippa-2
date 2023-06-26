@@ -11,8 +11,8 @@ import { RetakeExamService } from '@/services/https/retake-exam';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 import { Header } from '@/app/aplication/subject-details/components/Header';
-import TitleBar from '@/app/aplication/subject-details/components/Dashboard/TitleBar';
 import { TitleCard } from '../../components';
+import { Table } from '@/components/Table';
 
 const RetakeExam = () => {
    const { control } = useForm();
@@ -39,8 +39,14 @@ const RetakeExam = () => {
                <span className="text-[13px]">90% de Frequência</span>
             </div>
          </Header>
-         <div className="grid grid-cols-5 gap-10 mt-4">
-            <div className="col-span-5 lg:col-span-2 bg-gray-50 px-6 py-6 rounded-t-md">
+         <section
+            className="grid grid-cols-2 gap-6 mt-6"
+            aria-label="Solicitação e histórico de solicitações da segunda chamada."
+         >
+            <article
+               className="bg-white p-6 rounded-sm"
+               aria-label="Solicitação de segunda chamada."
+            >
                <TitleCard title="Solicitar Segunda Chamada" type="background">
                   <FileSpreadsheet size={18} />
                </TitleCard>
@@ -57,6 +63,7 @@ const RetakeExam = () => {
                                  value={value}
                                  onValueChange={onChange}
                                  options={[{ name: 'ap1' }, { name: 'ap2' }]}
+                                 ariaLabel="Selecionar avaliação."
                               />
                            );
                         }}
@@ -69,8 +76,6 @@ const RetakeExam = () => {
                      <textarea
                         id="justification"
                         name="justification"
-                        // value={formValues.justification}
-                        // onChange={handleChange}
                         className="w-full border-none bg-gray-200 px-3 py-2 rounded-md"
                         rows={4}
                      ></textarea>
@@ -81,49 +86,29 @@ const RetakeExam = () => {
                      </Button.Root>
                   </div>
                </form>
-            </div>
-            <div className="col-span-5 lg:col-span-3 bg-gray-50 px-9 py-6 rounded-t-md">
+            </article>
+            <article
+               className="bg-white p-6 rounded-sm space-y-3"
+               aria-label="Histórico de solicitações."
+            >
                <TitleCard title="Solicitações de Chamados" type="background">
                   <FileSpreadsheet size={18} />
                </TitleCard>
-               <table className="min-w-full divide-y divide-gray-200">
-                  <thead>
-                     <tr>
-                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
-                           Data
-                        </th>
-                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
-                           Avaliação
-                        </th>
-                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
-                           Justificativa
-                        </th>
-                        <th className="px-6 py-3 text-center text-[13px] font-semibold text-gray-800">
-                           Status
-                        </th>
+               <Table
+                  headers={['Data', 'Avaliação', 'Justificativa', 'Status']}
+                  center
+               >
+                  {retakeExamList?.map((retakeExam, index) => (
+                     <tr key={index} className="text-center">
+                        <td>{retakeExam.date.toDateString()}</td>
+                        <td>{retakeExam.exam}</td>
+                        <td>{retakeExam.justify}</td>
+                        <td>{retakeExam.status}</td>
                      </tr>
-                  </thead>
-                  <tbody className="text-gray-600">
-                     {retakeExamList?.map((retakeExam, index) => (
-                        <tr key={index}>
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {retakeExam.date.toDateString()}
-                           </td>
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {retakeExam.exam}
-                           </td>
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {retakeExam.justify}
-                           </td>
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {retakeExam.status}
-                           </td>
-                        </tr>
-                     ))}
-                  </tbody>
-               </table>
-            </div>
-         </div>
+                  ))}
+               </Table>
+            </article>
+         </section>
       </>
    );
 };

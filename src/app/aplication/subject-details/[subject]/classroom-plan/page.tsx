@@ -6,16 +6,17 @@ import { CheckCheck, FileSpreadsheet } from 'lucide-react';
 
 import { ClassroomPlanService } from '@/services/https/classroom-plan';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
+import SearchData from '@/components/SearchData';
 
 import { Header } from '@/app/aplication/subject-details/components/Header';
-import TitleBar from '@/app/aplication/subject-details/components/Dashboard/TitleBar';
-import { TitleCard } from '../../components';
+import { TitleCard } from '@/app/aplication/subject-details/components';
+import { Table } from '@/components/Table';
 
 const ClassroomPlan = () => {
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
 
-   const { data: planList } = useQuery({
+   const { data: planList, isLoading } = useQuery({
       queryKey: ['plans', subject],
       queryFn: () => ClassroomPlanService.getAllClassroomPlans(subject)
    });
@@ -33,50 +34,34 @@ const ClassroomPlan = () => {
                <span className="text-[13px]">90% de Frequência</span>
             </div>
          </Header>
-         <div className="bg-gray-50 px-8 py-6 rounded-t-md mt-4">
+         <section
+            className="bg-white shadow-sm px-8 py-6 rounded-sm mt-4 flex flex-col"
+            aria-label="Listagem dos planos de aulas."
+         >
             <TitleCard title="Plano de Aula" type="background">
                <FileSpreadsheet size={18} />
             </TitleCard>
-            <table className="min-w-full divide-y divide-gray-200 mt-4">
-               <thead>
-                  <tr>
-                     <th className="px-6 py-3 text-center text-sm font-semibold text-gray-800">
-                        Aula
-                     </th>
-                     <th className="px-6 py-3 text-center text-sm font-semibold text-gray-800">
-                        Plano de Aula
-                     </th>
-                     <th className="px-6 py-3 text-center text-sm font-semibold text-gray-800">
-                        Diário de Aula
-                     </th>
-                  </tr>
-               </thead>
-               <tbody className="text-gray-600 ">
-                  {planList ? (
-                     planList.map((plan, index) => (
-                        <tr
-                           key={plan.id}
-                           className={`${index % 2 != 0 ? 'bg-slate-100' : ''}`}
-                        >
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {new Date(plan.class_date).toLocaleDateString(
-                                 'pt-BR'
-                              )}
-                           </td>
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {plan.class_plan}
-                           </td>
-                           <td className="px-6 py-4 text-center whitespace-pre-wrap">
-                              {plan.class_diary}
-                           </td>
-                        </tr>
-                     ))
-                  ) : (
-                     <></>
-                  )}
-               </tbody>
-            </table>
-         </div>
+            {isLoading ? (
+               <SearchData className="py-11" />
+            ) : (
+               <Table
+                  headers={['Aula', 'Plano de Aula', 'Dário de Aula']}
+                  center
+               >
+                  {planList?.map((item) => (
+                     <tr key={item.id} className="text-center">
+                        <td>
+                           {new Date(item.class_date).toLocaleDateString(
+                              'pt-BR'
+                           )}
+                        </td>
+                        <td>{item.class_plan}</td>
+                        <td>{item.class_diary}</td>
+                     </tr>
+                  ))}
+               </Table>
+            )}
+         </section>
       </>
    );
 };

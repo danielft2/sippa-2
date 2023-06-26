@@ -13,7 +13,7 @@ const DisciplineActivities = () => {
    const { classrooms } = useClassRoomRecents();
 
    return (
-      <div className="space-y-4">
+      <main className="space-y-4">
          <Header
             key={classrooms[0]?.discipline.id}
             subtitle={classrooms[0]?.discipline.code}
@@ -33,17 +33,18 @@ const DisciplineActivities = () => {
          </Header>
 
          {ACTIVITIES_THEMES.map((theme) => (
-            <div
+            <section
                key={theme.title}
                className="bg-white w-full p-6 space-y-4 rounded-md"
+               aria-label={`Atividades do tópico ${theme.title}`}
             >
-               <div className="flex items-center gap-1">
+               <header className="flex items-center gap-1">
                   <span className="text-green-400">
                      <List size={20} />
                   </span>
                   <span className="text-sm text-gray-800">{theme.title}</span>
-               </div>
-               <div className="grid grid-cols-4 md_p:grid-cols-1 gap-4">
+               </header>
+               <article className="grid grid-cols-4 md_p:grid-cols-1 gap-4">
                   {theme.activities.map((activity) => (
                      <ActivityCard
                         key={activity.id}
@@ -59,10 +60,10 @@ const DisciplineActivities = () => {
                         date={activity.date}
                      />
                   ))}
-               </div>
-            </div>
+               </article>
+            </section>
          ))}
-      </div>
+      </main>
    );
 };
 

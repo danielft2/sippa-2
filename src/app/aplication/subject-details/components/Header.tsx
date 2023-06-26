@@ -23,7 +23,7 @@ export function Header({
    children
 }: DisicplineHeaderProps) {
    return (
-      <div className={`bg-white overflow-hidden rounded-md `}>
+      <header className={`bg-white overflow-hidden rounded-md `}>
          <div className="w-full relative h-[60px]">
             <Image
                className="relative max-h-full object-cover"
@@ -51,6 +51,6 @@ export function Header({
             </div>
             <div className="flex items-center gap-4">{children}</div>
          </div>
-      </div>
+      </header>
    );
 }

@@ -9,6 +9,7 @@ export default function CardNews(props: Props) {
    return (
       <div
          className={`flex w-full bg-gray-200 rounded-md flex-shrink-0 justify-between py-4 px-5`}
+         aria-label={`Noticia ${props.news.title}`}
       >
          <div className="flex items-center gap-3">
             <Search className="text-green-400" size={18}></Search>

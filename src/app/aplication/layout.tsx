@@ -21,7 +21,10 @@ export function Layout({ children }: { children: ReactNode }) {
                         height={100}
                      />
                   </Link>
-                  <a href="/api/auth/logout">
+                  <a
+                     href="/api/auth/logout"
+                     aria-label="Sair e voltar para a página de login."
+                  >
                      <LogOut size={20} color="white" />
                   </a>
                </div>

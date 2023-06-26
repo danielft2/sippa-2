@@ -1,7 +1,9 @@
 import { BellRing } from 'lucide-react';
+
+import UserSummary from '@/components/UserSummary';
+
 import DisciplinesRecents from './components/ClassroomRecents';
 import LastNewsClasses from './components/LastNewsClass';
-import UserSummary from '@/components/UserSummary';
 import GeneralNews from './components/GeneralNews';
 
 export default async function Dashboard() {
@@ -15,7 +17,7 @@ export default async function Dashboard() {
                <DisciplinesRecents />
             </div>
          </section>
-         <section className="w-full bg-white rounded-md px-8 py-7">
+         <section className="w-full min-h-[250px] bg-white rounded-md px-8 py-7 flex flex-col">
             <div className="flex items-center gap-2 text-sm mb-5">
                <span className="text-green-400">
                   <BellRing size={18} />
@@ -24,7 +26,9 @@ export default async function Dashboard() {
                   Ultimas notícias das suas turmas
                </span>
             </div>
-            <LastNewsClasses />
+            <div className="flex-1 flex flex-col">
+               <LastNewsClasses />
+            </div>
          </section>
          <GeneralNews />
       </main>

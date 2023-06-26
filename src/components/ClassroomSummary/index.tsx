@@ -29,11 +29,15 @@ const ClassroomSummary = ({
 }: ClassroomSummaryProps) => {
    const { handleSavedDiscipline } = useClassRoomRecents();
 
+   function handleClickDisiciple() {
+      handleSavedDiscipline({ ...data });
+   }
+
    return (
       <Link
          href={`aplication/subject-details/${data?.classroom.classroom_id}`}
          className="hover:shadow-md transition-all"
-         onClick={() => handleSavedDiscipline({ ...data })}
+         onClick={handleClickDisiciple}
       >
          <div
             className={`bg-white min-w-[200px] max-w-[580px] md_p:max-w-full overflow-hidden rounded-md 

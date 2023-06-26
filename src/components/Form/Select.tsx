@@ -11,16 +11,21 @@ type SelectOption = {
 interface SelectProps {
    value: string;
    options: SelectOption[];
+   ariaLabel: string;
    onValueChange: (...event: any[]) => void;
 }
 
 export const Select = forwardRef(
-   ({ value, options, onValueChange }: SelectProps, forwardedRef: any) => {
+   (
+      { value, options, ariaLabel, onValueChange }: SelectProps,
+      forwardedRef: any
+   ) => {
       return (
          <SelectRadix.Root value={value} onValueChange={onValueChange}>
             <SelectRadix.Trigger
+               aria-label={ariaLabel}
                className="bg-gray-200 h-10 rounded justify-between flex items-center px-4 text-sm text-gray-600
-            focus:outline-green-400 focus:bg-green-100"
+               focus:outline-green-400 focus:bg-green-100"
                ref={forwardedRef}
             >
                <SelectRadix.Value asChild>

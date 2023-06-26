@@ -34,8 +34,14 @@ const Notes = () => {
             </div>
          </Header>
          <section className="grid grid-cols-2 lg_p:grid-cols-1 gap-4">
-            <ResumeNotes body={data?.exams ? data.exams : []} />
-            <ResumeNotes body={data?.activities ? data.activities : []} />
+            <ResumeNotes
+               body={data?.exams ? data.exams : []}
+               type="Avaliações"
+            />
+            <ResumeNotes
+               body={data?.activities ? data.activities : []}
+               type="Atividades"
+            />
          </section>
       </main>
    );
