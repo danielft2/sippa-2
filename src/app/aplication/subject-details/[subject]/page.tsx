@@ -17,9 +17,9 @@ const DisciplineDetails = () => {
             subtitle={classrooms[0]?.discipline.code}
             title={classrooms[0]?.discipline.name}
             description={classrooms[0]?.teacherName}
-            color="#00AF8F"
+            color="#017863"
          >
-            <div className="text-green-400 flex items-center gap-1">
+            <div className="text-green-600 flex items-center gap-1">
                <CheckCheck size={16} />
                <span className="text-[13px]">90% de Frequência</span>
             </div>

@@ -18,7 +18,7 @@ export function GeneralNewCard({
 }: GeneralNewCardProps) {
    return (
       <section
-         className="max-w-[530px] h-[250px] bg-white rounded-md shadow-sm overflow-hidden flex flex-col"
+         className="max-w-[530px] h-[250px] bg-white rounded-md shadow overflow-hidden flex flex-col"
          aria-label="Noticia"
       >
          <div className="h-[100px] w-full relative">
@@ -37,7 +37,7 @@ export function GeneralNewCard({
             {linkUrlNews && (
                <a href={linkUrlNews} target="_blank" rel="noreferrer">
                   <span
-                     className={`${poppins_md.className} text-sm text-green-400`}
+                     className={`${poppins_md.className} text-sm text-green-600`}
                   >
                      Ver mais
                   </span>

@@ -22,7 +22,7 @@ const UserSummary = () => {
                />
                <div>
                   <span
-                     className={`${poppins.className} text-green-400 block -mb-1 text-sm`}
+                     className={`${poppins.className} text-green-600 block -mb-1 text-sm`}
                   >
                      {userLogged.course}
                   </span>

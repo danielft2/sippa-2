@@ -66,9 +66,6 @@ const FormLogin = () => {
                            Lembrar informações
                         </label>
                      </Form.Field>
-                     <button className="self-end text-xs text-green-400">
-                        Esqueceu a senha?
-                     </button>
                   </Form.Field>
                </Form.Field>
                <Button.Root type="submit" isLoading={loading}>

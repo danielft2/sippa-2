@@ -1,11 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname, useParams } from 'next/navigation';
+import { Poppins } from 'next/font/google';
+import Link from 'next/link';
+
 import { useSidebar } from '@/hooks/useSidebar';
 
 import '@/styles/utils.css';
 import './style.css';
+
+const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface SidebarItemProps {
    name: string;
@@ -53,12 +57,12 @@ const SidebarItem = ({ name, pathName = '', icon }: SidebarItemProps) => {
          <Link
             href={pathName}
             className={`group flex items-center gap-1 ${
-               path == pathName ? 'text-green-400' : 'text-gray-500'
+               path == pathName ? 'text-green-600' : 'text-gray-500'
             }`}
             prefetch={false}
          >
             <span className="item">{icon}</span>
-            <span className="item text-[13px]">{name}</span>
+            <span className={`item text-[13px]`}>{name}</span>
          </Link>
       </nav>
    );

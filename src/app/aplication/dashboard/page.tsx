@@ -26,7 +26,7 @@ export default async function Dashboard() {
                   Ultimas notícias das suas turmas
                </span>
             </div>
-            <div className="flex-1 flex flex-col">
+            <div>
                <LastNewsClasses />
             </div>
          </section>

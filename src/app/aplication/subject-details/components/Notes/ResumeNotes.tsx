@@ -18,7 +18,7 @@ export function ResumeNotes({ body, type }: ResumeNotesProps) {
 
    return (
       <section
-         className="bg-white rounded-md px-7 py-5 space-y-2"
+         className="bg-white rounded-md shadow px-7 py-5 space-y-2"
          aria-label={`Notas das ${type}`}
       >
          <TitleCard type="background" title="Notas das Atividades">
@@ -28,7 +28,7 @@ export function ResumeNotes({ body, type }: ResumeNotesProps) {
             {body.map((item) => (
                <tr key={item.studentActivityData?.id}>
                   <td className="flex items-center gap-1">
-                     <span className="text-green-400">
+                     <span className="text-green-600">
                         <FileText size={16} />
                      </span>
                      <span>{item.title}</span>
@@ -39,14 +39,14 @@ export function ResumeNotes({ body, type }: ResumeNotesProps) {
             ))}
             <tr key={'resume'}>
                <td className="flex items-center gap-1">
-                  <span className="text-green-400">
+                  <span className="text-green-600">
                      <Calculator size={16} />
                   </span>
-                  <span className="text-green-400">Nota Final</span>
+                  <span className="text-green-600">Nota Final</span>
                </td>
                <td></td>
                <td colSpan={2}>
-                  <span className="text-green-400">
+                  <span className="text-green-600">
                      {calculateAvg(
                         body.length,
                         body.reduce((acc, note) => {
