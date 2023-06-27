@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { StorageAuth } from '@/storage/StorageAuth';
+import { AppError } from '@/utils/app-error';
 
 const token = StorageAuth.retrieveToken();
 
@@ -12,6 +13,20 @@ const privateAPI = axios.create({
 });
 
 if (token) privateAPI.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+privateAPI.interceptors.response.use(
+   (response) => response,
+   (error) => {
+      if (error.response?.data && error.response.data?.message) {
+         return Promise.reject(
+            new AppError(
+               error.response.data.message,
+               error.response.data.statusCode
+            )
+         );
+      } else return Promise.reject(new AppError('Server Unavailable', 500));
+   }
+);
 
 export const api = {
    public: publicAPI,

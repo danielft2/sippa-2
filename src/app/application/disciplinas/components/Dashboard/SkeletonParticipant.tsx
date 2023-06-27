@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/Skeleton';
 
-export function SkeletonParticipants() {
+export function SkeletonParticipant() {
    return (
       <Skeleton className="w-full h-full py-3 px-5 flex items-center gap-2 bg-zinc-200">
          <>
@@ -11,5 +11,16 @@ export function SkeletonParticipants() {
             </div>
          </>
       </Skeleton>
+   );
+}
+
+export function SkeletonParticipants() {
+   return (
+      <div className="space-y-2">
+         <SkeletonParticipant />
+         <SkeletonParticipant />
+         <SkeletonParticipant />
+         <SkeletonParticipant />
+      </div>
    );
 }

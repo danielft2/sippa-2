@@ -21,7 +21,7 @@ export function ResumeNotes({ body, type }: ResumeNotesProps) {
          className="bg-white rounded-md shadow px-7 py-5 space-y-2"
          aria-label={`Notas das ${type}`}
       >
-         <TitleCard type="background" title="Notas das Atividades">
+         <TitleCard type="background" title={`Notas das ${type}`}>
             <TextSelection size={18} />
          </TitleCard>
          <Table headers={['Nome', 'Peso', 'Nota']}>

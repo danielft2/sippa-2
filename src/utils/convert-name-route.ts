@@ -1,3 +1,0 @@
-function converteNameRoute() {
-   const routes = ['']
-}

@@ -16,9 +16,7 @@ const Breadcrumb = ({ className }: Twmerge) => {
       .split('/')
       .map((item, index) => {
          const regex = /[0-9]/;
-         if (regex.test(item) || item == 'application' || index == 0)
-            return null;
-         console.log(item);
+         if (regex.test(item) || item == 'application') return null;
 
          const href = path
             .split('/')

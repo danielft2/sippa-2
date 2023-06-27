@@ -6,7 +6,7 @@ const SearchData = ({ className }: Twmerge) => {
    return (
       <div
          className={twMerge(
-            'w-full h-full flex justify-center items-center',
+            'w-full h-full flex justify-center items-center py-8',
             className
          )}
       >
