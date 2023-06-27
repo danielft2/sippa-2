@@ -4,9 +4,9 @@ import { CheckCheck } from 'lucide-react';
 
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
-import ParticipantsList from '@/app/aplication/subject-details/components/Dashboard/ParticipantsList';
-import NewsList from '@/app/aplication/subject-details/components/Dashboard/NewsList';
-import { Header } from '@/app/aplication/subject-details/components/Header';
+import ParticipantsList from '@/app/application/disciplinas/components/Dashboard/ParticipantsList';
+import NewsList from '@/app/application/disciplinas/components/Dashboard/NewsList';
+import { Header } from '@/app/application/disciplinas/components/Header';
 
 const DisciplineDetails = () => {
    const { classrooms } = useClassRoomRecents();

@@ -1,5 +1,6 @@
-import { ParticipantModel } from '@/domain/models/participant-model';
 import { UserIcon } from 'lucide-react';
+
+import { ParticipantModel } from '@/domain/models/participant-model';
 
 interface CardPersonProps {
    participant: ParticipantModel;

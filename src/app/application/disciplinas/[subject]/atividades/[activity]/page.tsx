@@ -3,7 +3,7 @@ import {
    Header,
    InformationsActivity,
    ShippingDetails
-} from '@/app/aplication/subject-details/components';
+} from '@/app/application/disciplinas/components';
 
 export default function ActivityDetails() {
    return (

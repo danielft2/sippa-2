@@ -18,7 +18,7 @@ export function ActivityCard({
    const { subject } = useParams();
 
    return (
-      <Link href={`/aplication/subject-details/${subject}/activities/${id}`}>
+      <Link href={`application/disciplinas/${subject}/atividades/${id}`}>
          <div className="bg-zinc-100 p-6 pb-3 flex flex-col justify-between gap-4 shadow rounded-md h-[140px]">
             <div className="flex flex-col">
                <span

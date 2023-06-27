@@ -35,7 +35,7 @@ const ClassroomSummary = ({
 
    return (
       <Link
-         href={`aplication/subject-details/${data?.classroom.classroom_id}`}
+         href={`application/disciplinas/${data?.classroom.classroom_id}`}
          className="hover:shadow-md transition-all"
          onClick={handleClickDisiciple}
       >

@@ -8,8 +8,8 @@ import { ClassroomPlanService } from '@/services/https/classroom-plan';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 import SearchData from '@/components/SearchData';
 
-import { Header } from '@/app/aplication/subject-details/components/Header';
-import { TitleCard } from '@/app/aplication/subject-details/components';
+import { Header } from '@/app/application/disciplinas/components/Header';
+import { TitleCard } from '@/app/application/disciplinas/components';
 import { Table } from '@/components/Table';
 
 const ClassroomPlan = () => {
