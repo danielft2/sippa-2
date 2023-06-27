@@ -4,7 +4,7 @@ import { DashboardService } from '@/services/https/dashboard';
 import { useQuery } from '@tanstack/react-query';
 
 import { Skeleton } from '@/components/Skeleton';
-import { GeneralNewCard } from './GeneralNewCard';
+import GeneralNewCard from './GeneralNewCard';
 
 const GeneralNews = () => {
    const { data, isLoading } = useQuery({
@@ -29,6 +29,7 @@ const GeneralNews = () => {
                   description={generalNew.generalNewsFind.description}
                   linkUrlImage={generalNew.URL}
                   linkUrlNews={generalNew.generalNewsFind.link}
+                  encodeImage={generalNew.encodedImg}
                />
             ))
          )}
