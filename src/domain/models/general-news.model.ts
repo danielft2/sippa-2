@@ -7,5 +7,6 @@ export interface GeneralNew {
       link: string;
       date_of_post: string;
    };
+   encodedImg: string;
    URL: string;
 }
