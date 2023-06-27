@@ -1,15 +1,12 @@
 'use client';
 
 import { usePathname, useParams } from 'next/navigation';
-import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 
 import { useSidebar } from '@/hooks/useSidebar';
 
 import '@/styles/utils.css';
 import './style.css';
-
-const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface SidebarItemProps {
    name: string;
@@ -26,7 +23,7 @@ const Sidebar = () => {
       <div className="bg-white h-14 shadow flex items-center">
          <div className="container-content">
             <div className="flex w-full gap-8">
-               {path.includes('/subject-details/')
+               {path.includes('/disciplinas/') && path.split('disciplinas/')[1]
                   ? subject_details.map((menu) => (
                        <SidebarItem
                           key={menu.name}

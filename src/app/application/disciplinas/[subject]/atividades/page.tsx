@@ -3,10 +3,7 @@
 import { CheckCheck, List } from 'lucide-react';
 import { ACTIVITIES_THEMES } from '@/mocks/activities';
 
-import {
-   ActivityCard,
-   Header
-} from '@/app/aplication/subject-details/components';
+import { ActivityCard, Header } from '@/app/application/disciplinas/components';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 const DisciplineActivities = () => {

@@ -1,6 +1,6 @@
 import { TextSelection } from 'lucide-react';
 import { Attachament } from './Attachament';
-import { TitleCard } from '../../../../../components/TitleCard';
+import { TitleCard } from '@/components/TitleCard';
 
 export function InformationsActivity() {
    return (

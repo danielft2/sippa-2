@@ -1,13 +1,11 @@
 'use client';
 
-import { CheckCheck } from 'lucide-react';
-import {
-   Header,
-   ResumeNotes
-} from '@/app/aplication/subject-details/components';
-import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
-import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
+import { CheckCheck } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+
+import { Header, ResumeNotes } from '@/app/application/disciplinas/components';
+import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 import { SubjectService } from '@/services/https/subjects';
 
 const Notes = () => {

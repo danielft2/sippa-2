@@ -1,10 +1,11 @@
+import Image from 'next/image';
 import { Poppins } from 'next/font/google';
 import { UploadCloud } from 'lucide-react';
-const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
-import uploadFileSvg from '@/assets/ilustrations/upload-file.svg';
-import Image from 'next/image';
 import { Button } from '@/components/Button';
+import uploadFileSvg from '@/assets/ilustrations/upload-file.svg';
+
+const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 export function ShippingDetails() {
    return (

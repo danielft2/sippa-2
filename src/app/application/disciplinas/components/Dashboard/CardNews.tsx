@@ -1,5 +1,6 @@
-import { NewClassModel } from '@/domain/models/new-class-model';
 import { Search } from 'lucide-react';
+
+import { NewClassModel } from '@/domain/models/new-class-model';
 
 interface Props {
    news: NewClassModel;

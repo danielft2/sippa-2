@@ -5,10 +5,10 @@ import { BellIcon } from 'lucide-react';
 
 import { SubjectDashboard } from '@/services/https/subject-dashboard';
 import { NewClassModel } from '@/domain/models/new-class-model';
+import SearchData from '@/components/SearchData';
 
 import CardNews from './CardNews';
 import ModalNews from './ModalNews';
-import SearchData from '@/components/SearchData';
 import { TitleCard } from '..';
 
 const NewsList = () => {

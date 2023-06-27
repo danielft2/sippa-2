@@ -7,12 +7,12 @@ import { CheckCheck, FileSpreadsheet } from 'lucide-react';
 
 import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
+import { TitleCard } from '@/components/TitleCard';
+import { Table } from '@/components/Table';
 import { RetakeExamService } from '@/services/https/retake-exam';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
-import { Header } from '@/app/aplication/subject-details/components/Header';
-import { TitleCard } from '../../components';
-import { Table } from '@/components/Table';
+import { Header } from '@/app/application/disciplinas/components/Header';
 
 const RetakeExam = () => {
    const { control } = useForm();

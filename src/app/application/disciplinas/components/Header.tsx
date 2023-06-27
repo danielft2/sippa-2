@@ -2,8 +2,6 @@ import { ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
 
-import { generateRandomColor } from '@/utils/generate-random-colors';
-
 const poppins_semi = Poppins({ weight: ['600'], subsets: ['latin'] });
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 

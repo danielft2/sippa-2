@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 import { AuthService } from '@/services/https/auth';
 import { ERRORS_MESSAGES } from '@/services/https/errors';
 
-import { AppError } from '@/utils/AppError';
+import { AppError } from '@/utils/app-error';
 import { StorageAuth } from '@/storage/StorageAuth';
 import { api } from '@/libs/axios';
 import { Context } from '@/@types/context';
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: Context) {
          const response = (await AuthService.signin(data)).data;
          updateUserAndToken(response.access_token, response.returnData);
          setUserLogged(response.returnData);
-         const redirect = Cookies.get('redirectTo') ?? '/aplication/dashboard';
+         const redirect = Cookies.get('redirectTo') ?? 'application/dashboard';
          router.push(redirect);
       } catch (error) {
          if (error instanceof AxiosError && error.response?.status === 401) {
