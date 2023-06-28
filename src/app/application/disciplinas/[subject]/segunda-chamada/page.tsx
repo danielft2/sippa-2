@@ -1,31 +1,38 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { Controller, useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import { CheckCheck, FileSpreadsheet } from 'lucide-react';
 
-import { Button } from '@/components/Button';
-import { Form } from '@/components/Form';
 import { TitleCard } from '@/components/TitleCard';
 import { Table } from '@/components/Table';
 import { RetakeExamService } from '@/services/https/retake-exam';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 import { Header } from '@/app/application/disciplinas/components/Header';
+import ResponseState from '@/components/ResponseState';
+import SearchData from '@/components/SearchData';
+import { EmptyList } from '@/components/EmptyList';
+import useErrorsTratament from '@/hooks/useErrorsTratament';
+import RetakeExamForm from './components/RetakeExamForm';
 
 const RetakeExam = () => {
-   const { control } = useForm();
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
 
-   const { data: retakeExamList } = useQuery({
+   const {
+      data: retakeExamList,
+      isLoading,
+      isSuccess,
+      isError,
+      error
+   } = useQuery({
       queryKey: ['retakeExam', subject],
-      queryFn: () =>
-         RetakeExamService.getAllRetakeExams(
-            '"b64c8c1c-ce0e-4e84-89cd-e6dc381a1004"'
-         )
+      queryFn: () => RetakeExamService.getAllRetakeExams(subject)
    });
+
+   const { getErrorComponent } = useErrorsTratament({ error });
+
    return (
       <>
          <Header
@@ -49,42 +56,7 @@ const RetakeExam = () => {
                <TitleCard title="Solicitar Segunda Chamada" type="background">
                   <FileSpreadsheet size={18} />
                </TitleCard>
-               <form className="space-y-4 mt-4">
-                  <Form.Field>
-                     <Form.Label htmlFor="exam">Avaliação:</Form.Label>
-                     <Controller
-                        control={control}
-                        name="exam"
-                        render={({ field: { onChange, ref, value } }) => {
-                           return (
-                              <Form.Select
-                                 ref={ref}
-                                 value={value}
-                                 onValueChange={onChange}
-                                 options={[{ name: 'ap1' }, { name: 'ap2' }]}
-                                 ariaLabel="Selecionar avaliação."
-                              />
-                           );
-                        }}
-                     />
-                  </Form.Field>
-                  <Form.Field>
-                     <Form.Label htmlFor="justification">
-                        Justificativa:
-                     </Form.Label>
-                     <textarea
-                        id="justification"
-                        name="justification"
-                        className="w-full border-none bg-gray-200 px-3 py-2 rounded-md"
-                        rows={4}
-                     ></textarea>
-                  </Form.Field>
-                  <div className="pt-12">
-                     <Button.Root type="submit">
-                        <Button.Text>Solicitar</Button.Text>
-                     </Button.Root>
-                  </div>
-               </form>
+               <RetakeExamForm></RetakeExamForm>
             </article>
             <article
                className="bg-white p-6 rounded space-y-3 shadow"
@@ -93,19 +65,31 @@ const RetakeExam = () => {
                <TitleCard title="Solicitações de Chamados" type="background">
                   <FileSpreadsheet size={18} />
                </TitleCard>
-               <Table
-                  headers={['Data', 'Avaliação', 'Justificativa', 'Status']}
-                  center
-               >
-                  {retakeExamList?.map((retakeExam, index) => (
-                     <tr key={index} className="text-center">
-                        <td>{retakeExam.date.toDateString()}</td>
-                        <td>{retakeExam.exam}</td>
-                        <td>{retakeExam.justify}</td>
-                        <td>{retakeExam.status}</td>
-                     </tr>
-                  ))}
-               </Table>
+
+               {isSuccess && retakeExamList && retakeExamList.length > 0 ? (
+                  <Table
+                     headers={['Data', 'Avaliação', 'Justificativa', 'Status']}
+                     center
+                  >
+                     {retakeExamList?.map((retakeExam, index) => (
+                        <tr key={index} className="text-center">
+                           <td>{retakeExam.date.toDateString()}</td>
+                           <td>{retakeExam.exam}</td>
+                           <td>{retakeExam.justify}</td>
+                           <td>{retakeExam.status}</td>
+                        </tr>
+                     ))}
+                  </Table>
+               ) : (
+                  <ResponseState
+                     loading={<SearchData />}
+                     error={getErrorComponent()}
+                     empty={<EmptyList />}
+                     isLoading={isLoading}
+                     isError={isError}
+                     isEmpty={retakeExamList?.length == 0}
+                  />
+               )}
             </article>
          </section>
       </>

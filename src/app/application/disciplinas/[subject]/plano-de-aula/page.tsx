@@ -45,7 +45,7 @@ const ClassroomPlan = () => {
             <TitleCard title="Plano de Aula" type="background">
                <FileSpreadsheet size={18} />
             </TitleCard>
-            {isSuccess && data.length ? (
+            {isSuccess && data.length && data.length > 0 ? (
                <Table
                   headers={['Aula', 'Plano de Aula', 'Dário de Aula']}
                   center
@@ -69,7 +69,7 @@ const ClassroomPlan = () => {
                   empty={<EmptyList />}
                   isLoading={isLoading}
                   isError={isError}
-                  isEmpty={!data}
+                  isEmpty={data?.length == 0}
                />
             )}
          </section>
