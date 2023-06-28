@@ -3,7 +3,7 @@
 import Lottie, { LottieComponentProps } from 'lottie-react';
 
 interface AnimationLottieProps extends LottieComponentProps {
-   width: number;
+   width?: number;
 }
 
 const AnimationLottie = ({

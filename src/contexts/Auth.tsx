@@ -42,13 +42,12 @@ export function AuthProvider({ children }: Context) {
          const response = (await AuthService.signin(data)).data;
          updateUserAndToken(response.access_token, response.returnData);
          setUserLogged(response.returnData);
-         const redirect = Cookies.get('redirectTo') ?? 'application/dashboard';
-         router.push(redirect);
+         router.push('application/dashboard');
       } catch (error) {
          if (error instanceof AxiosError && error.response?.status === 401) {
-            throw new AppError(ERRORS_MESSAGES.UNAUTHORIZED);
+            throw new AppError(ERRORS_MESSAGES.UNAUTHORIZED, 401);
          } else {
-            throw new AppError(ERRORS_MESSAGES.GENERIC);
+            throw new AppError(ERRORS_MESSAGES.GENERIC, 500);
          }
       }
    }

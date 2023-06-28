@@ -13,11 +13,7 @@ export function middleware(request: NextRequest) {
       }
       return NextResponse.next();
    } else {
-      return NextResponse.redirect(new URL('/auth/signin', request.url), {
-         headers: {
-            'Set-Cookie': `redirectTo=${request.nextUrl.pathname}; path=/; max-age=120;`
-         }
-      });
+      return NextResponse.redirect(new URL('/auth/signin', request.url));
    }
 }
 

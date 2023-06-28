@@ -1,13 +1,11 @@
-import { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { ReactNode } from 'react';
 import { LogOut } from 'lucide-react';
 
 import Sidebar from '@/layouts/Sidebar/index.';
 
 import '@/styles/utils.css';
-import Breadcrumb from '@/components/Breadcrumb';
 
 export function Layout({ children }: { children: ReactNode }) {
    return (
@@ -34,10 +32,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <Sidebar />
          </div>
          <div className="bg-[#F1F1F1] flex-1">
-            <Breadcrumb className="container-content mx-auto py-4" />
-            <div className="container-content mx-auto py-4 pt-0">
-               {children}
-            </div>
+            <div className="container-content mx-auto py-4">{children}</div>
          </div>
       </main>
    );

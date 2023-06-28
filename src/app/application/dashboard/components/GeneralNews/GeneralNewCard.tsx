@@ -37,7 +37,7 @@ const GeneralNewCard = ({
                fill
                onLoadingComplete={() => setImageLoading(true)}
             />
-            {!imageLoading && (
+            {/* {!imageLoading && (
                <Blurhash
                   hash={encodeImage}
                   width="100%"
@@ -46,7 +46,7 @@ const GeneralNewCard = ({
                   resolutionY={50}
                   punch={1}
                />
-            )}
+            )} */}
          </div>
          <div className="flex-1 p-5 flex flex-col justify-between">
             <div>

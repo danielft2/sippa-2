@@ -10,7 +10,7 @@ const GeneralNews = () => {
    const { data, isLoading } = useQuery({
       queryKey: ['general-news'],
       queryFn: DashboardService.getAllGeneralNews,
-      staleTime: 1000 * 60 * 60 * 60 * 4 // the news is valid for 4 hours
+      staleTime: 1000 * 60 * 60 * 60 * 8 // the news is valid for 4 hours
    });
 
    return (

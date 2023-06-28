@@ -6,20 +6,25 @@ import { CheckCheck, FileSpreadsheet } from 'lucide-react';
 
 import { ClassroomPlanService } from '@/services/https/classroom-plan';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
+import { Table } from '@/components/Table';
+import { EmptyList } from '@/components/EmptyList';
 import SearchData from '@/components/SearchData';
+import ResponseState from '@/components/ResponseState';
+import useErrorsTratament from '@/hooks/useErrorsTratament';
 
 import { Header } from '@/app/application/disciplinas/components/Header';
 import { TitleCard } from '@/app/application/disciplinas/components';
-import { Table } from '@/components/Table';
 
 const ClassroomPlan = () => {
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
 
-   const { data: planList, isLoading } = useQuery({
+   const { data, isLoading, isSuccess, isError, error } = useQuery({
       queryKey: ['plans', subject],
       queryFn: () => ClassroomPlanService.getAllClassroomPlans(subject)
    });
+
+   const { getErrorComponent } = useErrorsTratament({ error });
 
    return (
       <>
@@ -40,14 +45,12 @@ const ClassroomPlan = () => {
             <TitleCard title="Plano de Aula" type="background">
                <FileSpreadsheet size={18} />
             </TitleCard>
-            {isLoading ? (
-               <SearchData className="py-11" />
-            ) : (
+            {isSuccess && data.length ? (
                <Table
                   headers={['Aula', 'Plano de Aula', 'Dário de Aula']}
                   center
                >
-                  {planList?.map((item) => (
+                  {data?.map((item) => (
                      <tr key={item.id} className="text-center">
                         <td>
                            {new Date(item.class_date).toLocaleDateString(
@@ -59,6 +62,15 @@ const ClassroomPlan = () => {
                      </tr>
                   ))}
                </Table>
+            ) : (
+               <ResponseState
+                  loading={<SearchData />}
+                  error={getErrorComponent()}
+                  empty={<EmptyList />}
+                  isLoading={isLoading}
+                  isError={isError}
+                  isEmpty={!data}
+               />
             )}
          </section>
       </>

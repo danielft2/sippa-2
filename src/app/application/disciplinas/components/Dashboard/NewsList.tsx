@@ -5,7 +5,10 @@ import { BellIcon } from 'lucide-react';
 
 import { SubjectDashboard } from '@/services/https/subject-dashboard';
 import { NewClassModel } from '@/domain/models/new-class-model';
+import { EmptyList } from '@/components/EmptyList';
 import SearchData from '@/components/SearchData';
+import ResponseState from '@/components/ResponseState';
+import useErrorsTratament from '@/hooks/useErrorsTratament';
 
 import CardNews from './CardNews';
 import ModalNews from './ModalNews';
@@ -14,17 +17,20 @@ import { TitleCard } from '..';
 const NewsList = () => {
    const [isOpen, setIsOpen] = useState(false);
    const [selectedNews, setSelectedNews] = useState<NewClassModel | null>(null);
-
    const { subject } = useParams();
 
    const {
       data: newsList,
       isLoading,
-      isError
+      isSuccess,
+      isError,
+      error
    } = useQuery({
       queryKey: ['news', subject],
       queryFn: () => SubjectDashboard.getAllNewsClass(subject)
    });
+
+   const { getErrorComponent } = useErrorsTratament({ error });
 
    const openModal = (news: NewClassModel) => {
       setSelectedNews(news);
@@ -41,11 +47,7 @@ const NewsList = () => {
                <BellIcon className="text-green-600" size={18} />
             </TitleCard>
             <div className="px-8 py-4 flex-1">
-               {isLoading ? (
-                  <SearchData />
-               ) : isError ? (
-                  <span>Error</span>
-               ) : (
+               {isSuccess && newsList ? (
                   <div className="flex flex-col mt-3">
                      {newsList?.map((news) => (
                         <div
@@ -57,6 +59,15 @@ const NewsList = () => {
                         </div>
                      ))}
                   </div>
+               ) : (
+                  <ResponseState
+                     loading={<SearchData />}
+                     error={getErrorComponent()}
+                     empty={<EmptyList />}
+                     isLoading={isLoading}
+                     isError={isError}
+                     isEmpty={!newsList}
+                  />
                )}
             </div>
          </article>

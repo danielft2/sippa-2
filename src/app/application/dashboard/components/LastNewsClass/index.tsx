@@ -3,32 +3,29 @@
 import { useQuery } from '@tanstack/react-query';
 import { SwiperSlide } from 'swiper/react';
 
-import { Slide } from '@/components/Slide';
 import { DashboardService } from '@/services/https/dashboard';
+import { Slide } from '@/components/Slide';
+import { EmptyList } from '@/components/EmptyList';
+import ResponseState from '@/components/ResponseState';
+import useErrorsTratament from '@/hooks/useErrorsTratament';
 
 import { NewsClass } from './NewsClass';
 import { SkeletonNewsClass } from './SkeletonNewsClass';
 
 import '@/styles/utils.css';
-import NewsEmpty from '@/components/NewsEmpty';
-import { ServerUnavailable } from '@/errors/ServerUnavailable';
 
 const LastNewsClass = () => {
-   const { data, isLoading, isError } = useQuery({
+   const { data, isLoading, isError, isSuccess, error } = useQuery({
       queryKey: ['news'],
       queryFn: DashboardService.getAllNewsClass,
-      staleTime: 1000 * 60 * 60 * 30 // As informações permancem válidas por 30min.
+      staleTime: 1000 * 60 * 60 * 60 * 4 // As informações permancem válidas por 30min.
    });
+
+   const { getErrorComponent } = useErrorsTratament({ error });
 
    return (
       <>
-         {isLoading ? (
-            <SkeletonNewsClass />
-         ) : isError ? (
-            <ServerUnavailable />
-         ) : !data ? (
-            <NewsEmpty />
-         ) : (
+         {isSuccess && data.length ? (
             <Slide slidesPerView={'auto'} resizeObserver spaceBetween={16}>
                {data?.map((news) => (
                   <SwiperSlide key={news.id} className="swiper-slide-custom">
@@ -43,6 +40,15 @@ const LastNewsClass = () => {
                   </SwiperSlide>
                ))}
             </Slide>
+         ) : (
+            <ResponseState
+               loading={<SkeletonNewsClass />}
+               error={getErrorComponent()}
+               empty={<EmptyList />}
+               isLoading={isLoading}
+               isError={isError}
+               isEmpty={!data}
+            />
          )}
       </>
    );
