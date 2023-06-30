@@ -32,7 +32,7 @@ const ParticipantsList = () => {
             <Users className="text-green-600" size={20} />
          </TitleCard>
          <div className="px-8 py-4">
-            {isSuccess && data.length ? (
+            {isSuccess && data && data.length > 0 ? (
                data.map((participant, index) => (
                   <div className="flex w-full" key={participant.enrollment}>
                      <CardPerson
@@ -48,7 +48,7 @@ const ParticipantsList = () => {
                   empty={<EmptyList />}
                   isLoading={isLoading}
                   isError={isError}
-                  isEmpty={true}
+                  isEmpty={data?.length == 0}
                />
             )}
          </div>

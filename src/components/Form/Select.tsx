@@ -6,7 +6,7 @@ import { SelectItem } from './SelectItem';
 
 type SelectOption = {
    name: string;
-   value: number;
+   value: string;
 };
 
 interface SelectProps {
@@ -32,8 +32,9 @@ export const Select = forwardRef(
                <SelectRadix.Value asChild>
                   <span>
                      {options.map((item) => {
-                        if (item.value.toString() === value) return item.name;
+                        if (item.value === value) return item.name;
                      })}
+                     {!value && 'Selecione'}
                   </span>
                </SelectRadix.Value>
                <SelectRadix.Icon>

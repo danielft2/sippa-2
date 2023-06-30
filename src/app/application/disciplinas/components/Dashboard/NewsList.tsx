@@ -47,7 +47,7 @@ const NewsList = () => {
                <BellIcon className="text-green-600" size={18} />
             </TitleCard>
             <div className="px-8 py-4 flex-1">
-               {isSuccess && newsList ? (
+               {isSuccess && newsList && newsList.length > 0 ? (
                   <div className="flex flex-col mt-3">
                      {newsList?.map((news) => (
                         <div
@@ -66,7 +66,7 @@ const NewsList = () => {
                      empty={<EmptyList />}
                      isLoading={isLoading}
                      isError={isError}
-                     isEmpty={!newsList}
+                     isEmpty={newsList?.length == 0}
                   />
                )}
             </div>
