@@ -17,8 +17,6 @@ export function useSingIn({ setValue }: useSingInProps) {
    const [loading, setLoading] = useState(false);
    const { signin } = useAuth();
 
-   const router = useRouter();
-
    const verifyIsRememberInformations = useCallback(() => {
       const credencials = localStorage.getItem('credencials-singIn');
       if (credencials) {

@@ -1,8 +1,11 @@
 export interface ActivityModel {
    id: string;
-   status: 'Pendente' | 'Entregue';
+   student_id?: string;
+   activity_id?: string;
+   status: boolean;
    title: string;
-   date: string;
-   isFrequency?: boolean;
-   points?: number;
+   description: string;
+   fileUrl: string;
+   activity_points: number;
+   receive_data: string;
 }

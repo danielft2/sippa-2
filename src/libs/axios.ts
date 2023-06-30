@@ -18,11 +18,13 @@ privateAPI.interceptors.response.use(
    (response) => response,
    (error) => {
       if (error.response?.data && error.response.data?.message) {
+         const message =
+            error.response.data.statusCode === 500
+               ? 'Ocorreu um erro inesperado, tente novamente mais tarde.'
+               : error.response.data.message;
+
          return Promise.reject(
-            new AppError(
-               error.response.data.message,
-               error.response.data.statusCode
-            )
+            new AppError(message, error.response.data.statusCode)
          );
       } else return Promise.reject(new AppError('Server Unavailable', 500));
    }
