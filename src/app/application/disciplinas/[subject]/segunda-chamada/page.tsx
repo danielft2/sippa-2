@@ -15,10 +15,12 @@ import SearchData from '@/components/SearchData';
 import { EmptyList } from '@/components/EmptyList';
 import useErrorsTratament from '@/hooks/useErrorsTratament';
 import RetakeExamForm from './components/RetakeExamForm';
+import { StorageAuth } from '@/storage/StorageAuth';
 
 const RetakeExam = () => {
    const { subject } = useParams();
    const { classrooms } = useClassRoomRecents();
+   const studentId = StorageAuth.retrieveUserLogged()?.student_id ?? '';
 
    const {
       data: retakeExamList,
@@ -28,7 +30,7 @@ const RetakeExam = () => {
       error
    } = useQuery({
       queryKey: ['retakeExam', subject],
-      queryFn: () => RetakeExamService.getAllRetakeExams(subject)
+      queryFn: () => RetakeExamService.getAllRetakeExams(subject, studentId)
    });
 
    const { getErrorComponent } = useErrorsTratament({ error });
@@ -73,10 +75,14 @@ const RetakeExam = () => {
                   >
                      {retakeExamList?.map((retakeExam, index) => (
                         <tr key={index} className="text-center">
-                           <td>{retakeExam.date.toDateString()}</td>
-                           <td>{retakeExam.exam}</td>
+                           <td>
+                              {new Date(retakeExam.createdAt).toDateString()}
+                           </td>
+                           <td>{retakeExam.activity_title}</td>
                            <td>{retakeExam.justify}</td>
-                           <td>{retakeExam.status}</td>
+                           <td>
+                              {retakeExam.status ? 'Aprovada' : 'Pendente'}
+                           </td>
                         </tr>
                      ))}
                   </Table>
