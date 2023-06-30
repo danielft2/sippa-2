@@ -1,7 +1,7 @@
 export interface RetakeExamModel {
    id: string;
-   exam: string;
+   activity_title: string;
    justify: string;
-   date: Date;
+   createdAt: Date;
    status: string;
 }
