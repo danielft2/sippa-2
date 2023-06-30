@@ -11,7 +11,6 @@ import { api } from '@/libs/axios';
 import { Context } from '@/@types/context';
 import { SinginDTO } from '@/domain/dtos/singin-dto';
 import { StudentModel } from '@/domain/models/student-model';
-import Cookies from 'js-cookie';
 
 type AuthContextData = {
    signin: (data: SinginDTO) => Promise<void>;
