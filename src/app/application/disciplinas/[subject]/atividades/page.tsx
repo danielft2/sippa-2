@@ -1,13 +1,25 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { CheckCheck, List } from 'lucide-react';
-import { ACTIVITIES_THEMES } from '@/mocks/activities';
 
 import { ActivityCard, Header } from '@/app/application/disciplinas/components';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
+import { ActivitiesService } from '@/services/https/activities';
+import ResponseState from '@/components/ResponseState';
+import { EmptyList } from '@/components/EmptyList';
+import useErrorsTratament from '@/hooks/useErrorsTratament';
+import SearchData from '@/components/SearchData';
 
 const DisciplineActivities = () => {
    const { classrooms } = useClassRoomRecents();
+
+   const { data, isSuccess, isLoading, isError, error } = useQuery({
+      queryKey: ['activities'],
+      queryFn: ActivitiesService.getAll
+   });
+
+   const { getErrorComponent } = useErrorsTratament({ error });
 
    return (
       <main className="space-y-4">
@@ -29,37 +41,46 @@ const DisciplineActivities = () => {
             </div>
          </Header>
 
-         {ACTIVITIES_THEMES.map((theme) => (
-            <section
-               key={theme.title}
-               className="bg-white w-full p-6 space-y-4 shadow rounded-md"
-               aria-label={`Atividades do tópico ${theme.title}`}
-            >
-               <header className="flex items-center gap-1">
-                  <span className="text-green-400">
-                     <List size={20} />
-                  </span>
-                  <span className="text-sm text-gray-800">{theme.title}</span>
-               </header>
-               <article className="grid grid-cols-4 md_p:grid-cols-1 gap-4">
-                  {theme.activities.map((activity) => (
+         <section
+            className="bg-white w-full p-6 space-y-4 shadow rounded-md"
+            aria-label={`Lista de atividades`}
+         >
+            <header className="flex items-center gap-1">
+               <span className="text-green-400">
+                  <List size={20} />
+               </span>
+               <span className="text-sm text-gray-800">
+                  Lista de Atividades
+               </span>
+            </header>
+            <article className="flex items-center flex-wrap">
+               {isSuccess && data && data.activities.length > 0 ? (
+                  data.activities.map((activity) => (
                      <ActivityCard
-                        key={activity.id}
-                        id={activity.id}
+                        key={activity.studentActivityData.id}
+                        id={activity.studentActivityData.id}
                         title={activity.title}
                         status={
-                           activity.status == 'Pendente'
+                           activity.studentActivityData.status
                               ? 'Pendente'
                               : 'Entregue'
                         }
-                        isFrequency={activity.isFrequency}
-                        points={activity.points}
-                        date={activity.date}
+                        points={activity.studentActivityData.activity_points}
+                        date={'22/08/2002'}
                      />
-                  ))}
-               </article>
-            </section>
-         ))}
+                  ))
+               ) : (
+                  <ResponseState
+                     loading={<SearchData />}
+                     error={getErrorComponent()}
+                     empty={<EmptyList />}
+                     isLoading={isLoading}
+                     isError={isError}
+                     isEmpty={!data}
+                  />
+               )}
+            </article>
+         </section>
       </main>
    );
 };

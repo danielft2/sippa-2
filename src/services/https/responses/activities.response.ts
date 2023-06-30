@@ -1,6 +1,6 @@
 import { NoteModel } from '@/domain/models/note-model';
 
-export interface NotesResponse {
+export interface ActivitiesResponse {
    activities: NoteModel[];
    exams: NoteModel[];
 }

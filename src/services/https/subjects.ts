@@ -1,7 +1,7 @@
 import { ClassroomModel } from '@/domain/models/classroom-student-model';
 import { api } from '@/libs/axios';
 import { StorageAuth } from '@/storage/StorageAuth';
-import { NotesResponse } from './responses/notes.response';
+import { ActivitiesResponse } from './responses/activities.response';
 
 export const SubjectService = {
    async getAllDiciplines(): Promise<ClassroomModel[]> {
@@ -12,9 +12,11 @@ export const SubjectService = {
       ).data;
    },
 
-   async getAllNotesByClassroom(id_classroom: string): Promise<NotesResponse> {
+   async getAllNotesByClassroom(
+      id_classroom: string
+   ): Promise<ActivitiesResponse> {
       return (
-         await api.private.get<NotesResponse>(
+         await api.private.get<ActivitiesResponse>(
             `/student-activity/student/${
                StorageAuth.retrieveUserLogged()?.student_id
             }/${id_classroom}`
