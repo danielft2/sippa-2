@@ -5,11 +5,11 @@ import { AppError } from '@/utils/app-error';
 const token = StorageAuth.retrieveToken();
 
 const publicAPI = axios.create({
-   baseURL: 'http://localhost:3333/'
+   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
 });
 
 const privateAPI = axios.create({
-   baseURL: 'http://localhost:3333/'
+   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
 });
 
 if (token) privateAPI.defaults.headers['Authorization'] = `Bearer ${token}`;
