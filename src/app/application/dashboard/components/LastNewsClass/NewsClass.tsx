@@ -1,7 +1,6 @@
-import { generateRandomColor } from '@/utils/generate-random-colors';
-import { CalendarDays } from 'lucide-react';
-import { Poppins } from 'next/font/google';
 import Link from 'next/link';
+import { Poppins } from 'next/font/google';
+import { CalendarDays } from 'lucide-react';
 
 const poppins_sm = Poppins({ weight: ['600'], subsets: ['latin'] });
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
@@ -15,7 +14,10 @@ interface NewsClassProps {
 
 export function NewsClass({ code, name, date, title }: NewsClassProps) {
    return (
-      <div className="w-[360px] h-[160px] bg-zinc-100 rounded-md shadow-sm px-6 pt-6 pb-5 flex flex-col justify-between">
+      <div
+         className="w-[360px] h-[160px] bg-zinc-100 rounded-md shadow-sm px-6 pt-6 pb-5 flex flex-col 
+         justify-between hover:brightness-95 transition-all"
+      >
          <div>
             <span className={`${poppins_sm.className} text-sm text-green-600`}>
                {code}

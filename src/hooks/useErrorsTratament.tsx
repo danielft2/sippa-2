@@ -7,7 +7,7 @@ interface useErrorsTratamentProps {
    error: AppError | any;
 }
 
-const useErrorsTratament = ({ error }: useErrorsTratamentProps) => {
+export function useErrorsTratament({ error }: useErrorsTratamentProps) {
    function getErrorComponent() {
       const isAppError = error instanceof AppError;
       if (isAppError && error.getStatus() != 401) {
@@ -18,6 +18,4 @@ const useErrorsTratament = ({ error }: useErrorsTratamentProps) => {
    return {
       getErrorComponent
    };
-};
-
-export default useErrorsTratament;
+}

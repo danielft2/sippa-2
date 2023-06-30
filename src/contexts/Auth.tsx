@@ -21,9 +21,6 @@ export const AuthContext = createContext<AuthContextData>(
    {} as AuthContextData
 );
 
-//matricula: 342481
-//Senha: 123Dan
-
 export function AuthProvider({ children }: Context) {
    const [userLogged, setUserLogged] = useState<StudentModel>(
       {} as StudentModel
@@ -41,7 +38,7 @@ export function AuthProvider({ children }: Context) {
          const response = (await AuthService.signin(data)).data;
          updateUserAndToken(response.access_token, response.returnData);
          setUserLogged(response.returnData);
-         router.push('application/dashboard');
+         router.push('/application/dashboard');
       } catch (error) {
          if (error instanceof AxiosError && error.response?.status === 401) {
             throw new AppError(ERRORS_MESSAGES.UNAUTHORIZED, 401);

@@ -13,7 +13,7 @@ export function Layout({ children }: { children: ReactNode }) {
          <div className="w-full">
             <div className="h-[64px] bg-green-400 flex items-center">
                <div className="container-content flex items-center justify-between">
-                  <Link href="application/dashboard">
+                  <Link href="/application/dashboard">
                      <Image
                         src="/logo.png"
                         alt="Logo do sistema"

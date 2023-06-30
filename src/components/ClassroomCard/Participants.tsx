@@ -3,7 +3,7 @@ import { ClassroomParticipant } from '@/domain/models/classroom-participant';
 
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
-import Avatar from '../Avatar';
+import { Avatar } from '@/components/Avatar';
 
 interface ParticipantsProps {
    participant1: ClassroomParticipant;

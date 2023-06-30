@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import AnimationLottie from '../AnimationLottie';
 import searchDataAnimation from '@/assets/animations/search-data.json';
 
-const SearchData = ({ className }: Twmerge) => {
+export function SearchData({ className }: Twmerge) {
    return (
       <div
          className={twMerge(
@@ -17,6 +17,4 @@ const SearchData = ({ className }: Twmerge) => {
          />
       </div>
    );
-};
-
-export default SearchData;
+}

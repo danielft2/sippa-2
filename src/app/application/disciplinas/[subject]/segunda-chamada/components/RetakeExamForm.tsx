@@ -8,29 +8,17 @@ import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
 import { RetakeExamService } from '@/services/https/retake-exam';
 import { StorageAuth } from '@/storage/StorageAuth';
-import { useState } from 'react';
 
-const RetakeExamForm = () => {
-   const { control, handleSubmit } = useForm();
+type SelectOption = {
+   name: string;
+   value: string;
+};
+
+export function RetakeExamForm() {
+   const { control, register, handleSubmit } = useForm();
    const { subject } = useParams();
-   const [justify, setJustify] = useState('');
 
-   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setJustify(event.target.value);
-   };
-
-   type SelectOption = {
-      name: string;
-      value: string;
-   };
-
-   const {
-      data: examList = [],
-      isLoading,
-      isSuccess,
-      isError,
-      error
-   } = useQuery({
+   const { data: examList = [] } = useQuery({
       queryKey: ['examList', subject],
       queryFn: async () => {
          const response = await RetakeExamService.gellAllExams(
@@ -49,8 +37,7 @@ const RetakeExamForm = () => {
 
    function handleSubmitData(data: any) {
       RetakeExamService.post({
-         activity_id: data.exam,
-         justify: justify,
+         ...data,
          student_id: StorageAuth.retrieveUserLogged()?.student_id ?? '',
          classroom_id: subject
       });
@@ -84,11 +71,9 @@ const RetakeExamForm = () => {
                <Form.Label htmlFor="justification">Justificativa:</Form.Label>
                <textarea
                   id="justification"
-                  name="justification"
-                  value={justify}
-                  onChange={handleChange}
                   className="w-full border-none bg-gray-200 px-3 py-2 rounded-md"
                   rows={4}
+                  {...register('justification')}
                ></textarea>
             </Form.Field>
             <div className="pt-12">
@@ -99,6 +84,4 @@ const RetakeExamForm = () => {
          </form>
       </>
    );
-};
-
-export default RetakeExamForm;
+}
