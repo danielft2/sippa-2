@@ -50,7 +50,10 @@ export const Select = forwardRef(
                >
                   <SelectRadix.Viewport className="px-2 py-3 flex flex-col gap-y-2">
                      {options.map((option) => (
-                        <SelectItem key={option.name} value={option.value}>
+                        <SelectItem
+                           key={option.name}
+                           value={option.value.toString()}
+                        >
                            {option.name}
                         </SelectItem>
                      ))}

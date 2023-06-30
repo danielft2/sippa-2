@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
 interface ResponseStateProps {
-   loading: ReactNode;
-   error: ReactNode;
-   empty: ReactNode;
-   isLoading: boolean;
-   isError: boolean;
-   isEmpty: boolean;
+   loading?: ReactNode;
+   error?: ReactNode;
+   empty?: ReactNode;
+   isLoading?: boolean;
+   isError?: boolean;
+   isEmpty?: boolean;
 }
 
 const ResponseState = ({

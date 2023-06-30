@@ -7,4 +7,5 @@ export interface NoteModel {
    title: string;
    description: string;
    weight: number;
+   classroom_id: string;
 }

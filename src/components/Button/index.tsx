@@ -11,14 +11,19 @@ interface ButtonProps {
    children: React.ReactNode;
 }
 
-function ButtonRoot({ children, isLoading, ...rest }: ButtonRootProps) {
+function ButtonRoot({
+   children,
+   isLoading,
+   disabled,
+   ...rest
+}: ButtonRootProps) {
    return (
       <button
          className={clsx(
-            'bg-green-600 w-full h-10 rounded text-sm hover:brightness-90 transition-all flex justify-center items-center px-4',
+            'bg-green-600 w-full h-10 rounded text-sm transition-all flex justify-center items-center px-4',
             {
-               'opacity-50': isLoading,
-               'opacity-100': !isLoading
+               'opacity-50 cursor-default': isLoading || disabled,
+               'opacity-100 hover:brightness-90': !isLoading && !disabled
             }
          )}
          disabled={isLoading}
