@@ -1,12 +1,12 @@
 import { BellRing } from 'lucide-react';
 
-import UserSummary from '@/components/UserSummary';
+import { UserSummary } from '@/components/UserSummary';
 
 import DisciplinesRecents from './components/ClassroomRecents';
 import LastNewsClasses from './components/LastNewsClass';
 import GeneralNews from './components/GeneralNews';
 
-export default async function Dashboard() {
+export default function Dashboard() {
    return (
       <main className="space-y-6">
          <section className="grid grid-cols-dashboard gap-3 lg_p:grid-cols-1">

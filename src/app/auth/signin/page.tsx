@@ -18,6 +18,7 @@ export default function SigIn() {
                   alt="Logo do sistema"
                   width={100}
                   height={100}
+                  className="w-auto h-auto"
                />
             </div>
 

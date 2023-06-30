@@ -6,9 +6,9 @@ import { BellIcon } from 'lucide-react';
 import { SubjectDashboard } from '@/services/https/subject-dashboard';
 import { NewClassModel } from '@/domain/models/new-class-model';
 import { EmptyList } from '@/components/EmptyList';
-import SearchData from '@/components/SearchData';
-import ResponseState from '@/components/ResponseState';
-import useErrorsTratament from '@/hooks/useErrorsTratament';
+import { SearchData } from '@/components/SearchData';
+import { ResponseState } from '@/components/ResponseState';
+import { useErrorsTratament } from '@/hooks/useErrorsTratament';
 
 import CardNews from './CardNews';
 import ModalNews from './ModalNews';

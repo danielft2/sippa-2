@@ -1,11 +1,14 @@
 'use client';
 
 import { Poppins } from 'next/font/google';
-import Avatar from '../Avatar';
+
+import { Avatar } from '@/components/Avatar';
+import { Skeleton } from '@/components/Skeleton';
 import { useAuth } from '@/hooks/useAuth';
+
 const poppins = Poppins({ weight: '600', subsets: ['latin'] });
 
-const UserSummary = () => {
+export function UserSummary() {
    const { userLogged } = useAuth();
 
    return (
@@ -20,23 +23,31 @@ const UserSummary = () => {
                   textSizeFalback="text-lg"
                   isBorder
                />
-               <div>
-                  <span
-                     className={`${poppins.className} text-green-600 block -mb-1 text-sm`}
-                  >
-                     {userLogged.course}
-                  </span>
-                  <h1 className={`${poppins.className} text-lg text-gray-700`}>
-                     Olá, {userLogged.name}
-                  </h1>
-                  <span className="text-gray-500 text-[15px]">
-                     Ficamos feliz em tê-lo de volta.
-                  </span>
-               </div>
+               {userLogged.student_id ? (
+                  <div>
+                     <span
+                        className={`${poppins.className} text-green-600 block -mb-1 text-sm`}
+                     >
+                        {userLogged.course}
+                     </span>
+                     <h1
+                        className={`${poppins.className} text-lg text-gray-700`}
+                     >
+                        Olá, {userLogged.name}
+                     </h1>
+                     <span className="text-gray-500 text-[15px]">
+                        Ficamos feliz em tê-lo de volta.
+                     </span>
+                  </div>
+               ) : (
+                  <div className="space-y-1">
+                     <Skeleton className="h-2 w-32" />
+                     <Skeleton className="h-3 w-48" />
+                     <Skeleton className="h-3 w-56" />
+                  </div>
+               )}
             </div>
          </div>
       </div>
    );
-};
-
-export default UserSummary;
+}

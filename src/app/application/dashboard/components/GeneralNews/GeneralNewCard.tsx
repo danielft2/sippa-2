@@ -35,6 +35,7 @@ const GeneralNewCard = ({
                src={linkUrlImage}
                alt={`Imagem da noticia ${title}`}
                fill
+               sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
                onLoadingComplete={() => setImageLoading(true)}
             />
             {!imageLoading && (

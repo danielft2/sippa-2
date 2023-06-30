@@ -6,8 +6,8 @@ import { Users } from 'lucide-react';
 
 import { SubjectDashboard } from '@/services/https/subject-dashboard';
 import { EmptyList } from '@/components/EmptyList';
-import ResponseState from '@/components/ResponseState';
-import useErrorsTratament from '@/hooks/useErrorsTratament';
+import { ResponseState } from '@/components/ResponseState';
+import { useErrorsTratament } from '@/hooks/useErrorsTratament';
 
 import { SkeletonParticipants } from './SkeletonParticipant';
 import { TitleCard } from '..';

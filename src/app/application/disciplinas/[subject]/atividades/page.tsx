@@ -3,23 +3,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { List } from 'lucide-react';
 
+import { EmptyList } from '@/components/EmptyList';
+import { ResponseState } from '@/components/ResponseState';
+import { SearchData } from '@/components/SearchData';
+import { ClassroomSummary } from '@/components/ClassroomSummary';
+import { useErrorsTratament } from '@/hooks/useErrorsTratament';
+import { ActivitiesService } from '@/services/https/activities';
+
 import {
    ActivityCard,
-   Header,
    TitleCard
 } from '@/app/application/disciplinas/components';
 
-import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
-import { ActivitiesService } from '@/services/https/activities';
-import { EmptyList } from '@/components/EmptyList';
-import ResponseState from '@/components/ResponseState';
-import SearchData from '@/components/SearchData';
-import useErrorsTratament from '@/hooks/useErrorsTratament';
-
 const DisciplineActivities = () => {
-   const { classrooms } = useClassRoomRecents();
-   //const { subject } = useParams();
-
    const { data, isSuccess, isLoading, isError, error } = useQuery({
       queryKey: ['activities'],
       queryFn: ActivitiesService.getAll
@@ -29,13 +25,7 @@ const DisciplineActivities = () => {
 
    return (
       <main className="space-y-4">
-         <Header
-            key={classrooms[0]?.discipline.id}
-            subtitle={classrooms[0]?.discipline.code}
-            title={classrooms[0]?.discipline.name}
-            description={classrooms[0]?.teacherName}
-         />
-
+         <ClassroomSummary isLoading={isLoading} />
          <section
             className="bg-white w-full p-6 space-y-4 shadow rounded-md"
             aria-label={`Lista de atividades`}
