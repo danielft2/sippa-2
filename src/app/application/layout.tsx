@@ -17,8 +17,9 @@ export function Layout({ children }: { children: ReactNode }) {
                      <Image
                         src="/logo.png"
                         alt="Logo do sistema"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
+                        className="w-auto h-auto"
                      />
                   </Link>
                   <a

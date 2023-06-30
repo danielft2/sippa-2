@@ -23,12 +23,18 @@ export function ActivityCard({
    const { subject } = useParams();
 
    return (
-      <Link href={`application/disciplinas/${subject}/atividades/${id}`}>
-         <div className="bg-zinc-100 p-6 pb-3 flex flex-col justify-between gap-4 shadow rounded-md h-[140px] min-w-[300px]">
+      <Link
+         href={`application/disciplinas/${subject}/atividades/${id}`}
+         className="h-[140px] min-w-[300px]"
+      >
+         <div
+            className="bg-zinc-100 p-6 pb-3 flex flex-col justify-between gap-4 
+            shadow rounded-md hover:scale-105 transition-all"
+         >
             <div className="flex flex-col">
                <span
                   className={`text-[13px] ${poppins_md.className} ${
-                     status ? 'text-orange-700' : 'text-green-400'
+                     !status ? 'text-orange-700' : 'text-green-600'
                   }`}
                >
                   {status}

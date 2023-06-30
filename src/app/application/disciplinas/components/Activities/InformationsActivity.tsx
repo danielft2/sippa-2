@@ -31,7 +31,7 @@ export function InformationsActivity({
                   <div className="border-b border-gray-100 pb-4">
                      <p className="text-sm text-gray-600">{description}</p>
                   </div>
-                  <div className="space-y-3">
+                  {/* <div className="space-y-3">
                      <Attachament
                         name="TrabalhoComponentesBasicosAndroid.pdf"
                         urlFileDownload="http://sd"
@@ -42,7 +42,7 @@ export function InformationsActivity({
                         url="https://www.techyourchance.com/mvc-android-1/"
                         type="link"
                      />
-                  </div>
+                  </div> */}
                </>
             )}
          </div>

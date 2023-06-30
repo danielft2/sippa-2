@@ -7,5 +7,5 @@ export interface ActivityModel {
    description: string;
    fileUrl: string;
    activity_points: number;
-   date: string;
+   receive_data: string;
 }

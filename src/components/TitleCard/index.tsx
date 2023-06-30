@@ -15,7 +15,7 @@ export function TitleCard({ type, title, children = null }: TitleCardProps) {
    return (
       <header
          className={clsx('', {
-            'bg-slate-100 rounded-md': type === 'background',
+            'bg-zinc-100 rounded-md': type === 'background',
             'border-b-2 border-gray-100': type === 'simple'
          })}
       >

@@ -12,14 +12,12 @@ export const SubjectService = {
       ).data;
    },
 
-   async getAllNotesByClassroom(
-      id_classroom: string
-   ): Promise<ActivitiesResponse> {
+   async getAllNotesByClassroom(): Promise<ActivitiesResponse> {
       return (
          await api.private.get<ActivitiesResponse>(
             `/student-activity/student/${
                StorageAuth.retrieveUserLogged()?.student_id
-            }/${id_classroom}`
+            }`
          )
       ).data;
    }

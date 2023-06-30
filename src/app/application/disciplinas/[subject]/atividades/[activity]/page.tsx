@@ -10,21 +10,33 @@ import {
    InformationsActivity,
    ShippingDetails
 } from '@/app/application/disciplinas/components';
+import { queryClient } from '@/libs/react-query';
 
 const ActivityDetails = () => {
    const { activity } = useParams();
 
-   const { data, isSuccess, isLoading, isError, error } = useQuery({
+   const { data, isLoading, isError } = useQuery({
       queryKey: ['activityDetails', activity],
       queryFn: () => ActivitiesService.getActivityDetails(activity)
    });
+
+   function refreshData() {
+      queryClient.invalidateQueries({ queryKey: ['activityDetails'] });
+   }
+
+   const dateFormat = data?.receive_data
+      ? new Intl.DateTimeFormat('pt-BR', {
+           dateStyle: 'full',
+           timeStyle: 'medium'
+        }).format(new Date(data.receive_data.toString()))
+      : '';
 
    return (
       <main className="space-y-4">
          <Header
             subtitle={data?.status ? 'Concluida' : 'Pendente'}
             title={data?.title ?? ''}
-            description="Segunda, 09 de Abril 2023, 00:00h"
+            description={dateFormat}
             color={!data?.status ? '#E87912' : ''}
             isLoading={isLoading}
          >
@@ -48,6 +60,7 @@ const ActivityDetails = () => {
             <ShippingDetails
                id_activity={data?.id ?? ''}
                fileUrl={data?.fileUrl ?? ''}
+               onUpdateData={refreshData}
             />
          </section>
       </main>

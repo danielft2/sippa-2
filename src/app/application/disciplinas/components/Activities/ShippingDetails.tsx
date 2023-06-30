@@ -17,33 +17,44 @@ const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 interface ShippingDetailsProps {
    id_activity: string;
    fileUrl: string;
+   onUpdateData: () => void;
 }
 
-const ShippingDetails = ({ fileUrl, id_activity }: ShippingDetailsProps) => {
-   const [file, setFile] = useState<File>({} as File);
+const ShippingDetails = ({
+   fileUrl,
+   id_activity,
+   onUpdateData
+}: ShippingDetailsProps) => {
+   const [filesList, setFilesList] = useState<File[]>([]);
    const [fileURL, setFileURL] = useState('');
-   const { error } = useToastMessage();
+   const { successMessage, errorMessage } = useToastMessage();
 
    const { mutateAsync: sendActivity, isLoading } = useMutation({
       mutationKey: ['sendActivity'],
       mutationFn: () =>
-         ActivitiesService.sendActivityFile(id_activity, file as File)
+         ActivitiesService.sendActivityFile(id_activity, filesList),
+      onSuccess: () => {
+         onUpdateData();
+         successMessage('Arquivo submetido com sucesso!');
+      },
+      onError: () => {
+         errorMessage('Ocorreu um erro inesperado ao submeter o arquivo(s)!');
+      }
    });
 
    function onSelectedFile(files: FileList | null) {
-      const types = ['image/jpge', 'image/png', 'application/pdf', '.txt'];
       if (files && files.length > 0) {
-         if (types.includes(files[0].type)) {
-            setFile(files[0]);
-         } else {
-            error('Selecione um tipo de arquivo válido.');
-         }
+         setFilesList((prev) => [...prev, ...Array.from(files)]);
       }
    }
 
    function handleButtonSubmit() {
-      if (fileUrl) setFileURL('');
+      if (fileURL) setFileURL('');
       else sendActivity();
+   }
+
+   function handleRemoveFile(fileName: string) {
+      setFilesList((prev) => prev.filter((file) => file.name != fileName));
    }
 
    useEffect(() => {
@@ -72,47 +83,53 @@ const ShippingDetails = ({ fileUrl, id_activity }: ShippingDetailsProps) => {
                      src={uploadFileSvg}
                      alt="Imagem de uma nuvem de upload"
                   />
-                  {!file.size && !fileURL ? (
-                     <span className="text-sm">
-                        Selecione um{' '}
-                        <label
-                           className="underline cursor-pointer hover:text-green-600"
-                           htmlFor="file"
-                        >
-                           arquivo
-                        </label>{' '}
-                        para enviar
-                     </span>
-                  ) : (
-                     <FilePreview
-                        fileName={fileURL ? fileURL : file.name}
-                        onRemoveFile={() => setFile({} as File)}
-                     />
-                  )}
+                  <span className="text-sm">
+                     Selecione um{' '}
+                     <label
+                        className="underline cursor-pointer hover:text-green-600"
+                        htmlFor="file"
+                     >
+                        arquivo
+                     </label>{' '}
+                     para enviar
+                  </span>
                </div>
-               <div className="flex items-center justify-between">
+               <div className="flex items-center justify-between mb-4">
                   <span className="text-xs text-gray-500">
                      Formato suportados: PDF, imagem e txt
                   </span>
                   <span className="text-xs text-gray-500">
-                     Tamanho máximo 25mb
+                     Tamanho máximo 5mb
                   </span>
                </div>
+               {!fileURL ? (
+                  filesList?.map((file) => (
+                     <FilePreview
+                        key={file.name}
+                        fileName={file.name}
+                        onRemoveFile={() => handleRemoveFile(file.name)}
+                     />
+                  ))
+               ) : (
+                  <FilePreview fileName={fileURL} />
+               )}
             </div>
             <Button.Root
                onClick={handleButtonSubmit}
                isLoading={isLoading}
-               disabled={!file.size && !fileURL}
+               disabled={!filesList.length && !fileURL}
             >
                <Button.Text>
-                  {fileURL ? 'Mudar Arquivo' : 'Enviar Atividade'}
+                  {fileURL ? 'Mudar Arquivo' : 'Enivar Arquivo'}
                </Button.Text>
             </Button.Root>
          </div>
          <input
             accept="image/png, image/jpeg, application/pdf, .txt"
             type="file"
+            multiple
             id="file"
+            disabled={!!fileURL}
             className="hidden"
             onChange={(e) => onSelectedFile(e.target.files)}
          />

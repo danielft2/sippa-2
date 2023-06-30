@@ -12,8 +12,8 @@ const Notes = () => {
    const { subject } = useParams();
 
    const { data } = useQuery({
-      queryKey: ['notes', subject],
-      queryFn: () => SubjectService.getAllNotesByClassroom(subject)
+      queryKey: ['notes'],
+      queryFn: () => SubjectService.getAllNotesByClassroom()
    });
 
    const { classrooms } = useClassRoomRecents();
@@ -33,11 +33,23 @@ const Notes = () => {
          </Header>
          <section className="grid grid-cols-2 lg_p:grid-cols-1 gap-4">
             <ResumeNotes
-               body={data?.activities ? data.activities : []}
+               body={
+                  data?.activities
+                     ? data.activities.filter(
+                          (item) => item.classroom_id === subject
+                       )
+                     : []
+               }
                type="Atividades"
             />
             <ResumeNotes
-               body={data?.exams ? data.exams : []}
+               body={
+                  data?.exams
+                     ? data.exams.filter(
+                          (item) => item.classroom_id === subject
+                       )
+                     : []
+               }
                type="Avaliações"
             />
          </section>

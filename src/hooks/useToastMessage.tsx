@@ -1,14 +1,14 @@
 import { toast } from 'react-toastify';
 
 const useToastMessage = () => {
-   function success(msg: string, timeClose = 1500) {
+   function successMessage(msg: string, timeClose = 1500) {
       toast(msg, {
          autoClose: timeClose,
          type: 'success'
       });
    }
 
-   function error(msg: string, timeClose = 1500) {
+   function errorMessage(msg: string, timeClose = 1500) {
       toast(msg, {
          autoClose: timeClose,
          type: 'error'
@@ -16,8 +16,8 @@ const useToastMessage = () => {
    }
 
    return {
-      success,
-      error
+      successMessage,
+      errorMessage
    };
 };
 

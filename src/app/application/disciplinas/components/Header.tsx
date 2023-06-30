@@ -12,7 +12,7 @@ interface DisicplineHeaderProps {
    description: string;
    color?: string;
    isLoading?: boolean;
-   children: ReactNode;
+   children?: ReactNode;
 }
 
 export function Header({
@@ -24,20 +24,21 @@ export function Header({
    children
 }: DisicplineHeaderProps) {
    return (
-      <>
-         {isLoading ? (
-            <HeaderSkeleton />
-         ) : (
-            <header className={`bg-white overflow-hidden rounded-md shadow`}>
-               <div className="w-full relative h-[60px]">
-                  <Image
-                     className="relative max-h-full object-cover"
-                     src="/subject/subject-banner-md.jpg"
-                     alt="banner of subject"
-                     fill
-                  />
-               </div>
-               <div className="flex-1 flex flex-col gap-4 justify-between px-7 py-7 pb-3 pt-4">
+      <header className={`bg-white overflow-hidden rounded-md shadow`}>
+         <div className="w-full relative h-[60px]">
+            <Image
+               className="relative max-h-full object-cover"
+               src="/subject/subject-banner-md.jpg"
+               alt="banner of subject"
+               fill
+               priority
+            />
+         </div>
+         <div className="flex-1 flex flex-col gap-4 justify-between px-7 py-7 pb-3 pt-4">
+            {isLoading ? (
+               <HeaderSkeleton />
+            ) : (
+               <>
                   <div className="">
                      <span
                         className={`${poppins_semi.className} text-sm block -mb-1 text-green-600`}
@@ -55,9 +56,9 @@ export function Header({
                      </span>
                   </div>
                   <div className="flex items-center gap-4">{children}</div>
-               </div>
-            </header>
-         )}
-      </>
+               </>
+            )}
+         </div>
+      </header>
    );
 }
