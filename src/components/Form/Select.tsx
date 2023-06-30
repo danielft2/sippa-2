@@ -6,6 +6,7 @@ import { SelectItem } from './SelectItem';
 
 type SelectOption = {
    name: string;
+   value: string;
 };
 
 interface SelectProps {
@@ -29,7 +30,12 @@ export const Select = forwardRef(
                ref={forwardedRef}
             >
                <SelectRadix.Value asChild>
-                  <span>{value ? value : 'Selecione'}</span>
+                  <span>
+                     {options.map((item) => {
+                        if (item.value === value) return item.name;
+                     })}
+                     {!value && 'Selecione'}
+                  </span>
                </SelectRadix.Value>
                <SelectRadix.Icon>
                   <ChevronDown size={16} />
@@ -44,7 +50,7 @@ export const Select = forwardRef(
                >
                   <SelectRadix.Viewport className="px-2 py-3 flex flex-col gap-y-2">
                      {options.map((option) => (
-                        <SelectItem key={option.name} value={option.name}>
+                        <SelectItem key={option.name} value={option.value}>
                            {option.name}
                         </SelectItem>
                      ))}
