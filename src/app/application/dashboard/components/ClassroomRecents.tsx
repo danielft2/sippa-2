@@ -1,6 +1,6 @@
 'use client';
 
-import ClassroomSummary from '@/components/ClassroomSummary';
+import { ClassroomCard } from '@/components/ClassroomCard';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
 
 const ClassroomRecents = () => {
@@ -9,7 +9,7 @@ const ClassroomRecents = () => {
       <>
          {classrooms.map((item) => {
             return (
-               <ClassroomSummary
+               <ClassroomCard
                   key={item.classroom.classroom_id}
                   isDashboard
                   data={item}

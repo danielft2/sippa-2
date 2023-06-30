@@ -9,15 +9,13 @@ interface ResponseStateProps {
    isEmpty?: boolean;
 }
 
-const ResponseState = ({
+export function ResponseState({
    loading,
    error,
    empty,
    isLoading,
    isError,
    isEmpty
-}: ResponseStateProps) => {
+}: ResponseStateProps) {
    return <>{isLoading ? loading : isError ? error : isEmpty ? empty : null}</>;
-};
-
-export default ResponseState;
+}

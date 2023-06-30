@@ -1,7 +1,6 @@
 import { TextSelection } from 'lucide-react';
-import { Attachament } from './Attachament';
 import { TitleCard } from '@/components/TitleCard';
-import SearchData from '@/components/SearchData';
+import { SearchData } from '@/components/SearchData';
 import { GenericError } from '@/errors/GenericError';
 
 interface InformationsActivityProps {

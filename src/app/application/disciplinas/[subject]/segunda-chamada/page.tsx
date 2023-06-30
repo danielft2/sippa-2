@@ -2,20 +2,20 @@
 
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { CheckCheck, FileSpreadsheet } from 'lucide-react';
+import { FileSpreadsheet } from 'lucide-react';
 
 import { TitleCard } from '@/components/TitleCard';
 import { Table } from '@/components/Table';
-import { RetakeExamService } from '@/services/https/retake-exam';
+import { ResponseState } from '@/components/ResponseState';
+import { SearchData } from '@/components/SearchData';
+import { EmptyList } from '@/components/EmptyList';
 import { useClassRoomRecents } from '@/hooks/useClassroomsRecents';
+import { useErrorsTratament } from '@/hooks/useErrorsTratament';
+import { RetakeExamService } from '@/services/https/retake-exam';
+import { StorageAuth } from '@/storage/StorageAuth';
 
 import { Header } from '@/app/application/disciplinas/components/Header';
-import ResponseState from '@/components/ResponseState';
-import SearchData from '@/components/SearchData';
-import { EmptyList } from '@/components/EmptyList';
-import useErrorsTratament from '@/hooks/useErrorsTratament';
-import RetakeExamForm from './components/RetakeExamForm';
-import { StorageAuth } from '@/storage/StorageAuth';
+import { RetakeExamForm } from './components/RetakeExamForm';
 
 const RetakeExam = () => {
    const { subject } = useParams();
@@ -41,12 +41,7 @@ const RetakeExam = () => {
             subtitle={classrooms[0]?.discipline.code}
             title={classrooms[0]?.discipline.name}
             description={classrooms[0]?.teacherName}
-         >
-            <div className="text-green-600 flex items-center gap-1">
-               <CheckCheck size={16} />
-               <span className="text-[13px]">90% de Frequência</span>
-            </div>
-         </Header>
+         />
          <section
             className="grid grid-cols-2 lg_p:grid-cols-1 gap-6 mt-6"
             aria-label="Solicitação e histórico de solicitações da segunda chamada."

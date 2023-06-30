@@ -6,8 +6,8 @@ import { SwiperSlide } from 'swiper/react';
 import { DashboardService } from '@/services/https/dashboard';
 import { Slide } from '@/components/Slide';
 import { EmptyList } from '@/components/EmptyList';
-import ResponseState from '@/components/ResponseState';
-import useErrorsTratament from '@/hooks/useErrorsTratament';
+import { ResponseState } from '@/components/ResponseState';
+import { useErrorsTratament } from '@/hooks/useErrorsTratament';
 
 import { NewsClass } from './NewsClass';
 import { SkeletonNewsClass } from './SkeletonNewsClass';

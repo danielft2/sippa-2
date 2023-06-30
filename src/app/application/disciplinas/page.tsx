@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { SubjectService } from '@/services/https/subjects';
 import { Spinner } from '@/components/Spinner';
-import ClassroomSummary from '@/components/ClassroomSummary';
-import UserSummary from '@/components/UserSummary';
+import { ClassroomCard } from '@/components/ClassroomCard';
+import { UserSummary } from '@/components/UserSummary';
 
 const Subjects = () => {
    const { data, isLoading } = useQuery({
@@ -23,7 +23,7 @@ const Subjects = () => {
          ) : (
             <div className="grid grid-cols-3 md_p:grid-cols-1 gap-3 mt-6">
                {data?.map((classroom) => (
-                  <ClassroomSummary
+                  <ClassroomCard
                      key={classroom.discipline.id}
                      data={classroom}
                      isDashboard={false}
