@@ -1,13 +1,12 @@
 import { z } from 'zod';
-import { singInScheme } from '../validations/scheme';
+import { signInScheme } from '../validations/scheme';
 import { useCallback, useEffect, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { AppError } from '@/utils/app-error';
 
-type SinInFormData = z.infer<typeof singInScheme>;
+type SinInFormData = z.infer<typeof signInScheme>;
 
 type useSingInProps = {
    setValue: UseFormSetValue<SinInFormData>;
