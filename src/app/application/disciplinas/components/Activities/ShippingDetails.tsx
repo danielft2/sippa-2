@@ -118,7 +118,7 @@ const ShippingDetails = ({
                disabled={!fileSelected?.size && !fileURL}
             >
                <Button.Text>
-                  {fileURL ? 'Mudar Arquivo' : 'Enivar Arquivo'}
+                  {fileURL ? 'Mudar Arquivo' : 'Enviar Arquivo'}
                </Button.Text>
             </Button.Root>
          </div>
