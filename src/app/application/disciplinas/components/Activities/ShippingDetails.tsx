@@ -1,17 +1,17 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Poppins } from 'next/font/google';
+import Image from 'next/image';
 import clsx from 'clsx';
+import { Poppins } from 'next/font/google';
 import { UploadCloud } from 'lucide-react';
 
 import { Button } from '@/components/Button';
-import { useSubmitActivty } from '@/hooks/useSubmitActivity';
 import uploadFileSvg from '@/assets/ilustrations/upload-file.svg';
 import downloadFileSvg from '@/assets/ilustrations/download-file.svg';
 
 import { FilePreview } from './FilePreview';
+import { useSubmitActivty } from '@/hooks/useSubmitActivity';
 
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 

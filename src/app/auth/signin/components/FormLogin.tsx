@@ -3,12 +3,12 @@
 import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { singInScheme } from '../validations/scheme';
+import { signInScheme } from '../validations/scheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSingIn } from '../hooks/useSingIn';
 
-type SinInFormData = z.infer<typeof singInScheme>;
+type SinInFormData = z.infer<typeof signInScheme>;
 const options = [
    { name: 'Estudante', value: '1' },
    { name: 'Professor', value: '2' }
@@ -16,7 +16,7 @@ const options = [
 
 const FormLogin = () => {
    const singInForm = useForm<SinInFormData>({
-      resolver: zodResolver(singInScheme)
+      resolver: zodResolver(signInScheme)
    });
    const { handleSubmit, setValue, control } = singInForm;
    const { handleSubmitData, loading } = useSingIn({ setValue });

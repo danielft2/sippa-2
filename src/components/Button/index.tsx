@@ -26,7 +26,7 @@ function ButtonRoot({
                'opacity-100 hover:brightness-90': !isLoading && !disabled
             }
          )}
-         disabled={isLoading}
+         disabled={isLoading || disabled}
          {...rest}
       >
          {isLoading ? <Spinner /> : children}
