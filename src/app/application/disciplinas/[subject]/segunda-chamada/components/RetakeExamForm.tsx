@@ -1,43 +1,37 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, FormProvider } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 
 import { Button } from '@/components/Button';
 import { Form } from '@/components/Form';
-import { RetakeExamService } from '@/services/https/retake-exam';
 import { StorageAuth } from '@/storage/StorageAuth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { retakeExamScheme } from '../validations/scheme';
+import { useRetakeExam } from '@/hooks/useRetakeExam';
 
-type SelectOption = {
-   name: string;
-   value: string;
-};
+type RetakeExamData = z.infer<typeof retakeExamScheme>;
 
 export function RetakeExamForm() {
-   const { control, register, handleSubmit } = useForm();
    const { subject } = useParams();
+   const { requestSecondCall, examsOptions, isLoading } = useRetakeExam();
 
-   const { data: examList = [] } = useQuery({
-      queryKey: ['examList', subject],
-      queryFn: async () => {
-         const response = await RetakeExamService.gellAllExams(
-            subject,
-            StorageAuth.retrieveUserLogged()?.student_id ?? ''
-         );
-         const examList: SelectOption[] = [];
-         for (const exam of response) {
-            if (exam) {
-               examList.push({ name: exam.title, value: exam.id });
-            }
-         }
-         return examList;
-      }
+   const createRetakeExamForm = useForm<RetakeExamData>({
+      resolver: zodResolver(retakeExamScheme)
    });
 
-   function handleSubmitData(data: any) {
-      RetakeExamService.post({
-         ...data,
+   const {
+      handleSubmit,
+      control,
+      formState: { isValid }
+   } = createRetakeExamForm;
+
+   function handleSubmitData(data: RetakeExamData) {
+      requestSecondCall({
+         activity_id: data.exam,
+         justify: data.justify,
          student_id: StorageAuth.retrieveUserLogged()?.student_id ?? '',
          classroom_id: subject
       });
@@ -45,43 +39,46 @@ export function RetakeExamForm() {
 
    return (
       <>
-         <form
-            className="space-y-4 mt-4"
-            onSubmit={handleSubmit(handleSubmitData)}
-         >
-            <Form.Field>
-               <Form.Label htmlFor="exam">Avaliação:</Form.Label>
-               <Controller
-                  control={control}
-                  name="exam"
-                  render={({ field: { onChange, ref, value } }) => {
-                     return (
-                        <Form.Select
-                           ref={ref}
-                           value={value}
-                           onValueChange={onChange}
-                           options={examList}
-                           ariaLabel="Selecionar avaliação."
-                        />
-                     );
-                  }}
-               />
-            </Form.Field>
-            <Form.Field>
-               <Form.Label htmlFor="justification">Justificativa:</Form.Label>
-               <textarea
-                  id="justification"
-                  className="w-full border-none bg-gray-200 px-3 py-2 rounded-md"
-                  rows={4}
-                  {...register('justification')}
-               ></textarea>
-            </Form.Field>
-            <div className="pt-12">
-               <Button.Root type="submit">
-                  <Button.Text>Solicitar</Button.Text>
-               </Button.Root>
-            </div>
-         </form>
+         <FormProvider {...createRetakeExamForm}>
+            <form className="space-y-4 mt-4">
+               <Form.Field>
+                  <Form.Label htmlFor="exam">Avaliação:</Form.Label>
+                  <Controller
+                     control={control}
+                     name="exam"
+                     render={({ field: { onChange, ref, value } }) => {
+                        return (
+                           <Form.Select
+                              ref={ref}
+                              value={value}
+                              onValueChange={onChange}
+                              options={examsOptions}
+                              ariaLabel="Selecionar avaliação."
+                           />
+                        );
+                     }}
+                  />
+                  <Form.ErrorMessage field="exam" />
+               </Form.Field>
+               <Form.Field>
+                  <Form.Label htmlFor="justification">
+                     Justificativa:
+                  </Form.Label>
+                  <Form.Textarea id="justification" name="justify" rows={4} />
+                  <Form.ErrorMessage field="justify" />
+               </Form.Field>
+               <div className="pt-12">
+                  <Button.Root
+                     type="submit"
+                     disabled={!isValid}
+                     isLoading={isLoading}
+                     onClick={handleSubmit(handleSubmitData)}
+                  >
+                     <Button.Text>Solicitar</Button.Text>
+                  </Button.Root>
+               </div>
+            </form>
+         </FormProvider>
       </>
    );
 }

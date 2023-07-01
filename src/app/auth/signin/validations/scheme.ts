@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const singInScheme = z.object({
+export const signInScheme = z.object({
    user_type: z.coerce
       .string()
       .refine((type) => type != 'undefined', 'O tipo é obrigatório.'),

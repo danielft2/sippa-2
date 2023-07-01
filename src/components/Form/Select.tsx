@@ -11,14 +11,14 @@ type SelectOption = {
 
 interface SelectProps {
    value: string;
-   options: SelectOption[];
+   options: SelectOption[] | undefined;
    ariaLabel: string;
    onValueChange: (...event: any[]) => void;
 }
 
 export const Select = forwardRef(
    (
-      { value, options, ariaLabel, onValueChange }: SelectProps,
+      { value, options = [], ariaLabel, onValueChange }: SelectProps,
       forwardedRef: any
    ) => {
       return (
@@ -51,7 +51,7 @@ export const Select = forwardRef(
                   <SelectRadix.Viewport className="px-2 py-3 flex flex-col gap-y-2">
                      {options.map((option) => (
                         <SelectItem
-                           key={option.name}
+                           key={option.value}
                            value={option.value.toString()}
                         >
                            {option.name}
