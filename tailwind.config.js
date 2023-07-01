@@ -21,7 +21,7 @@ module.exports = {
          },
          gridTemplateColumns: {
             dashboard: '1fr 2fr',
-            activity: '1.3fr 1fr'
+            activity: '1.3fr minmax(650px, 650px)'
          },
          screens: {
             lg_p: { max: '1400px' },

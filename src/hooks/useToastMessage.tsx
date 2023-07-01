@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-const useToastMessage = () => {
+export function useToastMessage() {
    function successMessage(msg: string, timeClose = 1500) {
       toast(msg, {
          autoClose: timeClose,
@@ -19,6 +19,4 @@ const useToastMessage = () => {
       successMessage,
       errorMessage
    };
-};
-
-export default useToastMessage;
+}

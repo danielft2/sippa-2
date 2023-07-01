@@ -19,9 +19,9 @@ export const ActivitiesService = {
          .data;
    },
 
-   async sendActivityFile(id: string, files: File[]): Promise<ActivityModel> {
+   async sendActivityFile(id: string, file: File): Promise<ActivityModel> {
       const data = new FormData();
-      files.forEach((file) => data.append('file', file));
+      data.append('file', file, file.name);
 
       return (await api.private.post(`student-activity/files/${id}`, data))
          .data;

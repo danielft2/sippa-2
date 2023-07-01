@@ -5,9 +5,7 @@ import { api } from '@/libs/axios';
 export const SubjectDashboard = {
    async getAllNewsClass(classroomId: string): Promise<NewClassModel[]> {
       return (
-         await api.private.get<NewClassModel[]>(
-            `classroom/classroom-news/${classroomId}`
-         )
+         await api.private.get<NewClassModel[]>(`classroom-news/${classroomId}`)
       ).data;
    },
    async getAllParticipants(classroomId: string): Promise<ParticipantModel[]> {
