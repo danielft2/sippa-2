@@ -3,63 +3,54 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Poppins } from 'next/font/google';
+import clsx from 'clsx';
 import { UploadCloud } from 'lucide-react';
-import { useMutation } from '@tanstack/react-query';
 
 import { Button } from '@/components/Button';
-import { ActivitiesService } from '@/services/https/activities';
-import { FilePreview } from './FilePreview';
+import { useSubmitActivty } from '@/hooks/useSubmitActivity';
 import uploadFileSvg from '@/assets/ilustrations/upload-file.svg';
-import useToastMessage from '@/hooks/useToastMessage';
+import downloadFileSvg from '@/assets/ilustrations/download-file.svg';
+
+import { FilePreview } from './FilePreview';
 
 const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface ShippingDetailsProps {
    id_activity: string;
    fileUrl: string;
+   receiveData: string;
    onUpdateData: () => void;
 }
 
 const ShippingDetails = ({
    fileUrl,
    id_activity,
-   onUpdateData
+   onUpdateData,
+   receiveData
 }: ShippingDetailsProps) => {
-   const [filesList, setFilesList] = useState<File[]>([]);
    const [fileURL, setFileURL] = useState('');
-   const { successMessage, errorMessage } = useToastMessage();
 
-   const { mutateAsync: sendActivity, isLoading } = useMutation({
-      mutationKey: ['sendActivity'],
-      mutationFn: () =>
-         ActivitiesService.sendActivityFile(id_activity, filesList),
-      onSuccess: () => {
-         onUpdateData();
-         successMessage('Arquivo submetido com sucesso!');
-      },
-      onError: () => {
-         errorMessage('Ocorreu um erro inesperado ao submeter o arquivo(s)!');
-      }
+   const {
+      fileSelected,
+      handleSelectedFile,
+      removeFileSelected,
+      handleSubmitActivity,
+      verifyIsSubmitAvailable,
+      isLoading
+   } = useSubmitActivty({
+      onUpdateData,
+      id_activity,
+      receiveData
    });
-
-   function onSelectedFile(files: FileList | null) {
-      if (files && files.length > 0) {
-         setFilesList((prev) => [...prev, ...Array.from(files)]);
-      }
-   }
-
-   function handleButtonSubmit() {
-      if (fileURL) setFileURL('');
-      else sendActivity();
-   }
-
-   function handleRemoveFile(fileName: string) {
-      setFilesList((prev) => prev.filter((file) => file.name != fileName));
-   }
 
    useEffect(() => {
       setFileURL(fileUrl);
    }, [fileUrl]);
+
+   function handleSubmit() {
+      if (fileURL && !verifyIsSubmitAvailable()) setFileURL('');
+      else if (fileSelected?.size) handleSubmitActivity();
+   }
 
    return (
       <section className="bg-white rounded-md flex flex-col gap-1">
@@ -76,23 +67,34 @@ const ShippingDetails = ({
          <div className="w-full flex-1 px-7 py-5 flex flex-col justify-between">
             <div className="space-y-2 mb-8">
                <div
-                  className="w-full h-[150px] flex flex-col justify-center items-center bg-zinc-100 
-                  rounded-md border-2 border-dashed border-gray-300 gap-2 px-4"
+                  className={clsx(
+                     'w-full h-[150px] flex flex-col justify-center items-center rounded-md bg-zinc-100 border-2 border-dashed gap-2 px-4',
+                     {
+                        'border-green-400': fileURL,
+                        'border-gray-300': !fileURL
+                     }
+                  )}
                >
                   <Image
-                     src={uploadFileSvg}
+                     src={fileURL ? downloadFileSvg : uploadFileSvg}
                      alt="Imagem de uma nuvem de upload"
                   />
-                  <span className="text-sm">
-                     Selecione um{' '}
-                     <label
-                        className="underline cursor-pointer hover:text-green-600"
-                        htmlFor="file"
-                     >
-                        arquivo
-                     </label>{' '}
-                     para enviar
-                  </span>
+                  {fileURL ? (
+                     <span className="text-sm text-gray-600">
+                        Atividade submetida, realize o download do arquivo.
+                     </span>
+                  ) : (
+                     <span className="text-sm">
+                        Selecione um{' '}
+                        <label
+                           className="underline cursor-pointer hover:text-green-600"
+                           htmlFor="file"
+                        >
+                           arquivo
+                        </label>{' '}
+                        para enviar
+                     </span>
+                  )}
                </div>
                <div className="flex items-center justify-between mb-4">
                   <span className="text-xs text-gray-500">
@@ -102,22 +104,18 @@ const ShippingDetails = ({
                      Tamanho máximo 5mb
                   </span>
                </div>
-               {!fileURL ? (
-                  filesList?.map((file) => (
-                     <FilePreview
-                        key={file.name}
-                        fileName={file.name}
-                        onRemoveFile={() => handleRemoveFile(file.name)}
-                     />
-                  ))
-               ) : (
-                  <FilePreview fileName={fileURL} />
+               {fileSelected.size && !fileURL && (
+                  <FilePreview
+                     fileName={fileSelected.name}
+                     onRemoveFile={removeFileSelected}
+                  />
                )}
+               {fileURL && <FilePreview fileName={fileURL} />}
             </div>
             <Button.Root
-               onClick={handleButtonSubmit}
+               onClick={handleSubmit}
                isLoading={isLoading}
-               disabled={!filesList.length && !fileURL}
+               disabled={!fileSelected?.size && !fileURL}
             >
                <Button.Text>
                   {fileURL ? 'Mudar Arquivo' : 'Enivar Arquivo'}
@@ -125,13 +123,12 @@ const ShippingDetails = ({
             </Button.Root>
          </div>
          <input
-            accept="image/png, image/jpeg, application/pdf, .txt"
+            accept="image/png, image/jpeg, application/pdf, text/plain"
             type="file"
-            multiple
             id="file"
             disabled={!!fileURL}
             className="hidden"
-            onChange={(e) => onSelectedFile(e.target.files)}
+            onChange={(e) => handleSelectedFile(e.target.files)}
          />
       </section>
    );

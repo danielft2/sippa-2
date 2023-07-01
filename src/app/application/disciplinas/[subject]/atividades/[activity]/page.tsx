@@ -61,6 +61,7 @@ const ActivityDetails = () => {
                id_activity={data?.id ?? ''}
                fileUrl={data?.fileUrl ?? ''}
                onUpdateData={refreshData}
+               receiveData={data?.receive_data ?? ''}
             />
          </section>
       </main>

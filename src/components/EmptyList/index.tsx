@@ -10,7 +10,7 @@ export function EmptyList() {
                width={200}
                alt="Ilustração indicando que a lista está vázia"
             />
-            <span className="mt-3">
+            <span className="mt-3 text-sm text-gray-600">
                Não encontramos nenhuma informação relacionada.
             </span>
          </div>
