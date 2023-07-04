@@ -7,23 +7,23 @@ const poppins_md = Poppins({ weight: ['500'], subsets: ['latin'] });
 
 interface ActivityCardProps {
    id: string;
+   activity_id: string;
    title: string;
    date: string;
    points: number;
-   status: string;
+   status: boolean;
 }
 
 export function ActivityCard({
    id,
+   activity_id,
    title,
    status,
    points,
    date
 }: ActivityCardProps) {
-   const { subject } = useParams();
-
    return (
-      <Link href={`atividades/${id}`} className="h-[140px] min-w-[300px]">
+      <Link href={`atividades/${id}/${activity_id}`} className="h-[140px] ">
          <div
             className="bg-zinc-100 p-6 pb-3 flex flex-col justify-between gap-4 
             shadow rounded-md hover:scale-105 transition-all"
@@ -31,10 +31,10 @@ export function ActivityCard({
             <div className="flex flex-col">
                <span
                   className={`text-[13px] ${poppins_md.className} ${
-                     !status ? 'text-orange-700' : 'text-green-600'
+                     status ? 'text-green-600' : 'text-orange-700'
                   }`}
                >
-                  {status}
+                  {status ? 'Entregue' : 'Pendente'}
                </span>
                <span
                   className={`text-sm text-gray-600 truncate ${poppins_md.className}`}

@@ -17,7 +17,14 @@ const ActivityDetails = () => {
 
    const { data, isLoading, isError } = useQuery({
       queryKey: ['activityDetails', activity],
-      queryFn: () => ActivitiesService.getActivityDetails(activity)
+      queryFn: () =>
+         ActivitiesService.getActivityDetails(activity.split('/')[0])
+   });
+
+   const { data: activityFiles } = useQuery({
+      queryKey: ['activityFiles', activity],
+      queryFn: () =>
+         ActivitiesService.getFilesOfActivity(activity.split('/')[1])
    });
 
    function refreshData() {
@@ -53,7 +60,10 @@ const ActivityDetails = () => {
          <section className="grid grid-cols-activity lg_p:grid-cols-1 gap-4">
             <InformationsActivity
                description={data?.description ?? ''}
-               files={[]}
+               file={{
+                  title: activityFiles?.file ?? '',
+                  fileUrl: activityFiles?.teacherfileUrl ?? ''
+               }}
                isLoading={isLoading}
                isError={isError}
             />

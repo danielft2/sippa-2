@@ -7,7 +7,12 @@ interface AttachamentProps {
    type: 'file' | 'link';
 }
 
-export function Attachament({ name, type, url }: AttachamentProps) {
+export function Attachament({
+   name,
+   type,
+   url,
+   urlFileDownload
+}: AttachamentProps) {
    return (
       <div className="bg-zinc-100 px-5 py-3 rounded-md">
          <div className="flex items-center gap-2 justify-between">
@@ -27,9 +32,15 @@ export function Attachament({ name, type, url }: AttachamentProps) {
                </a>
             </div>
             {type == 'file' && (
-               <button className="text-green-400 hover:brightness-75 transition-all">
+               <a
+                  className="text-green-400 hover:brightness-75 transition-all"
+                  target="_blank"
+                  href={urlFileDownload}
+                  rel="noreferrer"
+                  download={name}
+               >
                   <Download size={18} />
-               </button>
+               </a>
             )}
          </div>
       </div>

@@ -14,8 +14,10 @@ import {
    ActivityCard,
    TitleCard
 } from '@/app/application/disciplinas/components';
+import { useParams } from 'next/navigation';
 
 const DisciplineActivities = () => {
+   const { subject } = useParams();
    const { data, isSuccess, isLoading, isError, error } = useQuery({
       queryKey: ['activities'],
       queryFn: ActivitiesService.getAll
@@ -33,37 +35,40 @@ const DisciplineActivities = () => {
             <TitleCard title="Lista de Atividades" type="background">
                <List className="text-green-600" size={20} />
             </TitleCard>
-            <article className="flex items-center flex-wrap">
+            <article>
                {isSuccess && data && data.activities.length > 0 ? (
-                  data.activities.map((activity) => {
-                     if (activity.classroom_id) {
-                        return (
-                           <ActivityCard
-                              key={activity.studentActivityData.id}
-                              id={activity.studentActivityData.id}
-                              title={activity.title}
-                              status={
-                                 activity.studentActivityData.status
-                                    ? 'Entregue'
-                                    : 'Pendente'
-                              }
-                              points={
-                                 activity.studentActivityData.activity_points
-                              }
-                              date={'22/08/2002'}
-                           />
-                        );
-                     }
-                  })
+                  <div className="grid sm:grid-cols-4 gap-x-4 lg_p:grid-cols-2 md_p:grid-cols-1">
+                     {data.activities.map((activity) => {
+                        if (activity.classroom_id === subject) {
+                           return (
+                              <ActivityCard
+                                 key={activity.studentActivityData.id}
+                                 id={activity.studentActivityData.id}
+                                 activity_id={
+                                    activity.studentActivityData.activity_id
+                                 }
+                                 title={activity.title}
+                                 status={activity.studentActivityData.status}
+                                 points={
+                                    activity.studentActivityData.activity_points
+                                 }
+                                 date={'22/08/2002'}
+                              />
+                           );
+                        }
+                     })}
+                  </div>
                ) : (
-                  <ResponseState
-                     loading={<SearchData />}
-                     error={getErrorComponent()}
-                     empty={<EmptyList />}
-                     isLoading={isLoading}
-                     isError={isError}
-                     isEmpty={!data}
-                  />
+                  <div className="flex items-center">
+                     <ResponseState
+                        loading={<SearchData />}
+                        error={getErrorComponent()}
+                        empty={<EmptyList />}
+                        isLoading={isLoading}
+                        isError={isError}
+                        isEmpty={!data}
+                     />
+                  </div>
                )}
             </article>
          </section>

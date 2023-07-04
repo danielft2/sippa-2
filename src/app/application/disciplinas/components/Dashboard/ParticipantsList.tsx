@@ -31,7 +31,7 @@ const ParticipantsList = () => {
          <TitleCard title="Participantes" type="simple">
             <Users className="text-green-600" size={20} />
          </TitleCard>
-         <div className="px-8 py-4">
+         <div className="px-8 py-4 max-h-[500px] overflow-y-auto">
             {isSuccess && data && data.length > 0 ? (
                data.map((participant, index) => (
                   <div className="flex w-full" key={participant.enrollment}>

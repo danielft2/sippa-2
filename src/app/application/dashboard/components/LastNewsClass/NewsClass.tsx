@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Poppins } from 'next/font/google';
 import { CalendarDays } from 'lucide-react';
 
@@ -34,13 +33,13 @@ export function NewsClass({ code, name, date, title }: NewsClassProps) {
                <CalendarDays size={18} />
                <span className={`${poppins_md.className} text-xs`}>{date}</span>
             </div>
-            <Link href="/">
+            {/* <Link href="/">
                <span
                   className={`${poppins_md.className} text-[13px] text-green-600`}
                >
                   Ver mais
                </span>
-            </Link>
+            </Link> */}
          </div>
       </div>
    );
