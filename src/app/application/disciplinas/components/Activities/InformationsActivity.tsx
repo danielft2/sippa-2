@@ -2,16 +2,21 @@ import { TextSelection } from 'lucide-react';
 import { TitleCard } from '@/components/TitleCard';
 import { SearchData } from '@/components/SearchData';
 import { GenericError } from '@/errors/GenericError';
+import { Attachament } from './Attachament';
 
 interface InformationsActivityProps {
    description: string;
-   files: any[];
+   file: {
+      title: string;
+      fileUrl: string;
+   };
    isLoading?: boolean;
    isError?: boolean;
 }
 
 export function InformationsActivity({
    description = '',
+   file,
    isLoading = false,
    isError = false
 }: InformationsActivityProps) {
@@ -30,18 +35,15 @@ export function InformationsActivity({
                   <div className="border-b border-gray-100 pb-4">
                      <p className="text-sm text-gray-600">{description}</p>
                   </div>
-                  {/* <div className="space-y-3">
-                     <Attachament
-                        name="TrabalhoComponentesBasicosAndroid.pdf"
-                        urlFileDownload="http://sd"
-                        type="file"
-                     />
-                     <Attachament
-                        name="Arquitetura no android"
-                        url="https://www.techyourchance.com/mvc-android-1/"
-                        type="link"
-                     />
-                  </div> */}
+                  {file.fileUrl && (
+                     <div className="space-y-3">
+                        <Attachament
+                           name={file.title}
+                           urlFileDownload={file.fileUrl}
+                           type="file"
+                        />
+                     </div>
+                  )}
                </>
             )}
          </div>
